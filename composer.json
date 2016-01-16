@@ -1,0 +1,11 @@
+{
+    "name": "spamer/spamian",
+    "description": "TravianX clone",
+    "authors": [
+        {
+            "name": "VBoss",
+            "email": "vcevela@gmail.com"
+        }
+    ],
+    "require": {}
+}
