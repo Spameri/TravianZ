@@ -7,5 +7,9 @@
             "email": "vcevela@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "dibi/dibi": "^3.0",
+        "tracy/tracy": "^2.3",
+        "nette/nette": "^2.3"
+    }
 }
