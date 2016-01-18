@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>TravianZ Installation</title>
+		<link rel="shortcut icon" href="{$baseUrl}/favicon.ico" />
+		<meta http-equiv="cache-control" content="max-age=0" />
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<meta http-equiv="imagetoolbar" content="no" />
+		<meta http-equiv="content-type" content="text/html; charset=us-ascii" />
+		<script src="{$baseUrl}/mt-full.js" type="text/javascript"></script>
+		<script src="{$baseUrl}/unx.js" type="text/javascript"></script>
+		<script src="{$baseUrl}/new.js" type="text/javascript"></script>
+		<link href="{$baseUrl}/gpack/travian_default/lang/en/lang.css" rel="stylesheet" type="text/css" />
+		<link href="{$baseUrl}/gpack/travian_default/lang/en/compact.css" rel="stylesheet" type="text/css" />
+		<link href="{$baseUrl}/gpack/travian_default/travian.css" rel="stylesheet" type="text/css" />
+		<link href="{$baseUrl}/gpack/travian_default/lang/en/lang.css" rel="stylesheet" type="text/css" />
+
+		{include customJS}
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<img class="c1" src="{$baseUrl}/img/x.gif" id="msfilter" alt="" name="msfilter" />
+			<div id="dynamic_header"></div>
+			<div id="header">
+				<div id="mtop"></div>
+			</div>
+
+			<div id="mid">
+				<div id="side_navi">
+					{include menu}
+				</div>
+
+				<div id="content" class="login">
+					{include content}
+				</div>
+			</div>
+
+			<div id="side_info" class="outgame"></div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="footer-stopper outgame"></div>
+		<div class="clear"></div>
+
+		{include ../../Templates/footer.latte}
+
+		<div id="ce"></div>
+	</body>
+</html>
