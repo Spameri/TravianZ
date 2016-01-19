@@ -13,3 +13,4 @@ Desktop.ini
 .idea
 
 /vendor/
+/App/Config/local.neon
