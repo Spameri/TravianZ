@@ -1,2 +1,2 @@
 services:
-
+    - App\InstallModule\Model\InstallService

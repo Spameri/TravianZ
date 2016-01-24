@@ -1,10 +1,7 @@
 				<?php
 					switch($_GET['s']){
-						case 1:
-						include("templates/config.tpl");
-						break;
+
 						case 2:
-						include("templates/dataform.tpl");
 						break;
 						case 3:
 						include("templates/field.tpl");
