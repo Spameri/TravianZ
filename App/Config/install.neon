@@ -1,2 +1,3 @@
 services:
     - App\InstallModule\Model\InstallService
+    - App\InstallModule\Model\WorldGenerator(..., %worldSize%)

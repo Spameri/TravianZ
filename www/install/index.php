@@ -1,11 +1,6 @@
 				<?php
 					switch($_GET['s']){
 
-						case 2:
-						break;
-						case 3:
-						include("templates/field.tpl");
-						break;
 						case 4:
 						include("templates/multihunter.tpl");
 						break;
