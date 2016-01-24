@@ -7,8 +7,8 @@ return call_user_func(function () {
 	$configurator->enableDebugger(__DIR__ . '/../log');
 	$configurator->addConfig(__DIR__ . '/config/config.neon');
 	$configurator->addConfig(__DIR__ . '/config/install.neon');
-	if (file_exists(__DIR__ . '/config/config.local.neon')) {
-		$configurator->addConfig(__DIR__ . '/config/config.local.neon');
+	if (file_exists(__DIR__ . '/config/local.neon')) {
+		$configurator->addConfig(__DIR__ . '/config/local.neon');
 	}
 	$configurator->createRobotLoader()
 		->addDirectory(__DIR__)

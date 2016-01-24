@@ -1,4 +1,11 @@
-config:
+dibi:
+    host: %SSERVER%
+    username: %SUSER%
+    password: %SPASS%
+    database: %SDB%
+    lazy: TRUE
+
+parameters:
     serverName: %SERVERNAME%
     timeZone: %STIMEZONE%
 
@@ -54,13 +61,6 @@ config:
     newsBoxOne: %BOX1%
     newsBoxTwo: %BOX2%
     newsBoxThree: %BOX3%
-
-    dibi:
-        host: %SSERVER%
-        username: %SUSER%
-        password: %SPASS%
-        database: %SDB%
-        lazy: TRUE
 
     adminStatistics: %ARANK%
     adminName: %ANAME%

@@ -1,3 +1,6 @@
+extensions:
+	dibi: Dibi\Bridges\Nette\DibiExtension22
+
 parameters:
 
 
