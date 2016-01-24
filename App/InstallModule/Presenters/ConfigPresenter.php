@@ -3,6 +3,7 @@
 namespace App\InstallModule\Presenters;
 
 use Nette;
+use App;
 
 class ConfigPresenter extends Nette\Application\UI\Presenter
 {
