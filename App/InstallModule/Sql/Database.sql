@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.9
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Jul 21, 2011 at 02:49 AM
--- Server version: 5.5.8
--- PHP Version: 5.3.5
-
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 
@@ -18,10 +9,10 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%a2b`
+-- Table structure for table `a2b`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%a2b` (
+CREATE TABLE IF NOT EXISTS `a2b` (
  `id` int(11) NULL AUTO_INCREMENT,
  `ckey` varchar(255) NULL,
  `time_check` int(11) NULL DEFAULT '0',
@@ -42,14 +33,14 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%a2b` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%a2b`
+-- Dumping data for table `a2b`
 --
 
 --
--- Table structure for table `%PREFIX%links`
+-- Table structure for table `links`
 --
 
-CREATE TABLE `%PREFIX%links` (
+CREATE TABLE `links` (
  `id` INT( 25 ) NULL AUTO_INCREMENT PRIMARY KEY ,
  `userid` INT( 25 ) NULL ,
  `name` VARCHAR( 50 ) NULL ,
@@ -58,16 +49,16 @@ CREATE TABLE `%PREFIX%links` (
 ) ENGINE = MYISAM;
 
 --
--- Dumping data for table `%PREFIX%links`
+-- Dumping data for table `links`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%abdata`
+-- Table structure for table `abdata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%abdata` (
+CREATE TABLE IF NOT EXISTS `abdata` (
  `vref` int(11) NULL,
  `a1` tinyint(2) NULL DEFAULT '0',
  `a2` tinyint(2) NULL DEFAULT '0',
@@ -89,17 +80,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%abdata` (
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%abdata`
+-- Dumping data for table `abdata`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%activate`
+-- Table structure for table `activate`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%activate` (
+CREATE TABLE IF NOT EXISTS `activate` (
  `id` int(255) NULL AUTO_INCREMENT,
  `username` varchar(100) NULL,
  `password` varchar(100) NULL,
@@ -114,34 +105,34 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%activate` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%activate`
+-- Dumping data for table `activate`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%active`
+-- Table structure for table `active`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%active` (
+CREATE TABLE IF NOT EXISTS `active` (
  `username` varchar(100) NULL,
  `timestamp` int(11) NULL,
  PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `%PREFIX%active`
+-- Dumping data for table `active`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%admin_log`
+-- Table structure for table `admin_log`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%admin_log` (
+CREATE TABLE IF NOT EXISTS `admin_log` (
  `id` int(11) NULL AUTO_INCREMENT,
  `user` text NULL,
  `log` text NULL,
@@ -150,16 +141,16 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%admin_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
--- Dumping data for table `%PREFIX%admin_log`
+-- Dumping data for table `admin_log`
 --
 
 
 -- --------------------------------------------------------
 --
--- Table structure for table `%PREFIX%allimedal`
+-- Table structure for table `allimedal`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%allimedal` (
+CREATE TABLE IF NOT EXISTS `allimedal` (
  `id` int(11) NULL AUTO_INCREMENT,
  `allyid` int(11) NULL,
  `categorie` int(11) NULL,
@@ -174,10 +165,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%allimedal` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%artefacts`
+-- Table structure for table `artefacts`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%artefacts` (
+CREATE TABLE IF NOT EXISTS `artefacts` (
  `id` int(11) NULL AUTO_INCREMENT,
  `vref` int(11) NULL,
  `owner` int(11) NULL,
@@ -202,10 +193,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%artefacts` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%alidata`
+-- Table structure for table `alidata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%alidata` (
+CREATE TABLE IF NOT EXISTS `alidata` (
  `id` int(11) NULL AUTO_INCREMENT,
  `name` varchar(100) NULL,
  `tag` varchar(100) NULL,
@@ -229,17 +220,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%alidata` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%alidata`
+-- Dumping data for table `alidata`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%ali_invite`
+-- Table structure for table `ali_invite`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%ali_invite` (
+CREATE TABLE IF NOT EXISTS `ali_invite` (
  `id` int(11) NULL AUTO_INCREMENT,
  `uid` int(11) NULL,
  `alliance` int(11) NULL,
@@ -250,17 +241,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%ali_invite` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%ali_invite`
+-- Dumping data for table `ali_invite`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%ali_log`
+-- Table structure for table `ali_log`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%ali_log` (
+CREATE TABLE IF NOT EXISTS `ali_log` (
  `id` int(11) NULL AUTO_INCREMENT,
  `aid` int(11) NULL,
  `comment` text NULL,
@@ -269,17 +260,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%ali_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%ali_log`
+-- Dumping data for table `ali_log`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%ali_permission`
+-- Table structure for table `ali_permission`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%ali_permission` (
+CREATE TABLE IF NOT EXISTS `ali_permission` (
  `id` int(11) NULL AUTO_INCREMENT,
  `uid` int(11) NULL,
  `alliance` int(11) NULL,
@@ -296,17 +287,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%ali_permission` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%ali_permission`
+-- Dumping data for table `ali_permission`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%attacks`
+-- Table structure for table `attacks`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%attacks` (
+CREATE TABLE IF NOT EXISTS `attacks` (
  `id` int(11) NULL AUTO_INCREMENT,
  `vref` int(11) NULL,
  `t1` int(11) NULL,
@@ -336,17 +327,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%attacks` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%attacks`
+-- Dumping data for table `attacks`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%banlist`
+-- Table structure for table `banlist`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%banlist` (
+CREATE TABLE IF NOT EXISTS `banlist` (
  `id` int(11) NULL AUTO_INCREMENT,
  `uid` int(11) NULL,
  `name` varchar(100) NULL,
@@ -359,17 +350,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%banlist` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%banlist`
+-- Dumping data for table `banlist`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%bdata`
+-- Table structure for table `bdata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%bdata` (
+CREATE TABLE IF NOT EXISTS `bdata` (
  `id` int(11) NULL AUTO_INCREMENT,
  `wid` int(11) NULL,
  `field` tinyint(2) NULL,
@@ -382,17 +373,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%bdata` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%bdata`
+-- Dumping data for table `bdata`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%build_log`
+-- Table structure for table `build_log`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%build_log` (
+CREATE TABLE IF NOT EXISTS `build_log` (
  `id` int(11) NULL AUTO_INCREMENT,
  `wid` int(11) NULL,
  `log` text NULL,
@@ -400,17 +391,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%build_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%build_log`
+-- Dumping data for table `build_log`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%chat`
+-- Table structure for table `chat`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%chat` (
+CREATE TABLE IF NOT EXISTS `chat` (
  `id` int(20) NULL AUTO_INCREMENT,
  `id_user` int(11) NULL,
  `name` varchar(255) NULL,
@@ -421,50 +412,50 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%chat` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%chat`
+-- Dumping data for table `chat`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%config`
+-- Table structure for table `config`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%config` (
+CREATE TABLE IF NOT EXISTS `config` (
  `lastgavemedal` int(11) NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-INSERT INTO `%PREFIX%config` VALUES (0);
+INSERT INTO `config` VALUES (0);
 
 --
--- Dumping data for table `%prefix%config`
+-- Dumping data for table `config`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%deleting`
+-- Table structure for table `deleting`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%deleting` (
+CREATE TABLE IF NOT EXISTS `deleting` (
  `uid` int(11) NULL,
  `timestamp` int(11) NULL,
  PRIMARY KEY (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `%prefix%deleting`
+-- Dumping data for table `deleting`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%demolition`
+-- Table structure for table `demolition`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%demolition` (
+CREATE TABLE IF NOT EXISTS `demolition` (
  `vref` int(11) NULL,
  `buildnumber` int(11) NULL DEFAULT '0',
  `lvl` int(11) NULL DEFAULT '0',
@@ -473,17 +464,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%demolition` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%demolition`
+-- Dumping data for table `demolition`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%diplomacy`
+-- Table structure for table `diplomacy`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%diplomacy` (
+CREATE TABLE IF NOT EXISTS `diplomacy` (
  `id` int(11) NULL AUTO_INCREMENT,
  `alli1` int(11) NULL,
  `alli2` int(11) NULL,
@@ -492,17 +483,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%diplomacy` (
  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 --
--- Dumping data for table `%prefix%diplomacy`
+-- Dumping data for table `diplomacy`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%enforcement`
+-- Table structure for table `enforcement`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%enforcement` (
+CREATE TABLE IF NOT EXISTS `enforcement` (
  `id` int(11) NULL AUTO_INCREMENT,
  `u1` int(11) NULL DEFAULT '0',
  `u2` int(11) NULL DEFAULT '0',
@@ -561,16 +552,16 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%enforcement` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%enforcement`
+-- Dumping data for table `enforcement`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%farmlist`
+-- Table structure for table `farmlist`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%farmlist` (
+CREATE TABLE IF NOT EXISTS `farmlist` (
  `id` int(11) NULL AUTO_INCREMENT,
  `wref` int(11) NULL,
  `owner` int(11) NULL,
@@ -579,17 +570,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%farmlist` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%farmlist`
+-- Dumping data for table `farmlist`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%fdata`
+-- Table structure for table `fdata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%fdata` (
+CREATE TABLE IF NOT EXISTS `fdata` (
  `vref` int(11) NULL,
  `f1` tinyint(2) NULL DEFAULT '0',
  `f1t` tinyint(2) NULL DEFAULT '0',
@@ -678,17 +669,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%fdata` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
 
 --
--- Dumping data for table `%prefix%fdata`
+-- Dumping data for table `fdata`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%forum_cat`
+-- Table structure for table `forum_cat`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_cat` (
+CREATE TABLE IF NOT EXISTS `forum_cat` (
  `id` int(11) NULL AUTO_INCREMENT,
  `owner` varchar(255) NULL,
  `alliance` varchar(255) NULL,
@@ -699,17 +690,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%forum_cat` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%forum_cat`
+-- Dumping data for table `forum_cat`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%forum_edit`
+-- Table structure for table `forum_edit`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_edit` (
+CREATE TABLE IF NOT EXISTS `forum_edit` (
  `id` int(11) NULL AUTO_INCREMENT,
  `alliance` varchar(255) NULL,
  `result` varchar(255) NULL,
@@ -717,17 +708,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%forum_edit` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%forum_edit`
+-- Dumping data for table `forum_edit`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%forum_post`
+-- Table structure for table `forum_post`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_post` (
+CREATE TABLE IF NOT EXISTS `forum_post` (
  `id` int(11) NULL AUTO_INCREMENT,
  `post` longtext NULL,
  `topic` varchar(255) NULL,
@@ -741,17 +732,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%forum_post` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%forum_post`
+-- Dumping data for table `forum_post`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%forum_survey`
+-- Table structure for table `forum_survey`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_survey` (
+CREATE TABLE IF NOT EXISTS `forum_survey` (
  `topic` int(11) NULL,
  `title` varchar(255) NULL,
  `option1` varchar(255) NULL,
@@ -775,17 +766,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%forum_survey` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%forum_survey`
+-- Dumping data for table `forum_survey`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%forum_topic`
+-- Table structure for table `forum_topic`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%forum_topic` (
+CREATE TABLE IF NOT EXISTS `forum_topic` (
  `id` int(11) NULL AUTO_INCREMENT,
  `title` varchar(255) NULL,
  `post` longtext NULL,
@@ -805,17 +796,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%forum_topic` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%forum_topic`
+-- Dumping data for table `forum_topic`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%general`
+-- Table structure for table `general`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%general` (
+CREATE TABLE IF NOT EXISTS `general` (
  `id` int(11) NULL AUTO_INCREMENT,
  `casualties` int(11) NULL,
  `time` int(11) NULL,
@@ -824,17 +815,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%general` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%general`
+-- Dumping data for table `general`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%gold_fin_log`
+-- Table structure for table `gold_fin_log`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%gold_fin_log` (
+CREATE TABLE IF NOT EXISTS `gold_fin_log` (
  `id` int(11) NULL AUTO_INCREMENT,
  `wid` int(11) NULL,
  `log` text NULL,
@@ -842,17 +833,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%gold_fin_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%gold_fin_log`
+-- Dumping data for table `gold_fin_log`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%hero`
+-- Table structure for table `hero`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%hero` (
+CREATE TABLE IF NOT EXISTS `hero` (
  `heroid` int(11) NULL AUTO_INCREMENT,
  `uid` int(11) NULL,
  `unit` smallint(2) NULL,
@@ -877,7 +868,7 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%hero` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 --
--- Dumping data for table `%prefix%hero`
+-- Dumping data for table `hero`
 --
 
 
@@ -885,10 +876,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%hero` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%illegal_log`
+-- Table structure for table `illegal_log`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%illegal_log` (
+CREATE TABLE IF NOT EXISTS `illegal_log` (
  `id` int(11) NULL AUTO_INCREMENT,
  `user` int(11) NULL,
  `log` text NULL,
@@ -896,17 +887,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%illegal_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%illegal_log`
+-- Dumping data for table `illegal_log`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%login_log`
+-- Table structure for table `login_log`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%login_log` (
+CREATE TABLE IF NOT EXISTS `login_log` (
  `id` int(11) NULL AUTO_INCREMENT,
  `uid` int(11) NULL,
  `ip` varchar(15) NULL,
@@ -914,17 +905,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%login_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%login_log`
+-- Dumping data for table `login_log`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%market`
+-- Table structure for table `market`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%market` (
+CREATE TABLE IF NOT EXISTS `market` (
  `id` int(11) NULL AUTO_INCREMENT,
  `vref` int(11) NULL,
  `gtype` tinyint(1) NULL,
@@ -939,17 +930,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%market` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%market`
+-- Dumping data for table `market`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%market_log`
+-- Table structure for table `market_log`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%market_log` (
+CREATE TABLE IF NOT EXISTS `market_log` (
  `id` int(11) NULL AUTO_INCREMENT,
  `wid` int(11) NULL,
  `log` text NULL,
@@ -957,17 +948,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%market_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%market_log`
+-- Dumping data for table `market_log`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%mdata`
+-- Table structure for table `mdata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%mdata` (
+CREATE TABLE IF NOT EXISTS `mdata` (
  `id` int(11) NULL AUTO_INCREMENT,
  `target` int(11) NULL,
  `owner` int(11) NULL,
@@ -987,17 +978,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%mdata` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%mdata`
+-- Dumping data for table `mdata`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%medal`
+-- Table structure for table `medal`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%medal` (
+CREATE TABLE IF NOT EXISTS `medal` (
  `id` int(11) NULL AUTO_INCREMENT,
  `userid` int(11) NULL,
  `categorie` int(11) NULL,
@@ -1010,17 +1001,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%medal` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%medal`
+-- Dumping data for table `medal`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%movement`
+-- Table structure for table `movement`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%movement` (
+CREATE TABLE IF NOT EXISTS `movement` (
  `moveid` int(11) NULL AUTO_INCREMENT,
  `sort_type` tinyint(4) NULL DEFAULT '0',
  `from` int(11) NULL DEFAULT '0',
@@ -1039,17 +1030,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%movement` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%movement`
+-- Dumping data for table `movement`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%ndata`
+-- Table structure for table `ndata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%ndata` (
+CREATE TABLE IF NOT EXISTS `ndata` (
  `id` int(11) NULL AUTO_INCREMENT,
  `uid` int(11) NULL,
  `toWref` int(11) NULL,
@@ -1065,17 +1056,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%ndata` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%ndata`
+-- Dumping data for table `ndata`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%odata`
+-- Table structure for table `odata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%odata` (
+CREATE TABLE IF NOT EXISTS `odata` (
  `wref` int(11) NULL,
  `type` tinyint(2) NULL,
  `conqured` int(11) NULL,
@@ -1095,17 +1086,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%odata` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `%prefix%odata`
+-- Dumping data for table `odata`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%online`
+-- Table structure for table `online`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%online` (
+CREATE TABLE IF NOT EXISTS `online` (
  `name` varchar(32) NULL,
  `uid` int(11) NULL,
  `time` varchar(32) NULL,
@@ -1114,16 +1105,16 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%online` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `%prefix%online`
+-- Dumping data for table `online`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%prisoners`
+-- Table structure for table `prisoners`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%prisoners` (
+CREATE TABLE IF NOT EXISTS `prisoners` (
  `id` int(11) NULL AUTO_INCREMENT,
  `wref` int(11) NULL,
  `from` int(11) NULL,
@@ -1142,17 +1133,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%prisoners` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%PREFIX%prisoners`
+-- Dumping data for table `prisoners`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%raidlist`
+-- Table structure for table `raidlist`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%raidlist` (
+CREATE TABLE IF NOT EXISTS `raidlist` (
  `id` int(11) NULL AUTO_INCREMENT,
  `lid` int(11) NULL,
  `towref` int(11) NULL,
@@ -1173,17 +1164,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%raidlist` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%raidlist`
+-- Dumping data for table `raidlist`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%research`
+-- Table structure for table `research`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%research` (
+CREATE TABLE IF NOT EXISTS `research` (
  `id` int(11) NULL AUTO_INCREMENT,
  `vref` int(11) NULL,
  `tech` varchar(3) NULL,
@@ -1192,17 +1183,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%research` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%research`
+-- Dumping data for table `research`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%route`
+-- Table structure for table `route`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%route` (
+CREATE TABLE IF NOT EXISTS `route` (
  `id` int(11) NULL AUTO_INCREMENT,
  `uid` int(11) NULL,
  `wid` int(11) NULL,
@@ -1220,17 +1211,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%route` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%route`
+-- Dumping data for table `route`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%send`
+-- Table structure for table `send`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%send` (
+CREATE TABLE IF NOT EXISTS `send` (
  `id` int(11) NULL AUTO_INCREMENT,
  `wood` int(11) NULL,
  `clay` int(11) NULL,
@@ -1241,17 +1232,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%send` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%send`
+-- Dumping data for table `send`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%tdata`
+-- Table structure for table `tdata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%tdata` (
+CREATE TABLE IF NOT EXISTS `tdata` (
  `vref` int(11) NULL,
  `t2` tinyint(1) NULL DEFAULT '0',
  `t3` tinyint(1) NULL DEFAULT '0',
@@ -1297,17 +1288,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%tdata` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `%prefix%tdata`
+-- Dumping data for table `tdata`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%tech_log`
+-- Table structure for table `tech_log`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%tech_log` (
+CREATE TABLE IF NOT EXISTS `tech_log` (
  `id` int(11) NULL AUTO_INCREMENT,
  `wid` int(11) NULL,
  `log` text NULL,
@@ -1315,17 +1306,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%tech_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%tech_log`
+-- Dumping data for table `tech_log`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%training`
+-- Table structure for table `training`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%training` (
+CREATE TABLE IF NOT EXISTS `training` (
  `id` int(11) NULL AUTO_INCREMENT,
  `vref` int(11) NULL,
  `unit` tinyint(2) NULL,
@@ -1338,17 +1329,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%training` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%training`
+-- Dumping data for table `training`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%units`
+-- Table structure for table `units`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%units` (
+CREATE TABLE IF NOT EXISTS `units` (
  `vref` int(11) NULL,
  `u1` int(11) NULL DEFAULT '0',
  `u2` int(11) NULL DEFAULT '0',
@@ -1407,17 +1398,17 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%units` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `%prefix%units`
+-- Dumping data for table `units`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%PREFIX%users`
+-- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
+CREATE TABLE IF NOT EXISTS `users` (
  `id` int(11) NULL AUTO_INCREMENT,
  `username` varchar(100) NULL,
  `password` varchar(100) NULL,
@@ -1508,10 +1499,10 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `%prefix%users`
+-- Dumping data for table `users`
 --
 
-INSERT INTO `%PREFIX%users` (`id`, `username`, `password`, `email`, `tribe`, `access`, `gold`, `gender`, `birthday`, `location`, `desc1`, `desc2`, `plus`, `b1`, `b2`, `b3`, `b4`, `sit1`, `sit2`, `alliance`, `sessid`, `act`, `timestamp`, `ap`, `apall`, `dp`, `dpall`, `protect`, `quest`, `gpack`, `cp`, `lastupdate`, `RR`, `Rc`, `ok`) VALUES
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `tribe`, `access`, `gold`, `gender`, `birthday`, `location`, `desc1`, `desc2`, `plus`, `b1`, `b2`, `b3`, `b4`, `sit1`, `sit2`, `alliance`, `sessid`, `act`, `timestamp`, `ap`, `apall`, `dp`, `dpall`, `protect`, `quest`, `gpack`, `cp`, `lastupdate`, `RR`, `Rc`, `ok`) VALUES
 (5, 'Multihunter', '', 'multihunter@travianx.mail', 0, 9, 0, 0, '0000-00-00', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 'gpack/travian_default/', 1, 0, 0, 0, 0),
 (1, 'Support', '', 'support@travianx.mail', 0, 8, 0, 0, '0000-00-00', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 'gpack/travian_default/', 1, 0, 0, 0, 0),
 (2, 'Nature', '', 'support@travianx.mail', 4, 8, 0, 0, '0000-00-00', '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0, 0, 0, 0, 0, 0, 0, 'gpack/travian_default/', 1, 0, 0, 0, 0),
@@ -1520,10 +1511,10 @@ INSERT INTO `%PREFIX%users` (`id`, `username`, `password`, `email`, `tribe`, `ac
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%vdata`
+-- Table structure for table `vdata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%vdata` (
+CREATE TABLE IF NOT EXISTS `vdata` (
 `wref` int(11) NULL,
 `owner` int(11) NULL,
 `name` varchar(100) NULL,
@@ -1553,17 +1544,17 @@ PRIMARY KEY (`wref`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%vdata`
+-- Dumping data for table `vdata`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `%prefix%wdata`
+-- Table structure for table `wdata`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%wdata` (
+CREATE TABLE IF NOT EXISTS `wdata` (
  `id` int(11) NULL AUTO_INCREMENT,
  `fieldtype` tinyint(2) NULL,
  `oasistype` tinyint(2) NULL,
@@ -1575,15 +1566,15 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%wdata` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `%prefix%wdata`
+-- Dumping data for table `wdata`
 --
 
 -- --------------------------------------------------------
 --
--- Table structure for table `%prefix%password`
+-- Table structure for table `password`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%password` (
+CREATE TABLE IF NOT EXISTS `password` (
  `uid` int(11) NULL,
  `npw` varchar(100) NULL,
  `cpw` varchar(100) NULL,
@@ -1593,21 +1584,21 @@ CREATE TABLE IF NOT EXISTS `%PREFIX%password` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
 --
--- Dumping data for table `%prefix%password`
+-- Dumping data for table `password`
 --
 
 -- --------------------------------------------------------
 --
--- Table structure for table `%prefix%ww_attacks`
+-- Table structure for table `ww_attacks`
 --
 
-CREATE TABLE IF NOT EXISTS `%PREFIX%ww_attacks` (
+CREATE TABLE IF NOT EXISTS `ww_attacks` (
  `vid` int(25) NULL,
  `attack_time` int(25) NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
 --
--- Dumping data for table `%prefix%password`
+-- Dumping data for table `password`
 --
 
 -- --------------------------------------------------------
