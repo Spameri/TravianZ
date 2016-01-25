@@ -112,12 +112,6 @@ class adm_DB {
         return $popT;
     } 
 
-	function getWref($x,$y) {
-		$q = "SELECT id FROM ".TB_PREFIX."wdata where x = $x and y = $y";
-		$result = mysql_query($q, $this->connection);
-		$r = mysql_fetch_array($result);
-		return $r['id'];
-	}
 
 	function AddVillage($post){
 	global $database;

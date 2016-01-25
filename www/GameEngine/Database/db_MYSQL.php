@@ -416,64 +416,6 @@ class MYSQL_DB {
     return $result[$base]['id'];
     }
 
-	function setFieldTaken($id) {
-		$q = "UPDATE " . TB_PREFIX . "wdata set occupied = 1 where id = $id";
-		return mysql_query($q, $this->connection);
-	}
-
-	function addVillage($wid, $uid, $username, $capital) {
-		$total = count($this->getVillagesID($uid));
-		if($total >= 1) {
-			$vname = $username . "\'s village " . ($total + 1);
-		} else {
-			$vname = $username . "\'s village";
-		}
-		$time = time();
-		$q = "INSERT into " . TB_PREFIX . "vdata (wref, owner, name, capital, pop, cp, celebration, wood, clay, iron, maxstore, crop, maxcrop, lastupdate, created) values ('$wid', '$uid', '$vname', '$capital', 2, 1, 0, 750, 750, 750, ".STORAGE_BASE.", 750, ".STORAGE_BASE.", '$time', '$time')";
-		return mysql_query($q, $this->connection) or die(mysql_error());
-	}
-
-	function addResourceFields($vid, $type) {
-		switch($type) {
-			case 1:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,4,4,1,4,4,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-			case 2:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,3,4,1,3,2,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-			case 3:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,1,4,1,3,2,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-			case 4:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,1,4,1,2,2,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-			case 5:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,1,4,1,3,1,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-			case 6:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,4,4,1,3,4,4,4,4,4,4,4,4,4,4,4,2,4,4,1,15)";
-				break;
-			case 7:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,1,4,4,1,2,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-			case 8:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,3,4,4,1,2,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-			case 9:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,3,4,4,1,1,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-			case 10:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,3,4,1,2,2,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-			case 11:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,3,1,1,3,1,4,4,3,3,2,2,3,1,4,4,2,4,4,1,15)";
-				break;
-			case 12:
-				$q = "INSERT into " . TB_PREFIX . "fdata (vref,f1t,f2t,f3t,f4t,f5t,f6t,f7t,f8t,f9t,f10t,f11t,f12t,f13t,f14t,f15t,f16t,f17t,f18t,f26,f26t) values($vid,1,4,1,1,2,2,3,4,4,3,3,4,4,1,4,2,1,2,1,15)";
-				break;
-		}
-		return mysql_query($q, $this->connection);
-	}
     function isVillageOases($wref) {
         $q = "SELECT id, oasistype FROM " . TB_PREFIX . "wdata where id = $wref";
         $result = mysql_query($q, $this->connection);
@@ -697,34 +639,6 @@ class MYSQL_DB {
 		return mysql_query($q, $this->connection);
 	}
 
-
-	/***************************
-	Function to retrieve type of village via ID
-	References: Village ID
-	***************************/
-	function getVillageType($wref) {
-		$q = "SELECT id, fieldtype FROM " . TB_PREFIX . "wdata where id = $wref";
-		$result = mysql_query($q, $this->connection);
-		$dbarray = mysql_fetch_array($result);
-		return $dbarray['fieldtype'];
-	}
-
-
-
-	/*****************************************
-	Function to retrieve if is ocuped via ID
-	References: Village ID
-	*****************************************/
-	function getVillageState($wref) {
-		$q = "SELECT oasistype,occupied FROM " . TB_PREFIX . "wdata where id = $wref";
-		$result = mysql_query($q, $this->connection);
-		$dbarray = mysql_fetch_array($result);
-		if($dbarray['occupied'] != 0 || $dbarray['oasistype'] != 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
 	function getProfileVillages($uid) {
 		$q = "SELECT capital,wref,name,pop,created from " . TB_PREFIX . "vdata where owner = $uid order by pop desc";
@@ -2477,11 +2391,6 @@ class MYSQL_DB {
 		return mysql_fetch_array($result);
 	}
 
-	function addUnits($vid) {
-		$q = "INSERT into " . TB_PREFIX . "units (vref) values ($vid)";
-		return mysql_query($q, $this->connection);
-	}
-
 	function getUnit($vid) {
 		$q = "SELECT * from " . TB_PREFIX . "units where vref = $vid";
 		$result = mysql_query($q, $this->connection);
@@ -2563,16 +2472,6 @@ class MYSQL_DB {
 
 	function modifyHeroXp($column,$value,$heroid) {
 		$q = "UPDATE ".TB_PREFIX."hero SET $column = $column + $value WHERE uid=$heroid";
-		return mysql_query($q, $this->connection);
-	}
-
-	function addTech($vid) {
-		$q = "INSERT into " . TB_PREFIX . "tdata (vref) values ($vid)";
-		return mysql_query($q, $this->connection);
-	}
-
-	function addABTech($vid) {
-		$q = "INSERT into " . TB_PREFIX . "abdata (vref) values ($vid)";
 		return mysql_query($q, $this->connection);
 	}
 

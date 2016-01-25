@@ -2,7 +2,7 @@ extensions:
 	dibi: Dibi\Bridges\Nette\DibiExtension22
 
 parameters:
-
+    storageCapacity: 800
 
 php:
 	date.timezone: Europe/Prague
@@ -20,3 +20,13 @@ session:
 
 services:
 	router: App\RouterFactory::createRouter
+
+	- App\FrontModule\Model\User\UserModel
+	- App\FrontModule\Model\ABData\ABDataModel
+	- App\FrontModule\Model\FData\FDataModel
+	- App\FrontModule\Model\TData\TDataModel
+	- App\FrontModule\Model\Units\UnitsModel
+	- App\FrontModule\Model\User\RegisterService
+	- App\FrontModule\Model\VData\VDataModel(%storageCapacity%, %storageMultiplier%)
+	- App\FrontModule\Model\VData\VillageService
+	- App\FrontModule\Model\WData\WDataModel

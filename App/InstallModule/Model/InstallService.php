@@ -4,7 +4,7 @@ namespace App\InstallModule\Model;
 
 use App;
 
-class InstallService extends App\Model\BaseService
+class InstallService extends App\Model\BaseModel
 {
 	public function createDatabase()
 	{

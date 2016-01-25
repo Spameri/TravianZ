@@ -5,7 +5,7 @@ namespace App\InstallModule\Model;
 use App;
 use Dibi;
 
-class WorldGenerator extends App\Model\BaseService
+class WorldGenerator extends App\Model\BaseModel
 {
 	/**
 	 * @var int
@@ -49,6 +49,8 @@ class WorldGenerator extends App\Model\BaseService
 					$field['image'] = "o" . $field['oasistype'] . "";
 				}
 
+				$field['x'] = $x;
+				$field['y'] = $y;
 				$this->saveField($field);
 			}
 		}
