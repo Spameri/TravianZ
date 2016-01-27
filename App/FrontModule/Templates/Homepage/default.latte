@@ -1,0 +1,164 @@
+{block content}
+	<div class="wrapper">
+		<div id="country_select">
+			<div id="flags"></div>
+			<script src="{$baseUrl}/flaggen.js?a" type="text/javascript"></script>
+			<script type="text/javascript">
+				var region_list = new Array('Europe','America','Asia','Middle East','Africa','Oceania');
+				show_flags('', '', region_list);
+			</script>
+		</div>
+		<div id="header"><h1>Welcome to Spamian</h1></div>
+		<div id="navigation">
+			<a n:href=":Front:Homepage:default" class="home"><img src="{$baseUrl}/img/x.gif" alt="Travian" /></a>
+			<table class="menu">
+				<tr>
+					<td><a href="tutorial.php"><span>Tutorial</span></a></td>
+					<td><a href="anleitung.php"><span>Manual</span></a></td>
+					<td><a href="http://forum.travian.com/" target="_blank"><span>Forum</span></a></td>
+					<td><a href="?signup" class="signup_link mark"><span>Register</span></a></td>
+					<td><a href="?login" class="login_link"><span>Login</span></a></td>
+				</tr>
+			</table>
+		</div>
+		<div id="register_now">
+			<a href="?signup" class="signup_link">Register</a>
+			<span>Play Spamian now</span>
+		</div>
+		<div id="content">
+			<div class="grit">
+				<div class="infobox">
+					<div id="what_is_travian">
+						<h2>What is Spamian</h2>
+						<p>Spamian is a <b>browser game</b> featuring an engaging ancient world with thousands of other real players.</p><p>It`s <strong>free to play</strong> and requires <strong>no downloads</strong>.</p>
+						<p class="play_now"><a href="?signup" class="signup_link">Click here to play</a></p>
+					</div>
+					<div id="player_counter">
+						<table>
+							<tbody>
+								<tr>
+									<th>Total players:</th>
+									<td>$totalPlayers</td>
+								</tr>
+								<tr>
+									<th>Players active:</th>
+									<td>$playersActive</td>
+								</tr>
+								<tr>
+									<th>Players online:</th>
+									<td>$playersOnline</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div id="about_the_game">
+						<h2>About the game:</h2>
+						<ul>
+							<li>You will begin as the chief of a tiny village and will embark on an exciting quest.</li>
+							<li>Build up villages, wage wars or establish trade routes with your neighbours.</li>
+							<li>Play with and against thousands of other real players and conquer the the world of Travian.</li>
+						</ul>
+					</div>
+				</div>
+				<div class="secondarybox">
+					<div id="screenshots">
+						<h2>Screenshots</h2>
+						<a href="#last" class="navi prev dynamic_btn"><img class="dynamic_btn" src="img/x.gif" alt="previous" /></a>
+						<div id="screenshots_preview">
+							<ul id="screenshot_list" class="c1">
+								<li><a href="#"><img src="{$baseUrl}/img/un/s/s1s.jpg" alt="Screenshot" /></a></li>
+								<li><a href="#"><img src="{$baseUrl}/img/un/s/s2s.jpg" alt="Screenshot" /></a></li>
+								<li><a href="#"><img src="{$baseUrl}/img/un/s/s4s.jpg" alt="Screenshot" /></a></li>
+								<li><a href="#"><img src="{$baseUrl}/img/un/s/s3s.jpg" alt="Screenshot" /></a></li>
+								<li><a href="#"><img src="{$baseUrl}/img/un/s/s5s.jpg" alt="Screenshot" /></a></li>
+								<li><a href="#"><img src="{$baseUrl}/img/un/s/s7s.jpg" alt="Screenshot" /></a></li>
+								<li><a href="#"><img src="{$baseUrl}/img/un/s/s8s.jpg" alt="Screenshot" /></a></li>
+							</ul>
+						</div><a href="#next" class="navi next"><img class="dynamic_btn" src="{$baseUrl}/img/x.gif" alt="next" /></a>
+					</div>
+					<div id="newsbox">
+						<h2>News</h2>
+						<div class="news">include ("Templates/indexnews.tpl");</div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div id="footer">
+			<div class="container">
+				<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/" class="logo">
+					<img alt="Licencia Creative Commons" style="border-width:0; height:31px; width:88px;" src="http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png" class="logo_traviangames" />
+				</a>
+				<ul class="menu">
+					<li><a href="anleitung.php?s=3">FAQ</a>|</li>
+					<li><a href="index.php?screenshots">Screenshots</a>|</li>
+					<li><a href="spielregeln.php">SPIELREGELN</a>|</li>
+					<li><a href="agb.php">AGB</a>|</li>
+					<li><a href="impressum.php">Imprint</a></li>
+					<li class="copyright">&copy; 2016 - Spamian - All rights reserved</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="login_layer" class="overlay">
+		<div class="mask closer"></div>
+		<div id="login_list" class="overlay_content">
+			<h2>Please choose a server.</h2>
+			<a href="#" class="closer"><img class="dynamic_img" alt="Close" src="{$baseUrl}/img/un/x.gif" /></a>
+			<ul class="world_list">
+				<li class="w_big c3" style="background-image:url('{$baseUrl}/img/en/welten/en1_big.jpg');">
+					<a href="login.php">
+						<img class="w_button" src="{$baseUrl}/img/un/x.gif" alt="World" title="" />
+					</a>
+					<div class="label_players c0">Players:</div>
+					<div class="label_online c0">Online:</div>
+					<div class="players c1">$playersWorld</div>
+					<div class="online c1">$onlineWorld</div>
+				</li>
+			</ul>
+			<div class="footer"></div>
+		</div>
+	</div>
+	<div id="signup_layer" class="overlay">
+		<div class="mask closer"></div>
+		<div id="signup_list" class="overlay_content">
+			<h2>Please choose a server.</h2>
+			<a href="#" class="closer"><img class="dynamic_img" alt="Close" src="{$baseUrl}/img/un/x.gif" /></a>
+			<ul class="world_list">
+				<li class="w_big c4" style="background-image:url('{$baseUrl}/img/en/welten/en1_big.jpg');">
+					<a href="anmelden.php"><img class="w_button" src="{$baseUrl}/img/un/x.gif" alt="World" /></a>
+					<div class="label_players c0">Players:</div>
+					<div class="label_online c0">Online:</div>
+					<div class="players c1">$playersWorld</div>
+					<div class="online c1">$onlineWorld</div>
+				</li>
+			</ul>
+			<div class="footer"></div>
+		</div>
+	</div>
+	<div id="iframe_layer" class="overlay">
+		<div class="mask closer"></div>
+		<div class="overlay_content">
+			<a href="#" class="closer"><img class="dynamic_img" alt="Close" src="{$baseUrl}/img/un/x.gif" /></a>
+			<h2>Manual</h2>
+			<div id="frame_box"></div>
+			<div class="footer"></div>
+		</div>
+	</div>
+	<div id="screenshot_layer" class="overlay">
+		<div class="mask closer"></div>
+		<div class="overlay_content">
+			<h3>Screenshots</h3>
+			<a href="#" class="closer"><img class="dynamic_img" alt="Close" src="{$baseUrl}/img/x.gif" /></a>
+			<div class="screenshot_view">
+				<h4 id="screen_hl"></h4>
+				<img id="screen_view" src="{$baseUrl}/img/x.gif" alt="Screenshot" name="screen_view" />
+				<div id="screen_desc"></div>
+			</div>
+			<a href="#prev" class="navi prev" onclick="galarie.showPrev();"><img class="dynamic_img" src="{$baseUrl}/img/x.gif" alt="previous" /></a>
+			<a href="#next" class="navi next" onclick="galarie.showNext();"><img class="dynamic_img" src="{$baseUrl}/img/x.gif" alt="next" /></a>
+			<div class="footer"></div>
+		</div>
+	</div>
+{/block}
