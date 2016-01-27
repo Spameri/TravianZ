@@ -506,17 +506,6 @@ class MYSQL_DB {
         }
     }
 
-	function populateOasis() {
-		$q = "SELECT * FROM " . TB_PREFIX . "wdata where oasistype != 0";
-		$result = mysql_query($q, $this->connection);
-		while($row = mysql_fetch_array($result)) {
-			$wid = $row['id'];
-
-			$this->addUnits($wid);
-
-		}
-	}
-
 	function populateOasisUnits($wid, $high) {
 		$basearray = $this->getOasisInfo($wid);
 		if($high == 0){
@@ -579,60 +568,6 @@ class MYSQL_DB {
 			  break;
 			  }
 		}
-
-	function populateOasisUnits2() {
-	$q2 = "SELECT * FROM " . TB_PREFIX . "wdata where oasistype != 0";
-	$result2 = mysql_query($q2, $this->connection);
-	while($row = mysql_fetch_array($result2)) {
-		$wid = $row['id'];
-		switch($row['oasistype']) {
-				case 1:
-				case 2:
-					//+25% lumber oasis
-					$q = "UPDATE " . TB_PREFIX . "units SET  u35 = u35 + '".rand(5,10)."', u36 = u36 + '".rand(0,5)."', u37 = u37 + '".rand(0,5)."' WHERE vref = '" . $wid . "' AND u35 <= '10' AND u36 <= '10' AND u37 <= '10'";
-					$result = mysql_query($q, $this->connection);
-					break;
-				case 3:
-					//+25% lumber and +25% crop oasis
-					$q = "UPDATE " . TB_PREFIX . "units SET u35 = u35 + '".rand(5,15)."', u36 = u36 + '".rand(0,5)."', u37 = u37 + '".rand(0,5)."' WHERE vref = '" . $wid . "' AND u35 <= '10' AND u36 <= '10' AND u37 <='10'";
-					$result = mysql_query($q, $this->connection);
-					break;
-				case 4:
-				case 5:
-					//+25% clay oasis
-					$q = "UPDATE " . TB_PREFIX . "units SET u31 = u31 + '".rand(10,15)."', u32 = u32 + '".rand(5,15)."', u35 = u35 + '".rand(0,10)."' WHERE vref = '" . $wid . "' AND u31 <= '10' AND u32 <= '10' AND u35 <= '10'";
-					$result = mysql_query($q, $this->connection);
-					break;
-				case 6:
-					//+25% clay and +25% crop oasis
-					$q = "UPDATE " . TB_PREFIX . "units SET u31 = u31 + '".rand(15,20)."', u32 = u32 + '".rand(10,15)."', u35 = u35 + '".rand(0,10)."' WHERE vref = '" . $wid . "' AND u31 <= '10' AND u32 <= '10' AND u35 <='10'";
-					$result = mysql_query($q, $this->connection);
-					break;
-				case 7:
-				case 8:
-					//+25% iron oasis
-					$q = "UPDATE " . TB_PREFIX . "units SET u31 = u31 + '".rand(10,15)."', u32 = u32 + '".rand(5,15)."', u34 = u34 + '".rand(0,10)."' WHERE vref = '" . $wid . "' AND u31 <= '10' AND u32 <= '10' AND u34 <= '10'";
-					$result = mysql_query($q, $this->connection);
-					break;
-				case 9:
-					//+25% iron and +25% crop oasis
-					$q = "UPDATE " . TB_PREFIX . "units SET u31 = u31 + '".rand(15,20)."', u32 = u32 + '".rand(10,15)."', u34 = u34 + '".rand(0,10)."' WHERE vref = '" . $wid . "' AND u31 <= '10' AND u32 <= '10' AND u34 <='10'";
-					$result = mysql_query($q, $this->connection);
-					break;
-				case 10:
-				case 11:
-					//+25% crop oasis
-					$q = "UPDATE " . TB_PREFIX . "units SET u31 = u31 + '".rand(5,15)."', u33 = u33 + '".rand(5,10)."', u37 = u37 + '".rand(0,10)."', u39 = u39 + '".rand(0,5)."' WHERE vref = '" . $wid . "' AND u31 <= '10' AND u33 <= '10' AND u37 <='10' AND u39 <='10'";
-					$result = mysql_query($q, $this->connection);
-					break;
-				case 12:
-					//+50% crop oasis
-					$q = "UPDATE " . TB_PREFIX . "units SET u31 = u31 + '".rand(10,15)."', u33 = u33 + '".rand(5,10)."', u38 = u38 + '".rand(0,5)."', u39 = u39 + '".rand(0,5)."' WHERE vref = '" . $wid . "' AND u31 <= '10' AND u33 <= '10' AND u38 <='10'AND u39 <='10'";
-					$result = mysql_query($q, $this->connection);
-					break;
-			}
-		}
-	}
 
 	function removeOases($wref) {
 		$q = "UPDATE ".TB_PREFIX."odata SET conqured = 0, owner = 2, name = 'Unoccupied Oasis' WHERE wref = $wref";
@@ -713,12 +648,6 @@ class MYSQL_DB {
 
 	function getMInfo($id) {
 		$q = "SELECT * FROM " . TB_PREFIX . "wdata left JOIN " . TB_PREFIX . "vdata ON " . TB_PREFIX . "vdata.wref = " . TB_PREFIX . "wdata.id where " . TB_PREFIX . "wdata.id = $id";
-		$result = mysql_query($q, $this->connection);
-		return mysql_fetch_array($result);
-	}
-
-	function getOMInfo($id) {
-		$q = "SELECT * FROM " . TB_PREFIX . "wdata left JOIN " . TB_PREFIX . "odata ON " . TB_PREFIX . "odata.wref = " . TB_PREFIX . "wdata.id where " . TB_PREFIX . "wdata.id = $id";
 		$result = mysql_query($q, $this->connection);
 		return mysql_fetch_array($result);
 	}
@@ -2985,25 +2914,6 @@ class MYSQL_DB {
 			return mysql_insert_id($this->connection);
 		} else {
 			return false;
-		}
-	}
-
-	function populateOasisdata() {
-		$q2 = "SELECT * FROM " . TB_PREFIX . "wdata where oasistype != 0";
-		$result2 = mysql_query($q2, $this->connection);
-		while($row = mysql_fetch_array($result2)) {
-			$wid = $row['id'];
-			$basearray = $this->getOMInfo($wid);
-			if($basearray['oasistype'] < 4) {
-                             $high = 1;                          
-                         } else if ($basearray['oasistype'] < 10){
-                             $high = 2;                          
-                          }else {
-			     $high = 0;
-						  }		
-			//We switch type of oasis and instert record with apropriate infomation.
-			$q = "INSERT into " . TB_PREFIX . "odata VALUES ('" . $basearray['id'] . "'," . $basearray['oasistype'] . ",0,800,800,800,800,800,800," . time() . "," . time() . ",100,2,'Unoccupied Oasis',".$high.")";
-			$result = mysql_query($q, $this->connection);
 		}
 	}
 

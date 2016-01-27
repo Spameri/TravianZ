@@ -32,4 +32,15 @@ class WDataModel extends App\Model\BaseModel
 			->execute();
 		return $id;
 	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getAllOases()
+	{
+		return $this->database->select('*')->from($this->table)
+			->where('oasistype > 0')
+			->fetchAll();
+	}
 }

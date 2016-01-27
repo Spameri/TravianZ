@@ -30,3 +30,5 @@ services:
 	- App\FrontModule\Model\VData\VDataModel(%storageCapacity%, %storageMultiplier%)
 	- App\FrontModule\Model\VData\VillageService
 	- App\FrontModule\Model\WData\WDataModel
+	- App\FrontModule\Model\OData\ODataModel
+	- App\FrontModule\Model\OData\OasisService
