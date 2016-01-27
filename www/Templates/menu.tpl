@@ -1,37 +1,3 @@
-<?php
-
-/** --------------------------------------------------- **\
-| ********* DO NOT REMOVE THIS COPYRIGHT NOTICE ********* |
-+---------------------------------------------------------+
-| Credits:     All the developers including the leaders:  |
-|              Advocaite & Dzoki & Donnchadh              |
-|                                                         |
-| Copyright:   TravianX Project All rights reserved       |
-\** --------------------------------------------------- **/
-
-?><?php
-if(!$session->logged_in) {
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
-<html>
-<head>
-    <title></title>
-    <style type="text/css">
-div.c1 {text-align: center}
-    </style>
-</head>
-
-<body>
-    <div id="side_navi">
-        <a id="logo" href="<?php echo HOMEPAGE; ?>" name="logo"><img src="img/x.gif" alt="Travian"></a>
-
-        <p><a href="<?php echo HOMEPAGE; ?>"><?php echo HOME; ?></a> <a href="login.php"><?php echo LOGIN; ?></a> <a href="anmelden.php"><?php echo REG; ?></a></p>
-    </div><?php
-    }
-    else {
-    ?>
-
     <div id="side_navi">
         <a id="logo" href="<?php echo HOMEPAGE; ?>" name="logo"><img src="img/x.gif" <?php if($session->plus) { echo "class=\"logo_plus\""; } ?> alt="Travian"></a>
 
@@ -111,10 +77,4 @@ div.c1 {text-align: center}
         </div>
     </div>
 
-    <div id="ce"></div><?php
-    die();
-    }
-    }
-    ?>
-</body>
-</html>
+    <div id="ce"></div>

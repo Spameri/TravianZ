@@ -26,9 +26,9 @@ services:
 	- App\FrontModule\Model\FData\FDataModel
 	- App\FrontModule\Model\TData\TDataModel
 	- App\FrontModule\Model\Units\UnitsModel
-	- App\FrontModule\Model\User\RegisterService
+	- App\FrontModule\Model\User\RegisterService(%protection%)
 	- App\FrontModule\Model\VData\VDataModel(%storageCapacity%, %storageMultiplier%)
 	- App\FrontModule\Model\VData\VillageService
-	- App\FrontModule\Model\WData\WDataModel
+	- App\FrontModule\Model\WData\WDataModel(%worldSize%)
 	- App\FrontModule\Model\OData\ODataModel
 	- App\FrontModule\Model\OData\OasisService

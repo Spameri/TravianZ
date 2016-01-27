@@ -39,9 +39,11 @@ class RegisterService
 	 * @var App\FrontModule\Model\VData\VillageService
 	 */
 	private $villageService;
+	private $protection;
 
 
 	public function __construct(
+		$protection,
 		UserModel $userModel,
 		App\FrontModule\Model\WData\WDataModel $WDataModel,
 		App\FrontModule\Model\FData\FDataModel $FDataModel,
@@ -59,9 +61,13 @@ class RegisterService
 		$this->ABDataModel = $ABDataModel;
 		$this->VDataModel = $VDataModel;
 		$this->villageService = $villageService;
+		$this->protection = $protection;
 	}
 
 
+	/**
+	 * @param \stdClass $data
+	 */
 	public function createMultihunter($data)
 	{
 		/** @var \stdClass $multihunter */
@@ -98,10 +104,14 @@ class RegisterService
 	 */
 	public function registerUser($data)
 	{
+		$protection = time() + $this->protection;
 		$userId = $this->userModel->add([
 			'email' => $data->email,
-			'username' => $data->username,
+			'username' => $data->nickname,
 			'password' => Nette\Security\Passwords::hash($data->password),
+			'access' => UserModel::PERMISSION_USER,
+			'tribe' => $data->tribe,
+			'protect' => $protection,
 		]);
 
 		return $this->userModel->get($userId);
@@ -110,9 +120,27 @@ class RegisterService
 
 	/**
 	 * Handle all related to create new user.
+	 *
+	 * @param \stdClass $data
 	 */
-	public function createUser()
+	public function createUser($data)
 	{
+		$user = $this->registerUser($data);
 
+		/** @var \stdClass $field */
+		$field = $this->WDataModel->getRandom($data->position);
+		$this->WDataModel->setFieldTaken($field->id);
+		$villageName = $this->villageService->getNewVillageName($user);
+		$vid = $this->VDataModel->addVillageForUser($user, $field, $villageName);
+		$this->FDataModel->addResourceFields($field->fieldtype, $vid);
+		$this->unitsModel->add([
+			'vref' => $vid,
+		]);
+		$this->TDataModel->add([
+			'vref' => $vid,
+		]);
+		$this->ABDataModel->add([
+			'vref' => $vid,
+		]);
 	}
 }

@@ -25,7 +25,7 @@ class Account {
 		if(isset($_POST['ft'])) {
 			switch($_POST['ft']) {
 				case "a1":
-				$this->Signup();
+
 				break;
 				case "a2":
 				$this->Activate();
@@ -43,94 +43,6 @@ class Account {
 		else {
 			if($session->logged_in && in_array("logout.php",explode("/",$_SERVER['PHP_SELF']))) {
 				$this->Logout();
-			}
-		}
-	}
-
-	private function Signup() {
-		global $database,$form,$mailer,$generator,$session;
-		if(!isset($_POST['name']) || trim($_POST['name']) == "") {
-			$form->addError("name",USRNM_EMPTY);
-		}
-		else {
-			if(strlen($_POST['name']) < USRNM_MIN_LENGTH) {
-				$form->addError("name",USRNM_SHORT);
-			}
-			else if(!USRNM_SPECIAL && preg_match('/[^0-9A-Za-z]/',$_POST['name'])) {
-				$form->addError("name",USRNM_CHAR);
-			}
-			else if(USRNM_SPECIAL && preg_match("/[:,\\. \\n\\r\\t\\s\\<\\>]+/", $_POST['name'])) {
-				$form->addError("name",USRNM_CHAR);
-			}
-			else if($database->checkExist($_POST['name'],0)) {
-				$form->addError("name",USRNM_TAKEN);
-			}
-			else if($database->checkExist_activate($_POST['name'],0)) {
-				$form->addError("name",USRNM_TAKEN);
-			}
-
-		}
-		if(!isset($_POST['pw']) || trim($_POST['pw']) == "") {
-			$form->addError("pw",PW_EMPTY);
-		}
-		else {
-			if(strlen($_POST['pw']) < PW_MIN_LENGTH) {
-				$form->addError("pw",PW_SHORT);
-			}
-			else if($_POST['pw'] == $_POST['name']) {
-				$form->addError("pw",PW_INSECURE);
-
-			}
-		}
-		if(!isset($_POST['email'])) {
-			$form->addError("email",EMAIL_EMPTY);
-		}
-		else {
-			if(!$this->validEmail($_POST['email'])) {
-				$form->addError("email",EMAIL_INVALID);
-			}
-			else if($database->checkExist($_POST['email'],1)) {
-				$form->addError("email",EMAIL_TAKEN);
-			}
-			else if($database->checkExist_activate($_POST['email'],1)) {
-				$form->addError("email",EMAIL_TAKEN);
-			}
-		}
-		if(!isset($_POST['vid'])) {
-			$form->addError("tribe",TRIBE_EMPTY);
-		}
-		if(!isset($_POST['agb'])) {
-			$form->addError("agree",AGREE_ERROR);
-		}
-		if($form->returnErrors() > 0) {
-            $form->addError("invt",$_POST['invited']);
-            $_SESSION['errorarray'] = $form->getErrors();
-            $_SESSION['valuearray'] = $_POST;
-            
-
-            header("Location: anmelden.php");
-        }
-		else {
-			if(AUTH_EMAIL){
-			$act = $generator->generateRandStr(10);
-			$act2 = $generator->generateRandStr(5);
-				$uid = $database->activate($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$_POST['kid'],$act,$act2);
-				if($uid) {
-
-					$mailer->sendActivate($_POST['email'],$_POST['name'],$_POST['pw'],$act);
-					header("Location: activate.php?id=$uid&q=$act2");
-				}
-			}
-			else {
-				$uid = $database->register($_POST['name'],md5($_POST['pw']),$_POST['email'],$_POST['vid'],$act);
-				if($uid) {
-					setcookie("COOKUSR",$_POST['name'],time()+COOKIE_EXPIRE,COOKIE_PATH);
-					setcookie("COOKEMAIL",$_POST['email'],time()+COOKIE_EXPIRE,COOKIE_PATH);
-					$database->updateUserField($uid,"act","",1);
-					$database->updateUserField($uid,"invited",$_POST['invited'],1);
-					$this->generateBase($_POST['kid'],$uid,$_POST['name']);
-					header("Location: login.php");
-				}
 			}
 		}
 	}
@@ -238,21 +150,7 @@ class Account {
 
 	function generateBase($kid,$uid,$username) {
 		global $database,$message;
-		if($kid == 0) {
-			$kid = rand(1,4);
-		}
-		else{
-			$kid = $_POST['kid'];
-		}
 
-		$wid = $database->generateBase($kid,0);
-		$database->setFieldTaken($wid);
-		$database->addVillage($wid,$uid,$username,1);
-		$database->addResourceFields($wid,$database->getVillageType($wid));
-		$database->addUnits($wid);
-		$database->addTech($wid);
-		$database->addABTech($wid);
-		$database->updateUserField($uid,"access",USER,1);
 		$message->sendWelcome($uid,$username);
 	}
 

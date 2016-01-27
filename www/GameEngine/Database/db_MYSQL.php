@@ -26,22 +26,6 @@ class MYSQL_DB {
 		mysql_query("SET NAMES 'UTF8'");  //Fix utf8 phpmyadmin by gm4st3r
 	}
 
-	function register($username, $password, $email, $tribe, $act) {
-		$time = time();
-        	$stime = strtotime(START_DATE)-strtotime(date('m/d/Y'))+strtotime(START_TIME);
-		if($stime > time()){
-		$time = $stime;
-		}
-		$timep = $time + PROTECTION;
-		$time = time();
-		$q = "INSERT INTO " . TB_PREFIX . "users (username,password,access,email,timestamp,tribe,act,protect,lastupdate,regtime) VALUES ('$username', '$password', " . USER . ", '$email', $time, $tribe, '$act', $timep, $time, $time)";
-		if(mysql_query($q, $this->connection)) {
-			return mysql_insert_id($this->connection);
-		} else {
-			return false;
-		}
-	}
-
 	function activate($username, $password, $email, $tribe, $locate, $act, $act2) {
 		$time = time();
 		$q = "INSERT INTO " . TB_PREFIX . "activate (username,password,access,email,tribe,timestamp,location,act,act2) VALUES ('$username', '$password', " . USER . ", '$email', $tribe, $time, $locate, '$act', '$act2')";
@@ -368,53 +352,6 @@ class MYSQL_DB {
 			return mysql_query($q, $this->connection);
 		}
 	}
-	
-	function generateBase($sector, $mode=1) {
-	$num_rows = 0;
-	$count_while = 0;
-    while (!$num_rows){
-    if (!$mode) {
-        $gamesday=time()-COMMENCE;
-        if ($gamesday<3600*24*10 && $count_while==0) { //10 day
-            $wide1=1;
-            $wide2=20;
-        } elseif ($gamesday<3600*24*20 && $count_while==1) { //20 day
-            $wide1=20;
-            $wide2=40;
-        } elseif ($gamesday<3600*24*30 && $count_while==2) { //30 day
-            $wide1=40;
-            $wide2=80;
-        } else {        // over 30 day
-            $wide1=80;
-            $wide2=WORLD_MAX;
-        }
-    }
-    else {
-        $wide1=1;    
-        $wide2=WORLD_MAX;
-    }
-    switch($sector) {
-    case 1:
-    $q = "Select * from ".TB_PREFIX."wdata where fieldtype = 3 and (x < -$wide1 and x > -$wide2) and (y > $wide1 and y < $wide2) and occupied = 0"; //x- y+
-    break;
-    case 2:
-    $q = "Select * from ".TB_PREFIX."wdata where fieldtype = 3 and (x > $wide1 and x < $wide2) and (y > $wide1 and y < $wide2) and occupied = 0"; //x+ y+
-    break;
-    case 3:
-    $q = "Select * from ".TB_PREFIX."wdata where fieldtype = 3 and (x < -$wide1 and x > -$wide2) and (y < -$wide1 and y > -$wide2) and occupied = 0"; //x- y-
-    break;
-    case 4:
-    $q = "Select * from ".TB_PREFIX."wdata where fieldtype = 3 and (x > $wide1 and x < $wide2) and (y < -$wide1 and y > -$wide2) and occupied = 0"; //x+ y-
-    break;
-    }
-    $result = mysql_query($q, $this->connection);
-    $num_rows = mysql_num_rows($result);
-	$count_while++;
-    }
-    $result = $this->mysql_fetch_all($result);
-    $base = rand(0, ($num_rows-1));
-    return $result[$base]['id'];
-    }
 
     function isVillageOases($wref) {
         $q = "SELECT id, oasistype FROM " . TB_PREFIX . "wdata where id = $wref";

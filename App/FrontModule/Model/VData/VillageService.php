@@ -10,12 +10,18 @@ class VillageService
 	 * @var VDataModel
 	 */
 	private $VDataModel;
+	/**
+	 * @var App\FrontModule\Model\WData\WDataModel
+	 */
+	private $WDataModel;
 
 
 	public function __construct(
-		VDataModel $VDataModel
+		VDataModel $VDataModel,
+		App\FrontModule\Model\WData\WDataModel $WDataModel
 	) {
 		$this->VDataModel = $VDataModel;
+		$this->WDataModel = $WDataModel;
 	}
 
 
@@ -33,5 +39,17 @@ class VillageService
 		}
 
 		return $villageName;
+	}
+
+
+	/**
+	 * @param int $place
+	 */
+	public function getRegistrationPlace($place)
+	{
+		if ($place === 0) {
+			$place = rand(1, 4);
+		}
+		$this->WDataModel->getRandom($place);
 	}
 }
