@@ -1,5 +1,39 @@
 {var bodyClass = 'v35 ie ie7'}
 {layout '../@layoutGame.latte'}
 {block content}
+	<div class="wrapper">
+		<div id="dynamic_header">
+		</div>
+		<div id="header"></div>
+		<div id="mid">
+			<div id="side_navi">
+				<a id="logo" n:href=":Front:Homepage:default" name="logo"><img src="{$baseUrl}/img/x.gif" alt="Travian"></a>
 
+				<p>
+					<a n:href=":Front:Homepage:default">Homepage</a>
+					<a n:href=":Front:Login:default">Login</a>
+					<a n:href=":Front:Register:default">Registration</a>
+				</p>
+			</div>
+		</div>
+		<div id="content"  class="login">
+			<h1><img class="img_login" src="{$baseUrl}/img/x.gif" alt="log in the game" /></h1>
+
+			<h5><img class="img_u04" src="{$baseUrl}/img/x.gif" alt="login" /></h5>
+
+			{foreach $flashes as $flash}
+                <div class="flash {$flash->type}">{$flash->message}</div>
+            {/foreach}
+
+			{control loginForm}
+		</div>
+		<div id="ce"></div>
+		<div id="side_info" class="outgame">
+
+		<div class="clear"></div>
+		</div>
+
+		<div class="footer-stopper outgame"></div>
+		<div class="clear"></div>
+	</div>
 {/block}

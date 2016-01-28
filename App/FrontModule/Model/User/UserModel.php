@@ -20,4 +20,12 @@ class UserModel extends App\Model\BaseModel
 			->where('email = %s', $email)
 			->fetch();
 	}
+
+
+	public function getByUsername($username)
+	{
+		return $this->database->select('*')->from($this->table)
+			->where('username = %s', $username)
+			->fetch();
+	}
 }

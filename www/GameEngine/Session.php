@@ -79,41 +79,10 @@ class Session {
 			}
 
 			public function Login($user) {
-				global $database, $generator, $logging;
-				$this->logged_in = true;
-				$_SESSION['sessid'] = $generator->generateRandID();
-				$_SESSION['username'] = $user;
-				$_SESSION['checker'] = $generator->generateRandStr(3);
-				$_SESSION['mchecker'] = $generator->generateRandStr(5);
-				$_SESSION['qst'] = $database->getUserField($_SESSION['username'], "quest", 1);
-                $result = mysql_query("SELECT village_select FROM `". TB_PREFIX."users` WHERE `username`='".$_SESSION['username']."'");
-                $dbarray = mysql_fetch_assoc($result);
-                $selected_village=$dbarray['village_select'];
-                if(!isset($_SESSION['wid'])) {
-                    if($selected_village!='') {
-                        $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = '.$selected_village);
-                    }else{
-                        $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `owner` = ' . $database->getUserField($_SESSION['username'], "id", 1) . ' LIMIT 1');
-                    }
-                    $data = mysql_fetch_assoc($query);
-                    $_SESSION['wid'] = $data['wref'];
-                } else
-                    if($_SESSION['wid'] == '') {
-                        if($selected_village!='') {
-                            $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `wref` = '.$selected_village);
-                        }else{
-                            $query = mysql_query('SELECT * FROM `' . TB_PREFIX . 'vdata` WHERE `owner` = ' . $database->getUserField($_SESSION['username'], "id", 1) . ' LIMIT 1');
-                        }
-                        $data = mysql_fetch_assoc($query);
-                        $_SESSION['wid'] = $data['wref'];
-                    }
+
+
 				$this->PopulateVar();
 
-				$logging->addLoginLog($this->uid, $_SERVER['REMOTE_ADDR']);
-				$database->addActiveUser($_SESSION['username'], $this->time);
-				$database->updateUserField($_SESSION['username'], "sessid", $_SESSION['sessid'], 0);
-
-				header("Location: dorf1.php");
 			}
 
 			public function Logout() {
@@ -181,44 +150,7 @@ class Session {
                 $yes=false;
             } 
             if($yes and !$hero) $database->KillMyHero($this->uid);
-				} 
-
-			private function PopulateVar() {
-				global $database;
-				$this->userarray = $this->userinfo = $database->getUserArray($_SESSION['username'], 0);
-				$this->username = $this->userarray['username'];
-				$this->uid = $_SESSION['id_user'] =  $this->userarray['id'];
-				$this->gpack = $this->userarray['gpack'];
-				$this->access = $this->userarray['access'];
-				$this->plus = ($this->userarray['plus'] > $this->time);
-				$this->goldclub = $this->userarray['goldclub'];
-				$this->villages = $database->getVillagesID($this->uid);
-				$this->tribe = $this->userarray['tribe'];
-				$this->isAdmin = $this->access >= MODERATOR;
-				$this->alliance = $_SESSION['alliance_user'] = $this->userarray['alliance'];
-				$this->checker = $_SESSION['checker'];
-				$this->mchecker = $_SESSION['mchecker'];
-				$this->sit = $database->GetOnline($this->uid);
-				$this->sit1 = $this->userarray['sit1'];
-				$this->sit2 = $this->userarray['sit2'];
-				$this->cp = floor($this->userarray['cp']);
-				$this->gold = $this->userarray['gold'];
-				$this->oldrank = $this->userarray['oldrank'];
-				$_SESSION['ok'] = $this->userarray['ok'];
-				if($this->userarray['b1'] > $this->time) {
-					$this->bonus1 = 1;
 				}
-				if($this->userarray['b2'] > $this->time) {
-					$this->bonus2 = 1;
-				}
-				if($this->userarray['b3'] > $this->time) {
-					$this->bonus3 = 1;
-				}
-				if($this->userarray['b4'] > $this->time) {
-					$this->bonus4 = 1;
-				}
-                $this->CheckHeroReal();
-			}
 
 			private function SurfControl(){
 				if(SERVER_WEB_ROOT) {

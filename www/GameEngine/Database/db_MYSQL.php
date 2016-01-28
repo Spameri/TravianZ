@@ -341,16 +341,10 @@ class MYSQL_DB {
 
 	function UpdateOnline($mode, $name = "", $time = "", $uid = 0) {
 		global $session;
-		if($mode == "login") {
-			$q = "INSERT IGNORE INTO " . TB_PREFIX . "online (name, uid, time, sit) VALUES ('$name', '$uid', " . time() . ", 0)";
-			return mysql_query($q, $this->connection);
-		} else if($mode == "sitter") {
-			$q = "INSERT IGNORE INTO " . TB_PREFIX . "online (name, uid, time, sit) VALUES ('$name', '$uid', " . time() . ", 1)";
-			return mysql_query($q, $this->connection);
-		} else {
+
 			$q = "DELETE FROM " . TB_PREFIX . "online WHERE name ='" . addslashes($session->username) . "'";
 			return mysql_query($q, $this->connection);
-		}
+
 	}
 
     function isVillageOases($wref) {

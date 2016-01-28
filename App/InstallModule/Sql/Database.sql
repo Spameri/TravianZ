@@ -1101,7 +1101,7 @@ CREATE TABLE IF NOT EXISTS `online` (
  `uid` int(11) NULL,
  `time` varchar(32) NULL,
  `sit` tinyint(1) NULL,
- UNIQUE KEY `name` (`name`)
+ UNIQUE KEY `uid` (`uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --

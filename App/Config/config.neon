@@ -32,3 +32,5 @@ services:
 	- App\FrontModule\Model\WData\WDataModel(%worldSize%)
 	- App\FrontModule\Model\OData\ODataModel
 	- App\FrontModule\Model\OData\OasisService
+	- App\FrontModule\Model\User\LoginService
+	- App\GameModule\Model\Online\OnlineModel
