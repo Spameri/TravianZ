@@ -1,0 +1,76 @@
+<div id="header">
+    <div id="mtop">
+        <a href="{plink ':Game:OuterVillage:default'}" id="n1" accesskey="1"><img src="{$baseUrl}/img/x.gif" title="Village overview" alt="Village overview" /></a>
+        <a href="{plink ':Game:InnerVillage:default'}" id="n2" accesskey="2"><img src="{$baseUrl}/img/x.gif" title="Village centre" alt="Village centre" /></a>
+        <a href="{plink ':Game:Map:default'}" id="n3" accesskey="3"><img src="{$baseUrl}/img/x.gif" title="Map" alt="Map" /></a>
+        <a href="{plink ':Game:Statistics:default'}" id="n4" accesskey="4"><img src="{$baseUrl}/img/x.gif" title="Statistics" alt="Statistics" /></a>
+	  	<div id="n5" n:class="
+	  		$unread && ! $report ? i2,
+	  		! $unread && $report ? i3,
+	  		$unread && $report ? i1,
+	  		! $unread && ! $report ? i4
+	  		">
+            <a href="{plink ':Game:Reports:default'}" accesskey="5"><img src="{$baseUrl}/img/x.gif" class="l" title="Reports" alt="Reports"/></a>
+            <a href="{plink ':Game:Messages:default'}" accesskey="6"><img src="{$baseUrl}/img/x.gif" class="r" title="Messages" alt="Messages" /></a>
+        </div>
+
+        <a href="{plink ':Game:Plus:default'}" id="plus">
+			<span class="plus_text">
+				<span class="plus_g">P</span>
+				<span class="plus_o">l</span>
+				<span class="plus_g">u</span>
+				<span class="plus_o">s</span>
+			</span>
+			<img src="{$baseUrl}/img/x.gif" id="btn_plus" n:class="$plusActive ? active, ! $plusActive ? inactive"
+				title="Plus menu" alt="Plus menu" />
+		</a>
+
+		<style>
+			.day_image {
+				background-image: url("../gpack/travian_default/img/l/day.gif");
+				width: 18px;
+				height:18px;
+			}
+			.night_image {
+				  background-image: url("../gpack/travian_default/img/l/night.gif");
+				width: 18px;
+				height:18px;
+			}
+		  	#container {
+				width: 30px;
+				height: 60px;
+				position: relative;
+		  	}
+	  		#wrapper > #container {
+				display: table;
+				position: static;
+		  	}
+		  	#container div {
+				position: absolute;
+				top: 50%;
+		  	}
+		  	#container div div {
+				position: relative;
+				top: -50%;
+		  	}
+		  	#container > div {
+				display: table-cell;
+				vertical-align: middle;
+				position: static;
+		  	}
+		</style>
+		{var hour = date('Hi')}
+		<div id="wrapper">
+			<div id="container">
+				<div>
+					<div>
+						<p>
+							<img src="{$baseUrl}/img/x.gif" style="display: block; margin: 0 auto; vertical-align:middle;" n:class="$hour > 1750 || $hour < 500 ? night_image : day_image"  />
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+</div>

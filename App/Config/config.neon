@@ -34,3 +34,8 @@ services:
 	- App\FrontModule\Model\OData\OasisService
 	- App\FrontModule\Model\User\LoginService
 	- App\GameModule\Model\Online\OnlineModel
+	- App\GameModule\Controls\Header\IHeaderControl
+	- App\GameModule\Model\MData\MDataModel
+	- App\GameModule\Model\NData\NDataModel
+	- App\FrontModule\Model\User\UserService
+	- App\GameModule\Controls\Resource\IResourceControl

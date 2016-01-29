@@ -5,7 +5,7 @@ namespace App\GameModule\Presenters;
 use App;
 use Nette;
 
-class InnerVillagePresenter extends Nette\Application\UI\Presenter
+class StatisticsPresenter extends GamePresenter
 {
 
 	public function actionDefault()

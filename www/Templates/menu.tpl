@@ -32,49 +32,4 @@
 		id=\"timer1\">".$time."</span> .</a></td>";
 		}
 		?>
-    </div><?php
-    if($_SESSION['ok']=='1'){
-    ?>
-
-    <div id="content" class="village1">
-        <h1><?php echo ANNOUNCEMENT; ?></h1>
-</br>
-        <h3>Hi <?php echo $session->username; ?>,</h3>
-        <?php include("Templates/text.tpl"); ?>
-        <div class="c1">
-		</br>
-            <h3><a href="dorf1.php?ok">&raquo; <?php echo GO2MY_VILLAGE; ?></a></h3>
-        </div>
     </div>
-
-    <div id="side_info">
-        <?php
-        include("Templates/quest.tpl");
-        include("Templates/news.tpl");
-        include("Templates/multivillage.tpl");
-        include("Templates/links.tpl");
-        ?>
-    </div>
-
-    <div class="clear"></div>
-
-    <div class="footer-stopper"></div>
-
-    <div class="clear"></div><?php 
-    include("Templates/footer.tpl"); 
-    include("Templates/res.tpl"); 
-    ?>
-
-    <div id="stime">
-        <div id="ltime">
-            <div id="ltimeWrap">
-                Calculated in <b><?php
-                echo round(($generator->pageLoadTimeEnd()-$start)*1000);
-                ?></b> ms
-                <br>
-                Server time: <span id="tp1" class="b"><?php echo date('H:i:s'); ?></span>
-            </div>
-        </div>
-    </div>
-
-    <div id="ce"></div>

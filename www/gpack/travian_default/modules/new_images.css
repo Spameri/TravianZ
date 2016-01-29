@@ -4,7 +4,7 @@
 
 div#footer {background: #F1F1F1 url(../images/footer_background.gif) repeat-x center top;}
 
-div#footer div#mfoot {background: transparent url(../images/footer_logo.gif) no-repeat 0px 21px;}
+div#footer div#mfoot {background: transparent url(../images/footer_logo.gif) no-repeat 0px 2px;}
 
 div#dynamic_header, 
 body.mod1 div#dynamic_header, 
