@@ -1,0 +1,67 @@
+dibi:
+    host: SSERVER
+    username: SUSER
+    password: SPASS
+    database: SDB
+    lazy: TRUE
+
+parameters:
+    serverName: SERVERNAME
+    timeZone: STIMEZONE
+
+    starDate: SSTARTDATE
+    starTime: SSTARTTIME
+
+    speed: SPEED
+
+    worldSize: MAX
+
+    troopSpeed: INCSPEED
+
+    evansionSpeed: EVASIONSPEED
+
+    traderCapacity: TRADERCAP
+
+    crannyCapacity: CRANNYCAP
+
+    trapMultiplier: TRAPPERCAP
+
+    storageMultiplier: STORAGE_MULTIPLIER
+
+    quest: QUEST
+
+    protection: BEGINNER
+
+    worldWonder: WW
+
+    showNatars: SHOW_NATARS
+
+    natarsMultiplier: NATARS_UNITS
+
+    natureRegeneration: NATURE_REGTIME
+
+    autoActivation: ACTIVATE
+
+    plusTime: PLUS_TIME
+
+    productionBoostTime: PLUS_PRODUCTION
+
+    medalInterval: MEDALINTERVAL
+
+    greatWorkShop: GREAT_WKS
+
+    tourTreshold: TS_THRESHOLD
+
+    registraionOpen: REG_OPEN
+
+    peace: PEACE
+
+    log: LOG
+
+    newsBoxOne: BOX1
+    newsBoxTwo: BOX2
+    newsBoxThree: BOX3
+
+    adminStatistics: ARANK
+    adminName: ANAME
+    adminEmail: AEMAIL

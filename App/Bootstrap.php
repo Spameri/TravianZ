@@ -9,6 +9,9 @@ return call_user_func(function () {
 	$configurator->addConfig(__DIR__ . '/config/install.neon');
 	if (file_exists(__DIR__ . '/config/local.neon')) {
 		$configurator->addConfig(__DIR__ . '/config/local.neon');
+
+	} else {
+		$configurator->addConfig(__DIR__ . '/config/default.neon');
 	}
 	$configurator->createRobotLoader()
 		->addDirectory(__DIR__)
