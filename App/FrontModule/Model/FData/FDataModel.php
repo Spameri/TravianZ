@@ -8,6 +8,34 @@ class FDataModel extends App\Model\BaseModel
 {
 	protected $table = 'fdata';
 
+	public static $coordinates = [
+		1 => "101,33,28",
+		2 => "165,32,28",
+		3 => "224,46,28",
+		4 => "46,63,28",
+		5 => "138,74,28",
+		6 => "203,94,28",
+		7 => "262,86,28",
+		8 => "31,117,28",
+		9 => "83,110,28",
+		10 => "214,142,28",
+		11 => "269,146,28",
+		12 => "42,171,28",
+		13 => "93,164,28",
+		14 => "160,184,28",
+		15 => "239,199,28",
+		16 => "87,217,28",
+		17 => "140,231,28",
+		18 => "190,232,28",
+	];
+
+	public static $names = [
+		1 => 'Woodcutter',
+		2 => 'Clay Pit',
+		3 => 'Iron Mine',
+		4 => 'Cropland',
+	];
+
 
 	/**
 	 * @param int $type
@@ -58,5 +86,16 @@ class FDataModel extends App\Model\BaseModel
 		if ($query) {
 			$this->database->query($query);
 		}
+	}
+
+	/**
+	 * @param int $vref
+	 * @return \Dibi\Row|FALSE
+     */
+	public function getByVref($vref)
+	{
+		return $this->database->select('*')->from($this->table)
+			->where('vref = %i', $vref)
+			->fetch();
 	}
 }

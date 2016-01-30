@@ -1,0 +1,33 @@
+{var bodyClass = 'v35 ie ie8'}
+{block content}
+    <div id="content" class="village1">
+        <h1>
+            {$village->getName()}
+            <div n:if="$village->getLoyalty() != 100" id="loyality" n:class="$village->getLoyalty() > 33 ? gr : re">
+                Loyalty {$village->getLoyalty()}%
+            </div>
+        </h1>
+        <div n:if="$village->isCapital()" id="cap" align="left">
+            <font color=gray>(Capital)</font>
+        </div>
+        <map name="rx" id="rx">
+            {for $i = 1; $i <= 18; $i++}
+                <area n:href=":Game:Build:default $village->getId(), $i"
+                    coords="{App\FrontModule\Model\FData\FDataModel::$coordinates[$i]}"
+                    shape="circle"
+                    title="{App\FrontModule\Model\FData\FDataModel::$names[$village->getFData()['f' . $i . 't']]} Level {$village->getFData()['f' . $i]}"
+                />
+            {/for}
+        	<area n:href=":Game:InnerVillage:default $village->getId()" coords="144,131,36" shape="circle" title="Village centre" alt="" />
+        </map>
+
+        <div id="village_map" class="f{$village->getType()}">
+            {for $i = 1; $i <= 18; $i++}
+                <img src="{$baseUrl}/img/x.gif" class="reslevel rf{$i} level{$village->getFData()['f' . $i]}"
+                    alt="{App\FrontModule\Model\FData\FDataModel::$names[$village->getFData()['f' . $i . 't']]} {$village->getFData()['f' . $i]}"
+                />
+            {/for}
+        	<img id="resfeld" usemap="#rx" src="{$baseUrl}/img/x.gif" alt="" />
+        </div>
+    </div>
+{/block}

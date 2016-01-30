@@ -8,13 +8,13 @@ use Nette;
 class InnerVillagePresenter extends GamePresenter
 {
 
-	public function actionDefault()
+	public function actionDefault($id)
 	{
 
 	}
 
 
-	public function renderDefault()
+	public function renderDefault($id)
 	{
 
 	}

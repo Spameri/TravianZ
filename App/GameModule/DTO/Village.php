@@ -5,6 +5,9 @@ namespace App\GameModule\DTO;
 class Village
 {
     /** @var int */
+    private $id;
+
+    /** @var int */
     private $actualWood;
     /** @var int */
     private $productionWood;
@@ -33,6 +36,36 @@ class Village
     private $upkeep;
     /** @var int */
     private $maxUpkeep;
+
+    /** @var string */
+    private $name;
+    /** @var int */
+    private $loyalty;
+
+    /** @var bool */
+    private $capital;
+
+    /** @var int */
+    private $type;
+
+    /** @var array */
+    private $fData;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return int
@@ -224,6 +257,86 @@ class Village
     public function setMaxUpkeep($maxUpkeep)
     {
         $this->maxUpkeep = $maxUpkeep;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLoyalty()
+    {
+        return $this->loyalty;
+    }
+
+    /**
+     * @param int $loyalty
+     */
+    public function setLoyalty($loyalty)
+    {
+        $this->loyalty = $loyalty;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isCapital()
+    {
+        return $this->capital;
+    }
+
+    /**
+     * @param boolean $capital
+     */
+    public function setCapital($capital)
+    {
+        $this->capital = $capital;
+    }
+
+    /**
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param int $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFData()
+    {
+        return $this->fData;
+    }
+
+    /**
+     * @param array $fData
+     */
+    public function setFData($fData)
+    {
+        $this->fData = $fData;
     }
 
 }

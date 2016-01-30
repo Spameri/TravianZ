@@ -15,14 +15,20 @@ class VillageService
 	 * @var App\FrontModule\Model\WData\WDataModel
 	 */
 	private $WDataModel;
+	/**
+	 * @var App\FrontModule\Model\FData\FDataModel
+	 */
+	private $FDataModel;
 
 
 	public function __construct(
 		VDataModel $VDataModel,
-		App\FrontModule\Model\WData\WDataModel $WDataModel
+		App\FrontModule\Model\WData\WDataModel $WDataModel,
+		App\FrontModule\Model\FData\FDataModel $FDataModel
 	) {
 		$this->VDataModel = $VDataModel;
 		$this->WDataModel = $WDataModel;
+		$this->FDataModel = $FDataModel;
 	}
 
 
@@ -64,6 +70,8 @@ class VillageService
 		$VData = $this->VDataModel->getByWId($id);
 		$village = new App\GameModule\DTO\Village();
 
+		$village->setId($VData->wref);
+
 		$village->setActualWood($VData->wood);
 		$village->setActualClay($VData->clay);
 		$village->setActualIron($VData->iron);
@@ -72,6 +80,15 @@ class VillageService
 		$village->setGranary($VData->maxcrop);
 
 		$village->setUpkeep($VData->pop);
+
+		$village->setName($VData->name);
+		$village->setLoyalty($VData->loyalty);
+		$village->setCapital($VData->capital);
+
+		$village->setType($VData->type);
+
+		$FData = $this->FDataModel->getByVref($village->getId())->toArray();
+		$village->setFData($FData);
 
 		return $village;
 	}
