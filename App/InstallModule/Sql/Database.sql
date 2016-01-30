@@ -1611,3 +1611,26 @@ CREATE TABLE IF NOT EXISTS `ww_attacks` (
 --
 
 -- --------------------------------------------------------
+CREATE TABLE `building` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE 'utf8_general_ci' NOT NULL
+) COMMENT='' ENGINE='InnoDB' COLLATE 'utf8_general_ci';
+ALTER TABLE `building`
+ADD PRIMARY KEY `id` (`id`);
+
+CREATE TABLE `building_levels` (
+  `building` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `production` int(11) NOT NULL,
+  `wood` int(11) NOT NULL,
+  `clay` int(11) NOT NULL,
+  `iron` int(11) NOT NULL,
+  `crop` int(11) NOT NULL,
+  `pop` int(11) NOT NULL,
+  `culturepoints` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `parameter` int(11) NOT NULL
+) COMMENT='' ENGINE='InnoDB' COLLATE 'utf8_general_ci';
+
+ALTER TABLE `building_levels`
+ADD FOREIGN KEY (`building`) REFERENCES `building` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -51,6 +51,9 @@ class Village
     /** @var array */
     private $fData;
 
+    /** @var \stdClass */
+    private $owner;
+
     /**
      * @return int
      */
@@ -337,6 +340,22 @@ class Village
     public function setFData($fData)
     {
         $this->fData = $fData;
+    }
+
+    /**
+     * @return \stdClass
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param \stdClass $owner
+     */
+    public function setOwner($owner)
+    {
+        $this->owner = $owner;
     }
 
 }

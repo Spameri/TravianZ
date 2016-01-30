@@ -29,5 +29,44 @@
             {/for}
         	<img id="resfeld" usemap="#rx" src="{$baseUrl}/img/x.gif" alt="" />
         </div>
+        <div id="map_details">
+            <br />
+            <br />
+            -------- movement --------
+
+            <table id="production" cellpadding="1" cellspacing="1">
+            	<thead>
+            	    <tr>
+            			<th colspan="4">Production:</th>
+            	    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="ico"><img class="r1" src="{$baseUrl}/img/x.gif" alt="Wood" title="Wood" /></td>
+                        <td class="res">Wood:</td>
+                        <td class="num">{$village->getProductionWood()}</td>
+                        <td class="per">per hour</td>
+                    </tr>
+                    <tr>
+                        <td class="ico"><img class="r2" src="{$baseUrl}/img/x.gif" alt="Clay" title="Clay" /></td>
+                        <td class="res">Clay:</td>
+                        <td class="num">{$village->getProductionClay()}</td>
+                        <td class="per">per hour</td>
+                    </tr>
+                    <tr>
+                        <td class="ico"><img class="r3" src="{$baseUrl}/img/x.gif" alt="Iron" title="Iron" /></td>
+                        <td class="res">Iron:</td>
+                        <td class="num">{$village->getProductionIron()}</td>
+                        <td class="per">per hour</td>
+                    </tr>
+                    <tr>
+                        <td class="ico"><img class="r4" src="{$baseUrl}/img/x.gif" alt="Crop" title="Crop" /></td>
+                        <td class="res">Crop:</td>
+                        <td class="num">{$village->getProductionCrop()}</td>
+                        <td class="per">per hour</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 {/block}

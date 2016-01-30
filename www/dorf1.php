@@ -8,12 +8,6 @@ $building->procBuild($_GET);
 
 <?php include("Templates/menu.tpl"); ?>
 
-
-	<?php include("Templates/field.tpl");
-	$timer = 1;
-	?>
-	<div id="map_details">
-		</br></br>
 		<?php
 		include("Templates/movement.tpl");
 		include("Templates/production.tpl");
@@ -23,7 +17,7 @@ $building->procBuild($_GET);
 			include("Templates/Building.tpl");
 		}
 		?>
-	</div>
+
 	</br></br></br></br>
 	<div id="side_info">
 		<?php

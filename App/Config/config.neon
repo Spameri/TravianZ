@@ -39,3 +39,5 @@ services:
 	- App\GameModule\Model\NData\NDataModel
 	- App\FrontModule\Model\User\UserService
 	- App\GameModule\Controls\Resource\IResourceControl
+	- App\GameModule\Model\Production\ProductionService(%speed%)
+	- App\GameModule\Model\Building\BuildingModel

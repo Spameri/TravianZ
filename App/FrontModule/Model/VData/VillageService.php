@@ -19,16 +19,28 @@ class VillageService
 	 * @var App\FrontModule\Model\FData\FDataModel
 	 */
 	private $FDataModel;
+	/**
+	 * @var App\GameModule\Model\Production\ProductionService
+	 */
+	private $productionService;
+	/**
+	 * @var App\FrontModule\Model\User\UserModel
+	 */
+	private $userModel;
 
 
 	public function __construct(
 		VDataModel $VDataModel,
 		App\FrontModule\Model\WData\WDataModel $WDataModel,
-		App\FrontModule\Model\FData\FDataModel $FDataModel
+		App\FrontModule\Model\FData\FDataModel $FDataModel,
+		App\GameModule\Model\Production\ProductionService $productionService,
+		App\FrontModule\Model\User\UserModel $userModel
 	) {
 		$this->VDataModel = $VDataModel;
 		$this->WDataModel = $WDataModel;
 		$this->FDataModel = $FDataModel;
+		$this->productionService = $productionService;
+		$this->userModel = $userModel;
 	}
 
 
@@ -70,6 +82,10 @@ class VillageService
 		$VData = $this->VDataModel->getByWId($id);
 		$village = new App\GameModule\DTO\Village();
 
+		/** @var \stdClass $owner */
+		$owner = $this->userModel->get($VData->owner);
+		$village->setOwner($owner);
+
 		$village->setId($VData->wref);
 
 		$village->setActualWood($VData->wood);
@@ -89,6 +105,11 @@ class VillageService
 
 		$FData = $this->FDataModel->getByVref($village->getId())->toArray();
 		$village->setFData($FData);
+
+		$village->setProductionWood($this->productionService->getProductionWood($village));
+		$village->setProductionClay($this->productionService->getProductionClay($village));
+		$village->setProductionIron($this->productionService->getProductionIron($village));
+		$village->setProductionCrop($this->productionService->getProductionCrop($village));
 
 		return $village;
 	}
