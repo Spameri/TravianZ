@@ -225,6 +225,6 @@ class ConfigPresenter extends Nette\Application\UI\Presenter
 
 		file_put_contents(__DIR__ . '/../../Config/local.neon', $text);
 
-		$this->redirect('Install:DataForm:default');
+		$this->redirect(':Install:DataForm:default');
 	}
 }
