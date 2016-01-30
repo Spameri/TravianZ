@@ -61,6 +61,7 @@ class VDataModel extends App\Model\BaseModel
 	/**
 	 * @param \stdClass $user
 	 * @param \stdClass $field
+	 * @param string $villageName
 	 * @return bool
 	 */
 	public function addVillageForUser($user, $field, $villageName)
@@ -69,7 +70,8 @@ class VDataModel extends App\Model\BaseModel
 			'wref'     => $field->id,
 			'owner'    => $user->id,
 			'name'     => $villageName,
-			'capital'  => $this->countByUser($user->id) ? TRUE : FALSE,
+			'capital'  => $this->countByUser($user->id) === 1 ? TRUE : FALSE,
+			'type'	   => $field->fieldtype,
 			'pop'      => 2,
 			'cp'       => 1,
 			'wood'     => 750,
