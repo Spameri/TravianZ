@@ -18,4 +18,14 @@ class BuildPresenter extends GamePresenter
 	{
 
 	}
+
+	public function actionFinishBuildingWithGold($wid)
+	{
+
+	}
+
+	public function actionCancel($id)
+	{
+
+	}
 }

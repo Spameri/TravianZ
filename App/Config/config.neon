@@ -41,3 +41,5 @@ services:
 	- App\GameModule\Controls\Resource\IResourceControl
 	- App\GameModule\Model\Production\ProductionService(%speed%)
 	- App\GameModule\Model\Building\BuildingModel
+	- App\GameModule\Controls\Building\IBuildingControl
+	- App\GameModule\Model\BData\BDataModel

@@ -31,4 +31,11 @@ class BuildingModel extends App\Model\BaseModel
             ->where('level = %i', $level)
             ->fetch();
     }
+
+
+    public function getAll()
+    {
+        return $this->database->select('*')->from($this->table)
+            ->fetchPairs('id', 'name');
+    }
 }

@@ -1,0 +1,39 @@
+<table cellpadding="1" cellspacing="1" id="building_contract">
+    <thead>
+        <tr>
+            <th colspan="4">Building:
+                <a n:if="$village->getOwner()->gold > 2" href="{plink ':Game:Build:finishBuildingWithGold' $village->getId()} "
+                    onclick="return confirm('Finish all construction and research orders in this village immediately for 2 Gold?');"
+                    title="Finish all construction and research orders in this village immediately for 2 Gold?">
+                    <img class="clock" alt="Finish all construction and research orders in this village immediately for 2 Gold?" src="{$baseUrl}/img/x.gif"/>
+                </a>
+            </th>
+		</tr>
+    </thead>
+    <tbody>
+        {foreach $buildings as $build}
+            <tr>
+                <td class="ico">
+                    <a href="{plink ':Game:Build:cancel', $build->id}">
+                        <img src="{$baseUrl}/img/x.gif" class="del" title="cancel" alt="cancel" />
+                    </a>
+                </td>
+                <td>
+                    {if $build->loopcon}(waiting loop){/if}
+                    {$names[$build->type]} (Level {$build->level})
+                </td>
+                <td>
+                    in
+                    <span id="timer{$iterator->counter}">
+                        {($build->timestamp - time())|date:'H:i:s'}
+                    </span>
+                    hrs.
+                </td>
+                <td>
+                    done at {$build->timestamp|date:'H:i:s'}
+                </td>
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
+<script type="text/javascript">var bld=[{"stufe":1,"gid":"1","aid":"3"}]</script>

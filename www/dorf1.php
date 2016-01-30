@@ -10,12 +10,9 @@ $building->procBuild($_GET);
 
 		<?php
 		include("Templates/movement.tpl");
-		include("Templates/production.tpl");
+		// --production--
 		include("Templates/troops.tpl");
 
-		if($building->NewBuilding) {
-			include("Templates/Building.tpl");
-		}
 		?>
 
 	</br></br></br></br>

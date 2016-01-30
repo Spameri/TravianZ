@@ -7,6 +7,8 @@ use Nette;
 
 class OuterVillagePresenter extends GamePresenter
 {
+	use App\GameModule\Controls\Building\TBuildingControl;
+
 	/** @var App\FrontModule\Model\VData\VillageService @inject */
 	public $villageService;
 
