@@ -4,19 +4,38 @@ namespace App\GameModule\Controls\Resource;
 
 use Nette;
 use App;
+use Nette\ComponentModel\IContainer;
 
 class ResourceControl extends Nette\Application\UI\Control
 {
+	/**
+	 * @var App\FrontModule\Model\VData\VillageService
+	 */
+	private $villageService;
+	/**
+	 * @var App\FrontModule\Model\VData\VDataModel
+	 */
+	private $VDataModel;
+
+
+	public function __construct(
+		App\FrontModule\Model\VData\VillageService $villageService,
+		App\FrontModule\Model\VData\VDataModel $VDataModel
+	) {
+		$this->villageService = $villageService;
+		$this->VDataModel = $VDataModel;
+	}
+
+
 	public function render()
 	{
-		$this->template->actualWood = 750;
-		$this->template->actualClay = 750;
-		$this->template->actualIron = 750;
-		$this->template->actualCrop = 750;
-		$this->template->store = 800;
-		$this->template->granary = 800;
-		$this->template->upkeep = 2;
-		$this->template->cropProduction = 15;
+		$id = $this->presenter->getParameter('id');
+		if ( ! $id) {
+			/** @var \stdClass $field */
+			$field = $this->VDataModel->getByUser($this->presenter->user->getId());
+			$id = $field->wref;
+		}
+		$this->template->village = $this->villageService->getVillage($id);
 		$this->template->gold = 40;
 
 

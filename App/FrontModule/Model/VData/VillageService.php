@@ -3,6 +3,7 @@
 namespace App\FrontModule\Model\VData;
 
 use App;
+use Nette;
 
 class VillageService
 {
@@ -51,5 +52,27 @@ class VillageService
 			$place = rand(1, 4);
 		}
 		$this->WDataModel->getRandom($place);
+	}
+
+	/**
+	 * @param int $id
+	 * @return App\GameModule\DTO\Village
+     */
+	public function getVillage($id)
+	{
+		/** @var \stdClass $VData */
+		$VData = $this->VDataModel->getByWId($id);
+		$village = new App\GameModule\DTO\Village();
+
+		$village->setActualWood($VData->wood);
+		$village->setActualClay($VData->clay);
+		$village->setActualIron($VData->iron);
+		$village->setActualCrop($VData->crop);
+		$village->setStorage($VData->maxstore);
+		$village->setGranary($VData->maxcrop);
+
+		$village->setUpkeep($VData->pop);
+
+		return $village;
 	}
 }

@@ -26,9 +26,11 @@ class VDataModel extends App\Model\BaseModel
 	}
 
 
-	public function getByWId()
+	public function getByWId($wid)
 	{
-
+		return $this->database->select('*')->from($this->table)
+			->where('wref = %i', $wid)
+			->fetch();
 	}
 
 
