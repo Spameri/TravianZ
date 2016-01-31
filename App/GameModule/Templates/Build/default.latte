@@ -1,0 +1,60 @@
+{var bodyClass = 'v35 ie ie8'}
+{block content}
+    <div id="content" class="build">
+        <div id="build" class="gid1">
+            <a href="#" onClick="return Popup(0,4);" class="build_logo">
+                <img class="building g1" src="{$baseUrl}/img/x.gif" alt="{$current->getName()}" title="{$current->getName()}" />
+            </a>
+            <h1>
+                {$current->getName()} <span class="level">level {$current->getLevel()}</span>
+            </h1>
+            <p class="build_desc">{$current->getDescription()}</p>
+            <table cellpadding="1" cellspacing="1" id="build_value">
+                <tr>
+                    <th>
+                        Current production:
+                    </th>
+                    <td>
+                        <b>{$current->getProduction()}</b> per hour
+                    </td>
+                </tr>
+                <tr n:if="$next">
+                    <th>
+                        Production at level {$next->getLevel()}:
+                    </th>
+                    <td>
+                        <b>{$next->getProduction()}</b> per hour
+                    </td>
+                </tr>
+            </table>
+            <p n:if=" ! $next">
+                <span class="none">
+                        Building already at max level
+                </span>
+            </p>
+            <p n:if=" ! $next && $buildingQueue > 0">
+                <span class="none">
+                        Building max level under construction
+                </span>
+            </p>
+            <p n:if="$next" id="contract">
+                <b>Costs</b> for upgrading to level {$next->getLevel()}:<br />
+                <img class="r1" src="{$baseUrl}/img/x.gif" alt="Lumber" title="Lumber" /><span class="little_res">{$next->getWood()}</span> |
+                <img class="r2" src="{$baseUrl}/img/x.gif" alt="Clay" title="Clay" /><span class="little_res">{$next->getClay()}</span> |
+                <img class="r3" src="{$baseUrl}/img/x.gif" alt="Iron" title="Iron" /><span class="little_res">{$next->getIron()}</span> |
+                <img class="r4" src="{$baseUrl}/img/x.gif" alt="Crop" title="Crop" /><span class="little_res">{$next->getCrop()}</span> |
+                <img class="r5" src="{$baseUrl}/img/x.gif" alt="Crop consumption" title="Crop consumption" />{$next->getUpkeep()} |
+                <img class="clock" src="{$baseUrl}/img/x.gif" alt="duration" title="duration" />{$next->getTime()|date:'H:i:s'}
+
+                {if $village->getOwner()->gold > 3}
+                |   <a href=":Game:Trade:redistribute $village->getId(), $next->getBuilding()" title="NPC trade">
+                        <img class="npc" src="{$baseUrl}/img/x.gif" alt="NPC trade" title="NPC trade" />
+                    </a>
+                    <br />
+                {/if}
+                <span n:if="$buildingQueue === 2 && ! $village->getOwner()->goldclub" class="none">The workers are already at work.</span>
+            	<br />
+            </p>
+        </div>
+    </div>
+{/block}

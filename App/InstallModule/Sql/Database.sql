@@ -1613,7 +1613,8 @@ CREATE TABLE IF NOT EXISTS `ww_attacks` (
 -- --------------------------------------------------------
 CREATE TABLE `building` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE 'utf8_general_ci' NOT NULL
+  `name` varchar(255) COLLATE 'utf8_general_ci' NOT NULL,
+  `description` text COLLATE 'utf8_general_ci' NOT NULL
 ) COMMENT='' ENGINE='InnoDB' COLLATE 'utf8_general_ci';
 ALTER TABLE `building`
 ADD PRIMARY KEY `id` (`id`);

@@ -12,7 +12,7 @@
         </div>
         <map name="rx" id="rx">
             {for $i = 1; $i <= 18; $i++}
-                <area n:href=":Game:Build:default $village->getId(), $i"
+                <area n:href=":Game:Build:default $village->getId(), $village->getFData()['f' . $i . 't'], $i"
                     coords="{App\FrontModule\Model\FData\FDataModel::$coordinates[$i]}"
                     shape="circle"
                     title="{App\FrontModule\Model\FData\FDataModel::$names[$village->getFData()['f' . $i . 't']]} Level {$village->getFData()['f' . $i]}"
