@@ -7,8 +7,11 @@ $bid1=array(
     array('wood'=>110,'clay'=>280,'iron'=>140,'crop'=>165,'pop'=>1,'cp'=>2,'prod'=>15,'time'=>1190),
 
     array('wood'=>185,'clay'=>465,'iron'=>235,'crop'=>280,'pop'=>1,'cp'=>2,'prod'=>22,'time'=>2100),
+
     array('wood'=>310,'clay'=>780,'iron'=>390,'crop'=>465,'pop'=>1,'cp'=>2,'prod'=>33,'time'=>3560),
+
     array('wood'=>520,'clay'=>1300,'iron'=>650,'crop'=>780,'pop'=>2,'cp'=>3,'prod'=>50,'time'=>5890),
+
     array('wood'=>870,'clay'=>2170,'iron'=>1085,'crop'=>1300,'pop'=>2,'cp'=>4,'prod'=>70,'time'=>9620),
     array('wood'=>1450,'clay'=>3625,'iron'=>1810,'crop'=>2175,'pop'=>2,'cp'=>4,'prod'=>100,'time'=>15590),
     array('wood'=>2420,'clay'=>6050,'iron'=>3025,'crop'=>3630,'pop'=>2,'cp'=>5,'prod'=>145,'time'=>25150),

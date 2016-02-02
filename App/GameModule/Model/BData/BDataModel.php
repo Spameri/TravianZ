@@ -22,4 +22,16 @@ class BDataModel extends App\Model\BaseModel
             ->where('wid = %i', $wid)
             ->fetchSingle();
     }
+
+
+	/**
+	 * @param int $time
+	 * @return array
+	 */
+	public function getBuilt($time)
+	{
+		return $this->database->select('*')->from($this->table)
+			->where('timestamp < %i', $time)
+			->fetchAll();
+	}
 }

@@ -1,11 +1,13 @@
 extensions:
 	dibi: Dibi\Bridges\Nette\DibiExtension22
+	kdybyclock: Kdyby\Clock\DI\ClockExtension
+	console: Kdyby\Console\DI\ConsoleExtension
 
 parameters:
     storageCapacity: 800
 
 php:
-	date.timezone: Europe/Prague
+	date.timezone: UTC
 
 
 application:
@@ -44,3 +46,9 @@ services:
 	- App\GameModule\Controls\Building\IBuildingControl
 	- App\GameModule\Model\BData\BDataModel
 	- App\GameModule\Model\Building\BuildingService(%speed%)
+	- App\GameModule\Model\Event\ProcessEvents
+
+#       commands
+	-
+	    class: App\GameModule\Command\Process
+	    tags: [kdyby.console.command]

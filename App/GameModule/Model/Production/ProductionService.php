@@ -16,16 +16,23 @@ class ProductionService
      * @var App\FrontModule\Model\OData\ODataModel
      */
     private $ODataModel;
+	/**
+	 * @var App\FrontModule\Model\VData\VDataModel
+	 */
+	private $VDataModel;
 
-    function __construct(
+
+	function __construct(
         $speed,
         App\GameModule\Model\Building\BuildingModel $buildingModel,
-        App\FrontModule\Model\OData\ODataModel $ODataModel
+        App\FrontModule\Model\OData\ODataModel $ODataModel,
+		App\FrontModule\Model\VData\VDataModel $VDataModel
     ){
         $this->speed = $speed;
         $this->buildingModel = $buildingModel;
         $this->ODataModel = $ODataModel;
-    }
+		$this->VDataModel = $VDataModel;
+	}
 
     /**
      * @param App\GameModule\DTO\Village $village
@@ -47,9 +54,9 @@ class ProductionService
             }
         }
         // Step 2 calculate raw production
-        foreach ($woodFields as $field) {
+        foreach ($woodFields as $level) {
             /** @var \stdClass $woodcutter */
-            $woodcutter = $this->buildingModel->getBuildingLevel(1, isset($FData[$field]) ? $FData[$field] : 0);
+            $woodcutter = $this->buildingModel->getBuildingLevel(1, $level);
             $production += $woodcutter->production;
         }
 
@@ -95,9 +102,9 @@ class ProductionService
             }
         }
         // Step 2 calculate raw production
-        foreach ($clayFields as $field) {
+        foreach ($clayFields as $level) {
             /** @var \stdClass $clayPit */
-            $clayPit = $this->buildingModel->getBuildingLevel(2, isset($FData[$field]) ? $FData[$field] : 0);
+            $clayPit = $this->buildingModel->getBuildingLevel(2, $level);
             $production += $clayPit->production;
         }
 
@@ -142,9 +149,9 @@ class ProductionService
             }
         }
         // Step 2 calculate raw production
-        foreach ($ironFields as $field) {
+        foreach ($ironFields as $level) {
             /** @var \stdClass $ironMine */
-            $ironMine = $this->buildingModel->getBuildingLevel(3, isset($FData[$field]) ? $FData[$field] : 0);
+            $ironMine = $this->buildingModel->getBuildingLevel(3, $level);
             $production += $ironMine->production;
         }
 
@@ -194,9 +201,9 @@ class ProductionService
             }
         }
         // Step 2 calculate raw production
-        foreach ($cropFields as $field) {
+        foreach ($cropFields as $level) {
             /** @var \stdClass $cropland */
-            $cropland = $this->buildingModel->getBuildingLevel(4, isset($FData[$field]) ? $FData[$field] : 0);
+            $cropland = $this->buildingModel->getBuildingLevel(4, $level);
             $production += $cropland->production;
         }
 
@@ -227,6 +234,81 @@ class ProductionService
         // Step 6 apply speed
         $production = $production * $this->speed;
 
+		// Step 7 subtract upkeep
+		$production = $production - $village->getUpkeep();
+
         return round($production);
     }
+
+
+	/**
+	 * @param App\GameModule\DTO\Village $village
+	 * @param int $time
+	 */
+	public function processProduction($village, $time)
+	{
+		/** @var \stdClass $VData */
+		$VData = $this->VDataModel->getByWId($village->getId());
+
+		if ($time !== $VData->lastupdate2) {
+			if ($VData->lastupdate2 === 0) {
+				$lastUpdate = $time;
+
+			} else {
+				$lastUpdate = $VData->lastupdate2;
+			}
+
+			$wood = $VData->wood;
+			if ($VData->wood !== $VData->maxstore) {
+				$productionWood = $this->getProductionWood($village);
+				$producedWood = ($time - $lastUpdate) * ($productionWood / 3600);
+				$totalWood = $producedWood + $VData->wood;
+				if ($totalWood < $VData->maxstore) {
+					$wood = $totalWood;
+				} else {
+					$wood = $VData->maxstore;
+				}
+			}
+			$clay = $VData->clay;
+			if ($VData->clay !== $VData->maxstore) {
+				$productionClay = $this->getProductionClay($village);
+				$producedClay = ($time - $lastUpdate) * ($productionClay / 3600);
+				$totalClay = $producedClay + $VData->clay;
+				if ($totalClay < $VData->maxstore) {
+					$clay = $totalClay;
+				} else {
+					$clay = $VData->maxstore;
+				}
+			}
+			$iron = $VData->iron;
+			if ($VData->iron !== $VData->maxstore) {
+				$productionIron = $this->getProductionIron($village);
+				$producedIron = ($time - $lastUpdate) * ($productionIron / 3600);
+				$totalIron = $producedIron + $VData->iron;
+				if ($totalIron < $VData->maxstore) {
+					$iron = $totalIron;
+				} else {
+					$iron = $VData->maxstore;
+				}
+			}
+			$crop = $VData->crop;
+			if ($VData->crop !== $VData->maxstore) {
+				$productionCrop = $this->getProductionCrop($village);
+				$producedCrop = ($time - $lastUpdate) * ($productionCrop / 3600);
+				$totalCrop = $producedCrop + $VData->crop;
+				if ($totalCrop < $VData->maxstore) {
+					$crop = $totalCrop;
+				} else {
+					$crop = $VData->maxstore;
+				}
+			}
+			$this->VDataModel->update($village->getId(), [
+				'wood' => $wood,
+				'clay' => $clay,
+				'iron' => $iron,
+				'crop' => $crop,
+				'lastupdate2' => $lastUpdate,
+			]);
+		}
+	}
 }

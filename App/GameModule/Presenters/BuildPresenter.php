@@ -26,7 +26,10 @@ class BuildPresenter extends GamePresenter
 		$next = $this->buildingService->getBuilding($building, $nextLevel);
 		$this->template->next = $next;
 		$this->template->buildingQueue = $this->BDataModel->countBuildingQueue($village->getId());
+		$canBuild = $this->BDataModel->countBuildingQueue($village->getId()) ? FALSE : TRUE;
+		$this->template->canBuild = $canBuild;
 		$this->template->village = $village;
+		$this->template->field = $field;
 	}
 
 
@@ -43,5 +46,16 @@ class BuildPresenter extends GamePresenter
 	public function actionCancel($id)
 	{
 
+	}
+
+	public function actionBuild($vid, $field, $building, $level)
+	{
+		$this->buildingService->build($vid, $field, $building, $level);
+		if ($field < 19) {
+			$this->redirect(':Game:OuterVillage:default', $vid);
+
+		} else {
+			$this->redirect(':Game:InnerVillage:default', $vid);
+		}
 	}
 }

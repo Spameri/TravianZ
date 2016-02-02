@@ -84,4 +84,19 @@ class VDataModel extends App\Model\BaseModel
 
 		return $field->id;
 	}
+
+
+	public function update($id, $data)
+	{
+		return $this->database->update($this->table, $data)
+			->where('wref = %i', $id)
+			->execute();
+	}
+
+
+	public function getAllIds()
+	{
+		return $this->database->select('wref')->from($this->table)
+			->fetchAll();
+	}
 }

@@ -98,4 +98,12 @@ class FDataModel extends App\Model\BaseModel
 			->where('vref = %i', $vref)
 			->fetch();
 	}
+
+
+	public function update($id, $data)
+	{
+		return $this->database->update($this->table, $data)
+			->where('vref = %i', $id)
+			->execute();
+	}
 }

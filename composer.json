@@ -10,6 +10,8 @@
     "require": {
         "dibi/dibi": "^3.0",
         "tracy/tracy": "^2.3",
-        "nette/nette": "^2.3"
+        "nette/nette": "^2.3",
+        "kdyby/clock": "^0.3.0",
+        "kdyby/console": "^2.5"
     }
 }

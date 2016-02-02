@@ -110,6 +110,7 @@ class VillageService
 		$village->setProductionClay($this->productionService->getProductionClay($village));
 		$village->setProductionIron($this->productionService->getProductionIron($village));
 		$village->setProductionCrop($this->productionService->getProductionCrop($village));
+		$village->setMaxUpkeep($this->productionService->getProductionCrop($village));
 
 		return $village;
 	}
