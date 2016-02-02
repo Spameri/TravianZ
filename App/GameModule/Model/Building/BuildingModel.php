@@ -18,6 +18,7 @@ class BuildingModel extends App\Model\BaseModel
     const FOUNDRY = 7;
     const GRAIN_MILL = 8;
     const BAKERY = 9;
+    const WAREHOUSE = 10;
 
     /**
      * @param int $building

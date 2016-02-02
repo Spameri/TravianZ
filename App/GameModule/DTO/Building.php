@@ -26,6 +26,8 @@ class Building
     private $upkeep;
     /** @var int */
     private $time;
+	/** @var int */
+	private $parameter;
 
     /**
      * @return string
@@ -202,5 +204,23 @@ class Building
     {
         $this->time = $time;
     }
+
+
+	/**
+	 * @return int
+	 */
+	public function getParameter()
+	{
+		return $this->parameter;
+	}
+
+
+	/**
+	 * @param int $parameter
+	 */
+	public function setParameter($parameter)
+	{
+		$this->parameter = $parameter;
+	}
 
 }

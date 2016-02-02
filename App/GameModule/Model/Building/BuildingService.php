@@ -91,14 +91,19 @@ class BuildingService
 		$buildings = $this->BDataModel->getBuilt($time);
 
 		foreach ($buildings as $building) {
+			$data = [];
 			$buildingStats = $this->getBuilding($building->type, $building->level);
 			$village = $this->villageService->getVillage($building->wid);
 			$this->FDataModel->update($building->wid, [
 				'f' . $building->field => $building->level,
 			]);
-			$this->VDataModel->update($village->getId(), [
-				'pop' => $village->getUpkeep() + $buildingStats->getUpkeep(),
-			]);
+			$data['pop'] = $village->getUpkeep() + $buildingStats->getUpkeep();
+			switch ($buildingStats->getBuilding()) {
+				case BuildingModel::WAREHOUSE:
+					$data['maxstore'] = $buildingStats->getParameter();
+					break;
+			}
+			$this->VDataModel->update($village->getId(), $data);
 			$this->BDataModel->delete($building->id);
 		}
 	}
