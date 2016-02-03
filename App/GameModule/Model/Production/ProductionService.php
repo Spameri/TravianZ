@@ -250,7 +250,7 @@ class ProductionService
 		/** @var \stdClass $VData */
 		$VData = $this->VDataModel->getByWId($village->getId());
 
-		if ($time !== $VData->lastupdate2) {
+		if ($time > $VData->lastupdate2) {
 			if ($VData->lastupdate2 === 0) {
 				$lastUpdate = $time;
 
@@ -307,7 +307,7 @@ class ProductionService
 				'clay' => $clay,
 				'iron' => $iron,
 				'crop' => $crop,
-				'lastupdate2' => $lastUpdate,
+				'lastupdate2' => $time,
 			]);
 		}
 	}

@@ -22,14 +22,26 @@ class BuildPresenter extends GamePresenter
 		$village = $this->villageService->getVillage($village);
 		$current = $this->buildingService->getBuilding($building, $village->getFData()['f' . $field]);
 		$this->template->current = $current;
+		$queue = $this->BDataModel->getBuildingQueue($village->getId());
 		$nextLevel = $village->getFData()['f' . $field] + 1;
+		foreach ($queue as $single) {
+			if ($single->type === $current->getBuilding() && $nextLevel < $single->level) {
+				$nextLevel = $single->level;
+			}
+		}
+		$nextLevel++;
 		$next = $this->buildingService->getBuilding($building, $nextLevel);
-		$this->template->next = $next;
-		$this->template->buildingQueue = $this->BDataModel->countBuildingQueue($village->getId());
-		$canBuild = $this->BDataModel->countBuildingQueue($village->getId()) ? FALSE : TRUE;
-		$this->template->canBuild = $canBuild;
+
 		$this->template->village = $village;
 		$this->template->field = $field;
+		$this->template->next = $next;
+
+		$this->template->canBuild = $next ? $this->buildingService->canBuild($next, $village) : FALSE;
+		$this->template->busyWorkers = $next ? $this->buildingService->busyWorkers($next, $village) : FALSE;
+		$this->template->storage = $next ? $this->buildingService->isStorageBigEnough($next, $village) : FALSE;
+		$this->template->granary = $next ? $this->buildingService->isGranaryBigEnough($next, $village) : FALSE;
+		$this->template->resources = $next ? $this->buildingService->isThereEnoughResources($next, $village) : FALSE;
+		$this->template->buldingStatus = $this->buildingService->canBuildLevel($next, $village);
 	}
 
 

@@ -16,10 +16,61 @@ class BDataModel extends App\Model\BaseModel
             ->fetchAll();
     }
 
+
+	public function getLastBuildTime($wid)
+	{
+		return $this->database->select('timestamp')->from($this->table)
+			->where('wid = %i', $wid)
+			->orderBy('timestamp DESC')
+			->limit(1)
+			->fetchSingle();
+	}
+
+
+	public function getLastInnerBuildTime($wid)
+	{
+		return $this->database->select('timestamp')->from($this->table)
+			->where('wid = %i', $wid)
+			->where('type > 18')
+			->orderBy('timestamp DESC')
+			->limit(1)
+			->fetchSingle();
+	}
+
+
+	public function getLastOuterBuildTime($wid)
+	{
+		return $this->database->select('timestamp')->from($this->table)
+			->where('wid = %i', $wid)
+			->where('type < 19')
+			->orderBy('timestamp DESC')
+			->limit(1)
+			->fetchSingle();
+	}
+
+
     public function countBuildingQueue($wid)
     {
         return $this->database->select('count(id)')->from($this->table)
             ->where('wid = %i', $wid)
+            ->fetchSingle();
+    }
+
+
+    public function countInnerBuildingQueue($wid)
+    {
+        return $this->database->select('count(id)')->from($this->table)
+            ->where('wid = %i', $wid)
+			->where('type > 18')
+            ->fetchSingle();
+    }
+
+
+    public function countOuterBuildingQueue($wid)
+    {
+        return $this->database->select('count(id)')->from($this->table)
+            ->where('wid = %i', $wid)
+			->where('type < 19')
             ->fetchSingle();
     }
 
