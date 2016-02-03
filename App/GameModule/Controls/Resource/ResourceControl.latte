@@ -6,19 +6,19 @@
 					<img src="{$baseUrl}/img/x.gif" class="r1" alt="Lumber" title="Lumber" />
 				</td>
 				<td id="l4" title="{$village->getProductionWood()}">
-					{$village->getActualWood()} / {$village->getStorage()}
+					{$village->getActualWood()|number} / {$village->getStorage()|number}
 				</td>
 				<td>
 					<img src="{$baseUrl}/img/x.gif" class="r2" alt="Clay" title="Clay" />
 				</td>
 				<td id="l3" title="{$village->getProductionClay()}">
-					{$village->getActualClay()} / {$village->getStorage()}
+					{$village->getActualClay()|number} / {$village->getStorage()|number}
 				</td>
 				<td>
 					<img src="{$baseUrl}/img/x.gif" class="r3" alt="Iron" title="Iron" />
 				</td>
 				<td id="l2" title="{$village->getProductionIron()}">
-					{$village->getActualIron()} / {$village->getStorage()}
+					{$village->getActualIron()|number} / {$village->getStorage()|number}
 				</td>
 				<td>
 					<img src="{$baseUrl}/img/x.gif" class="r4" alt="Crop" title="Crop" />
@@ -26,12 +26,12 @@
 
 
 				<td id="l1" title="{$village->getProductionCrop()}">
-					{$village->getActualCrop()} / {$village->getGranary()}
+					{$village->getActualCrop()|number} / {$village->getGranary()|number}
 				</td>
 				<td>
 					<img src="{$baseUrl}/img/x.gif" class="r5" alt="Crop consumption" title="Crop consumption" /></td>
 				<td>
-					{$village->getUpkeep()} / {$village->getMaxUpkeep()}
+					{$village->getUpkeep()|number} / {$village->getMaxUpkeep()|number}
 				</td>
 			</tr>
 		</table>

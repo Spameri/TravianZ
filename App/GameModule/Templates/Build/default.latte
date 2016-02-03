@@ -15,7 +15,7 @@
                         Current production:
                     </th>
                     <td>
-                        <b>{$current->getProduction()}</b> per hour
+                        <b>{$current->getProduction()|number}</b> per hour
                     </td>
                 </tr>
                 <tr n:if="$next">
@@ -23,39 +23,54 @@
                         Production at level {$next->getLevel()}:
                     </th>
                     <td>
-                        <b>{$next->getProduction()}</b> per hour
+                        <b>{$next->getProduction()|number}</b> per hour
                     </td>
                 </tr>
             </table>
-            <p n:if=" ! $next">
-                <span class="none">
-                        Building already at max level
-                </span>
-            </p>
-            <p n:if=" ! $next && $buildingQueue > 0">
-                <span class="none">
-                        Building max level under construction
-                </span>
-            </p>
             <p n:if="$next" id="contract">
                 <b>Costs</b> for upgrading to level {$next->getLevel()}:<br />
-                <img class="r1" src="{$baseUrl}/img/x.gif" alt="Lumber" title="Lumber" /><span class="little_res">{$next->getWood()}</span> |
-                <img class="r2" src="{$baseUrl}/img/x.gif" alt="Clay" title="Clay" /><span class="little_res">{$next->getClay()}</span> |
-                <img class="r3" src="{$baseUrl}/img/x.gif" alt="Iron" title="Iron" /><span class="little_res">{$next->getIron()}</span> |
-                <img class="r4" src="{$baseUrl}/img/x.gif" alt="Crop" title="Crop" /><span class="little_res">{$next->getCrop()}</span> |
-                <img class="r5" src="{$baseUrl}/img/x.gif" alt="Crop consumption" title="Crop consumption" />{$next->getUpkeep()} |
+                <img class="r1" src="{$baseUrl}/img/x.gif" alt="Lumber" title="Lumber" /><span class="little_res">{$next->getWood()|number}</span> |
+                <img class="r2" src="{$baseUrl}/img/x.gif" alt="Clay" title="Clay" /><span class="little_res">{$next->getClay()|number}</span> |
+                <img class="r3" src="{$baseUrl}/img/x.gif" alt="Iron" title="Iron" /><span class="little_res">{$next->getIron()|number}</span> |
+                <img class="r4" src="{$baseUrl}/img/x.gif" alt="Crop" title="Crop" /><span class="little_res">{$next->getCrop()|number}</span> |
+                <img class="r5" src="{$baseUrl}/img/x.gif" alt="Crop consumption" title="Crop consumption" />{$next->getUpkeep()|number} |
                 <img class="clock" src="{$baseUrl}/img/x.gif" alt="duration" title="duration" />{$next->getTime()|date:'H:i:s'}
 
                 {if $village->getOwner()->gold > 3}
                 |   <a href=":Game:Trade:redistribute $village->getId(), $next->getBuilding()" title="NPC trade">
                         <img class="npc" src="{$baseUrl}/img/x.gif" alt="NPC trade" title="NPC trade" />
                     </a>
-                    <br />
                 {/if}
-                <span n:if="$buildingQueue === 2 && ! $village->getOwner()->goldclub" class="none">The workers are already at work.</span>
-            	<br />
-            	<a class="build" n:href=":Game:Build:build vid => $village->getId(), field => $field, building => $current->getBuilding(), level => $next->getLevel()">Upgrade to level {$next->getLevel()}</a>
             </p>
+
+            <p n:if="$canBuild">
+				<a class="build" n:href=":Game:Build:build vid => $village->getId(), field => $field, building => $current->getBuilding(), level => $next->getLevel()">Upgrade to level {$next->getLevel()}</a>
+            </p>
+            <p n:if="$busyWorkers">
+				<span class="none">The workers are already at work.</span>
+            </p>
+			<p n:if="$buldingStatus !== TRUE">
+				<span class="none">
+					{$buldingStatus}
+				</span>
+			</p>
+			{if $next}
+				<p n:if=" ! $storage">
+					<span class="none">
+						Upgrade warehouse
+					</span>
+				</p>
+				<p n:if=" ! $granary">
+					<span class="none">
+						Upgrade granary
+					</span>
+				</p>
+				<p n:if="$resources !== TRUE && $storage && $granary">
+					<span class="none">
+						Enough resources at {$resources|date:'H:i:s'}
+					</span>
+				</p>
+			{/if}
         </div>
     </div>
 {/block}

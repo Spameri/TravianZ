@@ -23,6 +23,10 @@ session:
 services:
 	router: App\RouterFactory::createRouter
 
+	latte.latteFactory:
+		setup:
+			- addFilter(number, App\GameModule\Model\DisplayValues::number)
+
 	- App\FrontModule\Model\User\UserModel
 	- App\FrontModule\Model\ABData\ABDataModel
 	- App\FrontModule\Model\FData\FDataModel

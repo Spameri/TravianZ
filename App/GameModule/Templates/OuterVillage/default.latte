@@ -44,25 +44,25 @@
                     <tr>
                         <td class="ico"><img class="r1" src="{$baseUrl}/img/x.gif" alt="Wood" title="Wood" /></td>
                         <td class="res">Wood:</td>
-                        <td class="num">{$village->getProductionWood()}</td>
+                        <td class="num">{$village->getProductionWood()|number}</td>
                         <td class="per">per hour</td>
                     </tr>
                     <tr>
                         <td class="ico"><img class="r2" src="{$baseUrl}/img/x.gif" alt="Clay" title="Clay" /></td>
                         <td class="res">Clay:</td>
-                        <td class="num">{$village->getProductionClay()}</td>
+                        <td class="num">{$village->getProductionClay()|number}</td>
                         <td class="per">per hour</td>
                     </tr>
                     <tr>
                         <td class="ico"><img class="r3" src="{$baseUrl}/img/x.gif" alt="Iron" title="Iron" /></td>
                         <td class="res">Iron:</td>
-                        <td class="num">{$village->getProductionIron()}</td>
+                        <td class="num">{$village->getProductionIron()|number}</td>
                         <td class="per">per hour</td>
                     </tr>
                     <tr>
                         <td class="ico"><img class="r4" src="{$baseUrl}/img/x.gif" alt="Crop" title="Crop" /></td>
                         <td class="res">Crop:</td>
-                        <td class="num">{$village->getProductionCrop()}</td>
+                        <td class="num">{$village->getProductionCrop()|number}</td>
                         <td class="per">per hour</td>
                     </tr>
                 </tbody>
