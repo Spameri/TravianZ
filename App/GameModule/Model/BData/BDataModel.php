@@ -12,7 +12,7 @@ class BDataModel extends App\Model\BaseModel
     {
         return $this->database->select('*')->from($this->table)
             ->where('wid = %i', $wid)
-            ->orderBy('timestamp DESC')
+            ->orderBy('timestamp ASC')
             ->fetchAll();
     }
 

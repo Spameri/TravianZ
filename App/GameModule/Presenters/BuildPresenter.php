@@ -25,23 +25,26 @@ class BuildPresenter extends GamePresenter
 		$queue = $this->BDataModel->getBuildingQueue($village->getId());
 		$nextLevel = $village->getFData()['f' . $field] + 1;
 		foreach ($queue as $single) {
-			if ($single->type === $current->getBuilding() && $nextLevel < $single->level) {
+			if ($single->type == $current->getBuilding() && $nextLevel < $single->level && $single->field == $field) {
 				$nextLevel = $single->level;
+				$nextLevel++;
 			}
 		}
-		$nextLevel++;
+		if ($nextLevel == 0) {
+			$nextLevel++;
+		}
 		$next = $this->buildingService->getBuilding($building, $nextLevel);
 
 		$this->template->village = $village;
 		$this->template->field = $field;
 		$this->template->next = $next;
 
-		$this->template->canBuild = $next ? $this->buildingService->canBuild($next, $village) : FALSE;
+		$this->template->canBuild = $next ? $this->buildingService->canBuild($next, $field, $village) : FALSE;
 		$this->template->busyWorkers = $next ? $this->buildingService->busyWorkers($next, $village) : FALSE;
 		$this->template->storage = $next ? $this->buildingService->isStorageBigEnough($next, $village) : FALSE;
 		$this->template->granary = $next ? $this->buildingService->isGranaryBigEnough($next, $village) : FALSE;
 		$this->template->resources = $next ? $this->buildingService->isThereEnoughResources($next, $village) : FALSE;
-		$this->template->buldingStatus = $this->buildingService->canBuildLevel($next, $village);
+		$this->template->buldingStatus = $this->buildingService->canBuildLevel($next, $field, $village);
 	}
 
 
@@ -57,7 +60,14 @@ class BuildPresenter extends GamePresenter
 
 	public function actionCancel($id)
 	{
+		$BData = $this->BDataModel->get($id);
+		$this->BDataModel->delete($id);
+		if ($BData->type < 19) {
+			$this->redirect(':Game:OuterVillage:default', $BData->wid);
 
+		} else {
+			$this->redirect(':Game:InnerVillage:default', $BData->wid);
+		}
 	}
 
 	public function actionBuild($vid, $field, $building, $level)

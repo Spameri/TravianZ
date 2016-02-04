@@ -209,10 +209,11 @@ class BuildingService
 
 	/**
 	 * @param App\GameModule\DTO\Building $building
+	 * @param int $field
 	 * @param App\GameModule\DTO\Village $village
 	 * @return bool
 	 */
-	public function canBuild($building, $village)
+	public function canBuild($building, $field, $village)
 	{
 		if ($this->busyWorkers($building, $village)) {
 			return FALSE;
@@ -226,7 +227,7 @@ class BuildingService
 		if ($this->isThereEnoughResources($building, $village) !== TRUE) {
 			return FALSE;
 		}
-		if ($this->canBuildLevel($building, $village) !== TRUE) {
+		if ($this->canBuildLevel($building, $field, $village) !== TRUE) {
 			return FALSE;
 		}
 
@@ -326,17 +327,18 @@ class BuildingService
 
 	/**
 	 * @param App\GameModule\DTO\Building $building
+	 * @param int $field
 	 * @param App\GameModule\DTO\Village $village
 	 * @return bool
 	 */
-	public function canBuildLevel($building, $village)
+	public function canBuildLevel($building, $field, $village)
 	{
 		if ( ! $building) {
 			return 'Building is at maximum level';
 		}
 
-		$current = $this->getBuilding($building->getBuilding(), $village->getFData()['f' . $building->getBuilding()]);
-		if ($village->getFData()['f' . $building->getBuilding()] === $building->getLevel()) {
+		$current = $this->getBuilding($village->getFData()['f' . $field. 't'], $village->getFData()['f' . $field]);
+		if ($current->getLevel() === $building->getLevel()) {
 			return 'Building is at same level.';
 		}
 
@@ -348,10 +350,10 @@ class BuildingService
 
 		$queue = $this->BDataModel->getBuildingQueue($village->getId());
 		foreach ($queue as $single) {
-			if ($maxLevel->level === $single->level && $single->type === $building->getBuilding()) {
+			if ($maxLevel->level === $single->level && $single->type === $building->getBuilding() && $single->field === $field) {
 				return 'Building max level under construction';
 			}
-			if ($single->level === $building->getLevel() && $single->type === $building->getBuilding()) {
+			if ($single->level === $building->getLevel() && $single->type === $building->getBuilding() && $single->field === $field) {
 				return 'Building is already being build.';
 			}
 		}
