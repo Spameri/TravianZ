@@ -54,6 +54,10 @@ class Village
     /** @var \stdClass */
     private $owner;
 
+	/** @var int */
+	private $natar;
+
+
     /**
      * @return int
      */
@@ -357,5 +361,23 @@ class Village
     {
         $this->owner = $owner;
     }
+
+
+	/**
+	 * @return int
+	 */
+	public function getNatar()
+	{
+		return $this->natar;
+	}
+
+
+	/**
+	 * @param int $natar
+	 */
+	public function setNatar($natar)
+	{
+		$this->natar = $natar;
+	}
 
 }

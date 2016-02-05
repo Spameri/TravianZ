@@ -102,6 +102,7 @@ class VillageService
 		$village->setCapital($VData->capital);
 
 		$village->setType($VData->type);
+		$village->setNatar($VData->natar);
 
 		$FData = $this->FDataModel->getByVref($village->getId())->toArray();
 		$village->setFData($FData);

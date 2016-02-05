@@ -1,6 +1,41 @@
 {var bodyClass = 'v35 ie ie8'}
 {block content}
-    <div id="content" class="village1">
+    <div id="content" class="village2">
+		<map name="map1" id="map1">
+			<area n:href=":Game:Build:default $village->getId(), $wallId, $wallId" title="Wall level {$wallLevel}" coords="325,225,180" shape="circle" alt="" />
+			<area n:href=":Game:Build:default $village->getId(), $wallId, $wallId" title="Outer building site" coords="220,230,185" shape="circle" alt="" />
+		</map>
+		<map name="map2" id="map2">
+            {for $i = 19; $i <= 39; $i++}
+            	{if $village->getNatar() === 1 && ( $i === 25 || $i === 26 || $i === 29 || $i === 30 || $i === 33 )}
+					<area n:href=":Game:Build:default $village->getId(), 40, 40" title="{$names[$village->getFData()['f' . $i . 't']]}" coords="190,170,80" shape="circle"/>
+            	{else}
+					<area n:href=":Game:Build:default $village->getId(), $village->getFData()['f' . $i . 't'], $i"
+					title="{if $village->getFData()['f' . $i . 't'] !== 0}{$names[$village->getFData()['f' . $i . 't']]} Level {$village->getFData()['f' . $i]}{else}Building site{/if}"
+					coords="{App\FrontModule\Model\FData\FDataModel::$coordinatesInner[$i]}" shape="poly"/>
+            	{/if}
+			{/for}
+
+			<area n:href=":Game:Build:default $village->getId(), $wallId, $wallId" title="Wall level {$wallLevel}" coords="312,338,347,338,377,320,406,288,421,262,421,222,396,275,360,311" shape="poly" alt="" />
+			<area n:href=":Game:Build:default $village->getId(), $wallId, $wallId" title="Wall level {$wallLevel}" coords="49,338,0,274,0,240,33,286,88,338" shape="poly" alt="" />
+			<area n:href=":Game:Build:default $village->getId(), $wallId, $wallId" title="Wall level {$wallLevel}" coords="0,144,34,88,93,39,181,15,252,15,305,31,358,63,402,106,421,151,421,93,378,47,280,0,175,0,78,28,0,92" shape="poly" alt="" />
+		</map>
+		<div id="village_map" class="d2_{if $wallLevel > 0}{$village->getOwner()->tribe}{else}0{/if}">
+			{for $i = 1; $i <= 20; $i++}
+				<img src="{$baseUrl}/img/x.gif" class="building d{$i} {if $village->getFData()['f' . ($i+18) . 't'] != 0}g{$village->getFData()['f' . ($i+18) . 't']}{else}iso{/if}"
+				alt="{if $village->getFData()['f' . ($i+18) . 't'] !== 0}{$names[$village->getFData()['f' . ($i+18) . 't']]} Level {$village->getFData()['f' . ($i+18)]}{else}Building site{/if}" />
+			{/for}
+			<div id="levels" class="on">
+				{for $i = 1; $i <= 20; $i++}
+					<div n:if="$village->getFData()['f' . ($i+18)] != 0" class="d{$i}">{$village->getFData()['f' . ($i+18)]}</div>
+				{/for}
+				{if $village->getFData()['f40t'] != 0}
+					<div class="d40">{$village->getFData()['f40']}</div>
+				{/if}
+			</div>
+			<img class="map1" usemap="#map1" src="{$baseUrl}/img/x.gif" alt="" />
+			<img class="map2" usemap="#map2" src="{$baseUrl}/img/x.gif" alt="" />
+		</div>
 
         {control building}
     </div>
