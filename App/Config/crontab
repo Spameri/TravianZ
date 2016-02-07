@@ -1,0 +1,6 @@
+SHELL=/bin/bash
+ROOT_DIR=/var/www/spamian/
+
+# m h dom mon dow	command
+
+*/10 * * * *		php $ROOT_DIR/www/index.php game:processCulturePoints

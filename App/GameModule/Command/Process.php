@@ -15,6 +15,7 @@ class Process extends Symfony\Component\Console\Command\Command
 
 	public function __construct(App\GameModule\Model\Event\ProcessEvents $processEvents)
 	{
+		parent::__construct();
 		$this->processEvents = $processEvents;
 	}
 

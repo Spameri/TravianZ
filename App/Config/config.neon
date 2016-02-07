@@ -52,8 +52,12 @@ services:
 	- App\GameModule\Model\Building\BuildingService(%speed%, %storageMultiplier%)
 	- App\GameModule\Model\Event\ProcessEvents
 	- App\GameModule\Model\Building\BuildingAvailabilityService
+	- App\GameModule\Model\Event\ProcessCulturePoints
 
 #       commands
 	-
 	    class: App\GameModule\Command\Process
+	    tags: [kdyby.console.command]
+	-
+	    class: App\GameModule\Command\ProcessCulturePoints
 	    tags: [kdyby.console.command]

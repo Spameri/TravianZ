@@ -45,6 +45,17 @@ class VDataModel extends App\Model\BaseModel
 			->fetch();
 	}
 
+	/**
+	 * @param int $user
+	 * @return array
+	 */
+	public function getAllByUser($user)
+	{
+		return $this->database->select('*')->from($this->table)
+			->where('owner = %i', $user)
+			->fetchAll();
+	}
+
 
 	/**
 	 * @param int $user

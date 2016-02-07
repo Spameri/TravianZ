@@ -28,4 +28,15 @@ class UserModel extends App\Model\BaseModel
 			->where('username = %s', $username)
 			->fetch();
 	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getAllCulturePoints()
+	{
+		return $this->database->select('id, cp')->from($this->table)
+			->fetchAll();
+	}
+
 }
