@@ -36,7 +36,6 @@ class ResourceControl extends Nette\Application\UI\Control
 			$id = $field->wref;
 		}
 		$this->template->village = $this->villageService->getVillage($id);
-		$this->template->gold = 40;
 
 
 		$this->template->setFile(__DIR__ . '/ResourceControl.latte');
