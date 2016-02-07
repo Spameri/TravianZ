@@ -57,6 +57,9 @@ class Village
 	/** @var int */
 	private $natar;
 
+	/** @var int */
+	private $culturePoints;
+
 
     /**
      * @return int
@@ -378,6 +381,24 @@ class Village
 	public function setNatar($natar)
 	{
 		$this->natar = $natar;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getCulturePoints()
+	{
+		return $this->culturePoints;
+	}
+
+
+	/**
+	 * @param int $culturePoints
+	 */
+	public function setCulturePoints($culturePoints)
+	{
+		$this->culturePoints = $culturePoints;
 	}
 
 }

@@ -13,6 +13,8 @@ class BuildingService
     private $buildingModel;
     /** @var int */
     private $speed;
+	/** @var int */
+	private $storageMultiplier;
 	/**
 	 * @var App\GameModule\Model\BData\BDataModel
 	 */
@@ -41,6 +43,7 @@ class BuildingService
 
 	public function __construct(
         $speed,
+		$storageMultiplier,
         BuildingModel $buildingModel,
 		App\GameModule\Model\BData\BDataModel $BDataModel,
 		App\FrontModule\Model\FData\FDataModel $FDataModel,
@@ -57,6 +60,7 @@ class BuildingService
 		$this->villageService = $villageService;
 		$this->VDataModel = $VDataModel;
 		$this->dateTimeProvider = $dateTimeProvider;
+		$this->storageMultiplier = $storageMultiplier;
 	}
 
     public function getBuilding($id, $level)
@@ -73,6 +77,8 @@ class BuildingService
 
 			$building->setLevel($levelData->level);
 			$building->setProduction($levelData->production * $this->speed);
+			$building->setParameter($levelData->parameter);
+			$building->setCulturePoints($levelData->culturepoints);
 
 			$building->setBuilding($buildingData->id);
 
@@ -101,11 +107,16 @@ class BuildingService
 			$village = $this->villageService->getVillage($building->wid);
 			$this->FDataModel->update($building->wid, [
 				'f' . $building->field => $building->level,
+				'f' . $building->field . 't' => $building->type,
 			]);
 			$data['pop'] = $village->getUpkeep() + $buildingStats->getUpkeep();
+			$data['cp'] = $village->getCulturePoints() + $buildingStats->getCulturePoints();
 			switch ($buildingStats->getBuilding()) {
 				case BuildingModel::WAREHOUSE:
-					$data['maxstore'] = $buildingStats->getParameter();
+					$data['maxstore'] = ($this->storageMultiplier * $buildingStats->getParameter());
+					break;
+				case BuildingModel::GRANARY:
+					$data['maxcrop'] = ($this->storageMultiplier * $buildingStats->getParameter());
 					break;
 			}
 			$this->VDataModel->update($village->getId(), $data);
@@ -338,23 +349,24 @@ class BuildingService
 		}
 
 		$current = $this->getBuilding($village->getFData()['f' . $field. 't'], $village->getFData()['f' . $field]);
-		if ($current->getLevel() === $building->getLevel()) {
-			return 'Building is at same level.';
-		}
-
-		/** @var \stdClass $maxLevel */
-		$maxLevel = $this->buildingModel->getBuildingLevel($building->getBuilding(), ($current->getLevel() + 1));
-		if ($current->getLevel() === $maxLevel->level) {
-			return 'Building is at maximum level';
-		}
-
-		$queue = $this->BDataModel->getBuildingQueue($village->getId());
-		foreach ($queue as $single) {
-			if ($maxLevel->level === $single->level && $single->type === $building->getBuilding() && $single->field === $field) {
-				return 'Building max level under construction';
+		if ($current) {
+			if ($current->getLevel() === $building->getLevel()) {
+				return 'Building is at same level.';
 			}
-			if ($single->level === $building->getLevel() && $single->type === $building->getBuilding() && $single->field === $field) {
-				return 'Building is already being build.';
+
+			/** @var \stdClass $maxLevel */
+			$maxLevel = $this->buildingModel->getBuildingLevel($building->getBuilding(), ($current->getLevel() + 1));
+			if ($current->getLevel() === $maxLevel->level) {
+				return 'Building is at maximum level';
+			}
+			$queue = $this->BDataModel->getBuildingQueue($village->getId());
+			foreach ($queue as $single) {
+				if ($maxLevel->level === $single->level && $single->type === $building->getBuilding() && $single->field === $field) {
+					return 'Building max level under construction';
+				}
+				if ($single->level === $building->getLevel() && $single->type === $building->getBuilding() && $single->field === $field) {
+					return 'Building is already being build.';
+				}
 			}
 		}
 

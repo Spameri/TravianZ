@@ -16,9 +16,15 @@ class BuildPresenter extends GamePresenter
 	/** @var App\GameModule\Model\BData\BDataModel @inject */
 	public $BDataModel;
 
+	/** @var App\GameModule\Model\Building\BuildingAvailabilityService @inject */
+	public $buildingAvailability;
+
 
 	public function actionDefault($village, $building, $field)
 	{
+		if ($building == 0) {
+			$this->redirect('chooseBuilding', [$village, $field]);
+		}
 		$village = $this->villageService->getVillage($village);
 		$current = $this->buildingService->getBuilding($building, $village->getFData()['f' . $field]);
 		$this->template->current = $current;
@@ -79,5 +85,27 @@ class BuildPresenter extends GamePresenter
 		} else {
 			$this->redirect(':Game:InnerVillage:default', $vid);
 		}
+	}
+
+
+	public function renderChooseBuilding($village, $field)
+	{
+		$this->template->village = $village = $this->villageService->getVillage($village);
+		$available = $this->buildingAvailability->getAvailable($village, $field);
+
+		$availableData = [];
+		foreach ($available as $building) {
+			$availableData[] = [
+				'building' => $building,
+				'canBuild' => $this->buildingService->canBuild($building, $field, $village),
+				'busyWorkers' => $this->buildingService->busyWorkers($building, $village),
+				'storage' => $this->buildingService->isStorageBigEnough($building, $village),
+				'granary' => $this->buildingService->isGranaryBigEnough($building, $village),
+				'resources' => $this->buildingService->isThereEnoughResources($building, $village),
+				'buldingStatus' => $this->buildingService->canBuildLevel($building, $field, $village),
+			];
+		}
+		$this->template->available = $availableData;
+		$this->template->field = $field;
 	}
 }

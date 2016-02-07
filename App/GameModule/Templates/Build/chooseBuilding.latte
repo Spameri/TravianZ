@@ -1,0 +1,72 @@
+{var bodyClass = 'v35 ie ie8'}
+{block content}
+    <div id="content" class="build">
+		<div id="build" class="gid0">
+			<h1>Construct new building</h1>
+			{foreach $available as $single}
+				<h2>{$single['building']->getName()}</h2>
+				<table class="new_building" cellpadding="1" cellspacing="1">
+					<tbody>
+						<tr>
+							<td class="desc">
+								{$single['building']->getDescription()}
+							</td>
+							<td rowspan="3" class="bimg">
+								<a href="#" onClick="return Popup(10,4);">
+									<img class="building g{$single['building']->getBuilding()}" src="{$baseUrl}/img/x.gif" alt="{$single['building']->getName()}" title="{$single['building']->getName()}" />
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td class="res">
+								<img class="r1" src="{$baseUrl}/img/x.gif" alt="Lumber" title="Lumber" /><span class="little_res">{$single['building']->getWood()|number}</span> |
+								<img class="r2" src="{$baseUrl}/img/x.gif" alt="Clay" title="Clay" /><span class="little_res">{$single['building']->getClay()|number}</span> |
+								<img class="r3" src="{$baseUrl}/img/x.gif" alt="Iron" title="Iron" /><span class="little_res">{$single['building']->getIron()|number}</span> |
+								<img class="r4" src="{$baseUrl}/img/x.gif" alt="Crop" title="Crop" /><span class="little_res">{$single['building']->getCrop()|number}</span> |
+								<img class="r5" src="{$baseUrl}/img/x.gif" alt="Crop consumption" title="Crop consumption" />{$single['building']->getUpkeep()|number} |
+								<img class="clock" src="{$baseUrl}/img/x.gif" alt="duration" title="duration" />{$single['building']->getTime()|date:'H:i:s'}
+								{if $village->getOwner()->gold > 3}
+								|   <a href=":Game:Trade:redistribute $village->getId(), $single['building']->getBuilding()" title="NPC trade">
+										<img class="npc" src="{$baseUrl}/img/x.gif" alt="NPC trade" title="NPC trade" />
+									</a>
+								{/if}
+                			</td>
+						</tr>
+						<tr>
+							<td class="link">
+								<p n:if="$single['canBuild']">
+									<a class="build" n:href=":Game:Build:build vid => $village->getId(), field => $field, building => $single['building']->getBuilding(), level => $single['building']->getLevel()">Build level {$single['building']->getLevel()}</a>
+								</p>
+								<p n:if="$single['busyWorkers']">
+									<span class="none">The workers are already at work.</span>
+								</p>
+								<p n:if="$single['buldingStatus'] !== TRUE">
+									<span class="none">
+										{$single['buldingStatus']}
+									</span>
+								</p>
+								{if $single['building']}
+									<p n:if=" ! $single['storage']">
+										<span class="none">
+											Upgrade warehouse
+										</span>
+									</p>
+									<p n:if=" ! $single['granary']">
+										<span class="none">
+											Upgrade granary
+										</span>
+									</p>
+									<p n:if="$single['resources'] !== TRUE && $single['storage'] && $single['granary']">
+										<span class="none">
+											Enough resources at {$single['resources']|date:'H:i:s'}
+										</span>
+									</p>
+								{/if}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		 	{/foreach}
+    	</div>
+    </div>
+{/block}

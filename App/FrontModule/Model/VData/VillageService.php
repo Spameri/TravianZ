@@ -103,6 +103,7 @@ class VillageService
 
 		$village->setType($VData->type);
 		$village->setNatar($VData->natar);
+		$village->setCulturePoints($VData->cp);
 
 		$FData = $this->FDataModel->getByVref($village->getId())->toArray();
 		$village->setFData($FData);

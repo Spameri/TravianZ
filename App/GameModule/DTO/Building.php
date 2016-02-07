@@ -28,6 +28,8 @@ class Building
     private $time;
 	/** @var int */
 	private $parameter;
+	/** @var int */
+	private $culturePoints;
 
     /**
      * @return string
@@ -221,6 +223,24 @@ class Building
 	public function setParameter($parameter)
 	{
 		$this->parameter = $parameter;
+	}
+
+
+	/**
+	 * @return int
+	 */
+	public function getCulturePoints()
+	{
+		return $this->culturePoints;
+	}
+
+
+	/**
+	 * @param int $culturePoints
+	 */
+	public function setCulturePoints($culturePoints)
+	{
+		$this->culturePoints = $culturePoints;
 	}
 
 }

@@ -8,6 +8,7 @@ class BuildingModel extends App\Model\BaseModel
 {
     protected $table = 'building';
     protected $tableLevel = 'building_levels';
+    protected $tableRequirement = 'building_requirement';
 
     const WOODCUTTER = 1;
     const CLAY_PIT = 2;
@@ -19,6 +20,14 @@ class BuildingModel extends App\Model\BaseModel
     const GRAIN_MILL = 8;
     const BAKERY = 9;
     const WAREHOUSE = 10;
+    const GRANARY = 11;
+    const MAIN_BUILDING = 15;
+	const RALLY_POINT = 16;
+    const CRANNY = 23;
+	const CITY_WALL = 31;
+	const EARTH_WALL = 32;
+	const PALISADE = 33;
+	const WORLD_WONDER = 40;
 
     /**
      * @param int $building
@@ -39,4 +48,16 @@ class BuildingModel extends App\Model\BaseModel
         return $this->database->select('*')->from($this->table)
             ->fetchPairs('id', 'name');
     }
+
+
+	/**
+	 * @param int $id
+	 * @return array
+	 */
+	public function getRequirements($id)
+	{
+		return $this->database->select('*')->from($this->tableRequirement)
+			->where('building = %i', $id)
+			->fetchAll();
+	}
 }
