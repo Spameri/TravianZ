@@ -61,7 +61,7 @@ class BDataModel extends App\Model\BaseModel
     {
         return $this->database->select('count(id)')->from($this->table)
             ->where('wid = %i', $wid)
-			->where('type > 18')
+			->where('type > 4')
             ->fetchSingle();
     }
 
@@ -70,7 +70,7 @@ class BDataModel extends App\Model\BaseModel
     {
         return $this->database->select('count(id)')->from($this->table)
             ->where('wid = %i', $wid)
-			->where('type < 19')
+			->where('type < 5')
             ->fetchSingle();
     }
 
