@@ -1,0 +1,101 @@
+{var bodyClass = 'v35 ie ie8'}
+{block content}
+	<div id="content" class="map">
+		<h1>Map (<span id="x">{$wdata->x}</span>|<span id="y">{$wdata->y}</span>)</h1>
+
+		<div id="map">
+			<div id="map_content">
+				{foreach $fieldData as $key => $field}
+					<div id="i_{$key}" class="{$field->image}"></div>
+				{/foreach}
+			</div>
+
+			<div id="map_rulers">
+				{foreach $ruler as $key => $value}
+					<div id="m{$key}">{$value}</div>
+				{/foreach}
+			</div>
+
+			<map id="map_overlay" name="map_overlay">
+				{foreach $fieldData as $key => $field}
+					<area id="a_{$key}"
+						shape="poly"
+						coords="{\App\FrontModule\Model\WData\WDataModel::$mapCoordinates[($iterator->counter - 1)]}"
+						title=""
+						{if $field->occupied === 1}
+							alt="<b>({$field->x}|{$field->y}) {$field->village->getName()}</b><br/>
+							Owner: {$field->village->getOwner()->username}<br/>
+							Tribe: Teutons<br/>
+							Population: {$field->village->getPopulation()}<br/>
+							Alliance: -"
+						{elseif $field->oasistype > 0}
+							alt="Unoccupied oasis"
+						{/if}
+
+						href="{link ':Game:Map:detail' $field->id}">
+				{/foreach}
+				<area id="ma_n1" n:href=":Game:Map:default $id, $oneNorth" vid="$oneNorth" coords="422,67,25" shape="circle" title="North">
+				<area id="ma_n2" n:href=":Game:Map:default $id, $oneEast" vid="$oneEast" coords="427,254,25" shape="circle" title="East">
+				<area id="ma_n3" n:href=":Game:Map:default $id, $oneSouth" vid="$oneSouth" coords="119,255,25" shape="circle" title="South">
+				<area id="ma_n4" n:href=":Game:Map:default $id, $oneWest" vid="$oneWest" coords="114,63,25" shape="circle" title="West">
+			</map>
+			<img id="map_links" src="{$baseUrl}/img/x.gif" usemap="#map_overlay">
+			{if $user->identity->gold}
+				<a id="map_makelarge" href="" onclick="return slm();">
+					<img class="ml" src="{$baseUrl}/img/x.gif" alt="" title="Large map">
+				</a>
+			{/if}
+			<img id="map_navibox" src="{$baseUrl}/img/x.gif" usemap="#map_navibox">
+			<map name="map_navibox">
+				<area id="ma_n1p7" n:href=":Game:Map:default $id, $jumpNorth" vid="{$jumpNorth}" coords="51,15,73,3,95,15,73,27" shape="poly" title="North">
+				<area id="ma_n2p7" n:href=":Game:Map:default $id, $jumpEast" vid="{$jumpEast}" coords="51,41,73,29,95,41,73,53" shape="poly" title="East">
+				<area id="ma_n3p7" n:href=":Game:Map:default $id, $jumpSouth" vid="{$jumpSouth}" coords="4,41,26,29,48,41,26,53" shape="poly" title="South">
+				<area id="ma_n4p7" n:href=":Game:Map:default $id, $jumpWest" vid="{$jumpWest}" coords="4,15,26,3,48,15,26,27" shape="poly" title="West">
+			</map>
+
+			<div id="map_coords">
+				{form move}
+					<span>{$form['x']->caption} </span><input n:name="x" id="mcx" class="text">
+					<span>{$form['y']->caption} </span><input n:name="y" id="mcx" class="text">
+					<input n:name="ok" type="image" id="btn_ok" class="dynamic_img" src="{$baseUrl}/img/x.gif" alt="ok">
+				{/form}
+			</div>
+
+			<table cellpadding="1" cellspacing="1" id="map_infobox" class="default">
+				<thead><tr><th colspan="2" id="mbx_1">details:</th></tr></thead>
+				<tbody>
+					<tr>
+						<th>Owner:</th>
+						<td id="mbx_11">
+							{if isset($fieldData['3_3']->village)}
+								{$fieldData['3_3']->village->getOwner()->username}
+							{else}
+							-
+							{/if}
+						</td>
+					</tr>
+					<tr>
+						<th>Population:</th>
+						<td id="mbx_12">
+							{if isset($fieldData['3_3']->village)}
+								{$fieldData['3_3']->village->getPopulation()}
+							{else}
+							-
+							{/if}
+						</td>
+					</tr>
+					<tr>
+						<th>Alliance:</th>
+						<td id="mbx_13">
+							{if isset($fieldData['3_3']->village) && $fieldData['3_3']->village->getOwner()->alliance != 0}
+								{$fieldData['3_3']->village->getOwner()->alliance}
+							{else}
+							-
+							{/if}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+    </div>
+{/block}

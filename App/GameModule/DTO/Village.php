@@ -60,6 +60,8 @@ class Village
 	/** @var int */
 	private $culturePoints;
 
+	/** @var int */
+	private $population;
 
     /**
      * @return int
@@ -401,4 +403,21 @@ class Village
 		$this->culturePoints = $culturePoints;
 	}
 
+
+	/**
+	 * @return int
+	 */
+	public function getPopulation()
+	{
+		return $this->population;
+	}
+
+
+	/**
+	 * @param int $population
+	 */
+	public function setPopulation($population)
+	{
+		$this->population = $population;
+	}
 }

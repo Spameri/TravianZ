@@ -81,38 +81,39 @@ class VillageService
 		/** @var \stdClass $VData */
 		$VData = $this->VDataModel->getByWId($id);
 		$village = new App\GameModule\DTO\Village();
+		$village->setId($id);
+		if ($VData) {
+			/** @var \stdClass $owner */
+			$owner = $this->userModel->get($VData->owner);
+			$village->setOwner($owner);
 
-		/** @var \stdClass $owner */
-		$owner = $this->userModel->get($VData->owner);
-		$village->setOwner($owner);
+			$village->setActualWood($VData->wood);
+			$village->setActualClay($VData->clay);
+			$village->setActualIron($VData->iron);
+			$village->setActualCrop($VData->crop);
+			$village->setStorage($VData->maxstore);
+			$village->setGranary($VData->maxcrop);
 
-		$village->setId($VData->wref);
+			$village->setUpkeep($VData->pop);
 
-		$village->setActualWood($VData->wood);
-		$village->setActualClay($VData->clay);
-		$village->setActualIron($VData->iron);
-		$village->setActualCrop($VData->crop);
-		$village->setStorage($VData->maxstore);
-		$village->setGranary($VData->maxcrop);
+			$village->setName($VData->name);
+			$village->setLoyalty($VData->loyalty);
+			$village->setCapital($VData->capital);
 
-		$village->setUpkeep($VData->pop);
+			$village->setType($VData->type);
+			$village->setNatar($VData->natar);
+			$village->setCulturePoints($VData->cp);
+			$village->setPopulation($VData->pop);
 
-		$village->setName($VData->name);
-		$village->setLoyalty($VData->loyalty);
-		$village->setCapital($VData->capital);
+			$FData = $this->FDataModel->getByVref($village->getId())->toArray();
+			$village->setFData($FData);
 
-		$village->setType($VData->type);
-		$village->setNatar($VData->natar);
-		$village->setCulturePoints($VData->cp);
-
-		$FData = $this->FDataModel->getByVref($village->getId())->toArray();
-		$village->setFData($FData);
-
-		$village->setProductionWood($this->productionService->getProductionWood($village));
-		$village->setProductionClay($this->productionService->getProductionClay($village));
-		$village->setProductionIron($this->productionService->getProductionIron($village));
-		$village->setProductionCrop($this->productionService->getProductionCrop($village));
-		$village->setMaxUpkeep($this->productionService->getProductionCrop($village));
+			$village->setProductionWood($this->productionService->getProductionWood($village));
+			$village->setProductionClay($this->productionService->getProductionClay($village));
+			$village->setProductionIron($this->productionService->getProductionIron($village));
+			$village->setProductionCrop($this->productionService->getProductionCrop($village));
+			$village->setMaxUpkeep($this->productionService->getProductionCrop($village));
+		}
 
 		return $village;
 	}

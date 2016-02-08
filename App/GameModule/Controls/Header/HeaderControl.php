@@ -46,7 +46,12 @@ class HeaderControl extends Nette\Application\UI\Control
 			$field = $this->VDataModel->getByUser($this->presenter->user->getId());
 			$id = $field->wref;
 		}
+		$wref = $this->presenter->getParameter('wref');
+		if ( ! $wref) {
+			$wref = $id;
+		}
 		$this->template->villageId = $id;
+		$this->template->wref = $wref;
 		$this->template->unread = $this->MDataModel->countUnread($this->presenter->getUser()->getId()) ? TRUE : FALSE;
 		$this->template->report = $this->NDataModel->countUnread($this->presenter->getUser()->getId()) ? TRUE : FALSE;
 		$this->template->plusActive = $this->userService->hasPlus($this->presenter->getUser()->getId());

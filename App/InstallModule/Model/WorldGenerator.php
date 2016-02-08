@@ -43,10 +43,10 @@ class WorldGenerator extends App\Model\BaseModel
 					$field = $this->calculateFieldType();
 				}
 
-				if ($field['oasistype'] === 1) {
-					$field['image'] = "t" . rand(0, 9) . "";
+				if ($field['oasistype'] === 0) {
+					$field['image'] = "t" . rand(0, 9);
 				} else {
-					$field['image'] = "o" . $field['oasistype'] . "";
+					$field['image'] = "o" . $field['oasistype'];
 				}
 
 				$field['x'] = $x;

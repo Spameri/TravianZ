@@ -53,6 +53,7 @@ services:
 	- App\GameModule\Model\Event\ProcessEvents
 	- App\GameModule\Model\Building\BuildingAvailabilityService
 	- App\GameModule\Model\Event\ProcessCulturePoints
+	- App\GameModule\Model\Diplomacy\DiplomacyModel
 
 #       commands
 	-

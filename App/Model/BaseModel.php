@@ -71,4 +71,14 @@ abstract class BaseModel
 			->where('id = %i', $id)
 			->execute();
 	}
+
+	public function getMapData($xMax, $xMin, $yMax, $yMin)
+	{
+		return $this->database->select('*')->from($this->table)
+			->where('x <= %i', $xMax)
+			->where('x >= %i', $xMin)
+			->where('y <= %i', $yMax)
+			->where('y >= %i', $yMin)
+			->fetchAll();
+	}
 }
