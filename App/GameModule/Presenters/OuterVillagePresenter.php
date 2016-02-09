@@ -16,6 +16,19 @@ class OuterVillagePresenter extends GamePresenter
 	public $VDataModel;
 
 
+	public function startup()
+	{
+		parent::startup();
+
+		if ($id = $this->getParameter('id')) {
+			$village = $this->villageService->getVillage($id);
+			if ( ! $village->getOwner() || $village->getOwner()->id !== $this->user->id) {
+				$this->redirect(':Game:OuterVillage:default');
+			}
+		}
+	}
+
+
 	public function actionDefault($id)
 	{
 		if ( ! $id) {
