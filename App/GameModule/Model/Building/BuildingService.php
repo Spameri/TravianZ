@@ -234,10 +234,10 @@ class BuildingService
 			$maximumOuterQueue++;
 		}
 
-		if ($building->getBuilding() < 19 && $village->getOwner()->tribe === 1 && $outerQueue >= $maximumOuterQueue) {
+		if ($building->getBuilding() < 5 && $village->getOwner()->tribe === 1 && $outerQueue >= $maximumOuterQueue) {
 			return TRUE;
 
-		} elseif ($building->getBuilding() > 18 && $village->getOwner()->tribe === 1 && $innerQueue >= $maximumInnerQueue) {
+		} elseif ($building->getBuilding() > 4 && $village->getOwner()->tribe === 1 && $innerQueue >= $maximumInnerQueue) {
 			return TRUE;
 
 		} elseif ($innerQueue >= $maximumInnerQueue) {
@@ -391,11 +391,11 @@ class BuildingService
 			}
 			$queue = $this->BDataModel->getBuildingQueue($village->getId());
 			foreach ($queue as $single) {
-				if ($maxLevel->level === $single->level && $single->type === $building->getBuilding() && $single->field === $field) {
-					return 'Building max level under construction';
-				}
-				if ($single->level === $building->getLevel() && $single->type === $building->getBuilding() && $single->field === $field) {
+				if ($single->level === $building->getLevel() && $single->type === $building->getBuilding() && $single->field == $field) {
 					return 'Building is already being build.';
+				}
+				if ($maxLevel->level === $single->level && $single->type === $building->getBuilding() && $single->field == $field) {
+					return 'Building max level under construction';
 				}
 			}
 		}
