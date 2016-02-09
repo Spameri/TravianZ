@@ -26,7 +26,7 @@ class BuildPresenter extends GamePresenter
 			$this->redirect('chooseBuilding', [$village, $field]);
 		}
 		$village = $this->villageService->getVillage($village);
-		$current = $this->buildingService->getBuilding($building, $village->getFData()['f' . $field]);
+		$current = $this->buildingService->getBuilding($building, $village->getFData()['f' . $field], $village);
 		$this->template->current = $current;
 		$queue = $this->BDataModel->getBuildingQueue($village->getId());
 		$nextLevel = $village->getFData()['f' . $field] + 1;
@@ -39,7 +39,7 @@ class BuildPresenter extends GamePresenter
 		if ($nextLevel == 0) {
 			$nextLevel++;
 		}
-		$next = $this->buildingService->getBuilding($building, $nextLevel);
+		$next = $this->buildingService->getBuilding($building, $nextLevel, $village);
 
 		$this->template->village = $village;
 		$this->template->field = $field;

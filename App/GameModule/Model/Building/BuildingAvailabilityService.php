@@ -35,21 +35,21 @@ class BuildingAvailabilityService
 
 		if ($field == 40) {
 			if ($village->getOwner()->tribe === 1) {
-				$available[] = $this->buildingService->getBuilding(BuildingModel::CITY_WALL, 1);
+				$available[] = $this->buildingService->getBuilding(BuildingModel::CITY_WALL, 1, $village);
 				return $available;
 
 			} elseif ($village->getOwner()->tribe === 2) {
-				$available[] = $this->buildingService->getBuilding(BuildingModel::EARTH_WALL, 1);
+				$available[] = $this->buildingService->getBuilding(BuildingModel::EARTH_WALL, 1, $village);
 				return $available;
 
 			} elseif ($village->getOwner()->tribe === 3) {
-				$available[] = $this->buildingService->getBuilding(BuildingModel::PALISADE, 1);
+				$available[] = $this->buildingService->getBuilding(BuildingModel::PALISADE, 1, $village);
 				return $available;
 
 			}
 		}
 		if ($field == 39) {
-			$available[] = $this->buildingService->getBuilding(BuildingModel::RALLY_POINT, 1);
+			$available[] = $this->buildingService->getBuilding(BuildingModel::RALLY_POINT, 1, $village);
 			return $available;
 		}
 
@@ -86,7 +86,7 @@ class BuildingAvailabilityService
 				}
 			}
 			if ( ! $requirements || $passed) {
-				$available[] = $this->buildingService->getBuilding($building, 1);
+				$available[] = $this->buildingService->getBuilding($building, 1, $village);
 			}
 		}
 
@@ -103,7 +103,7 @@ class BuildingAvailabilityService
 	{
 		for ($i = 19; $i <= 40; $i++) {
 			if ($village->getFData()['f' . $i . 't'] === $building) {
-				return $this->buildingService->getBuilding($building, $village->getFData()['f' . $i]);
+				return $this->buildingService->getBuilding($building, $village->getFData()['f' . $i], $village);
 			}
 		}
 

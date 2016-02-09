@@ -63,7 +63,14 @@ class BuildingService
 		$this->storageMultiplier = $storageMultiplier;
 	}
 
-    public function getBuilding($id, $level)
+
+	/**
+	 * @param int $id
+	 * @param int $level
+	 * @param App\GameModule\DTO\Village|bool $village
+	 * @return App\GameModule\DTO\Building|bool
+	 */
+	public function getBuilding($id, $level, $village = FALSE)
     {
         /** @var \stdClass $buildingData */
         $buildingData = $this->buildingModel->get($id);
@@ -87,7 +94,12 @@ class BuildingService
 			$building->setIron($levelData->iron);
 			$building->setCrop($levelData->crop);
 			$building->setUpkeep($levelData->pop);
-			$building->setTime(round($levelData->time / $this->speed));
+
+			$time = $levelData->time / $this->speed;
+			if ($village) {
+				$time = $time * $this->getMainBuildingSpeed($village);
+			}
+			$building->setTime(round($time));
 
 		} else {
 			$building = FALSE;
@@ -103,8 +115,8 @@ class BuildingService
 
 		foreach ($buildings as $building) {
 			$data = [];
-			$buildingStats = $this->getBuilding($building->type, $building->level);
 			$village = $this->villageService->getVillage($building->wid);
+			$buildingStats = $this->getBuilding($building->type, $building->level, $village);
 			$this->FDataModel->update($building->wid, [
 				'f' . $building->field => $building->level,
 				'f' . $building->field . 't' => $building->type,
@@ -127,11 +139,11 @@ class BuildingService
 
 	public function build($vid, $field, $building, $level)
 	{
-		$next = $this->getBuilding($building, $level);
 		$village = $this->villageService->getVillage($vid);
+		$next = $this->getBuilding($building, $level, $village);
 		if ($this->isThereEnoughResources($next, $village)) {
 			if ($village->getOwner()->tribe === 1) {
-				if ($next->getBuilding() < 19) {
+				if ($next->getBuilding() < 5) {
 					if ($time = $this->BDataModel->getLastOuterBuildTime($village->getId())) {
 						$time += $next->getTime();
 					} else {
@@ -139,7 +151,7 @@ class BuildingService
 						$now = $this->dateTimeProvider->getDateTime()->format('U');
 						$time = ($next->getTime() + $now);
 					}
-				} elseif ($next->getBuilding() > 18) {
+				} elseif ($next->getBuilding() > 4) {
 					if ($time = $this->BDataModel->getLastInnerBuildTime($village->getId())) {
 						$time += $next->getTime();
 					} else {
@@ -176,6 +188,24 @@ class BuildingService
 				'lastupdate2' => $this->dateTimeProvider->getDateTime()->format('U'),
 			]);
 		}
+	}
+
+
+	/**
+	 * @param App\GameModule\DTO\Village $village
+	 * @return float
+	 */
+	public function getMainBuildingSpeed($village)
+	{
+		$speed = 1;
+		for ($i = 5; $i <= 39; $i++) {
+			if ($village->getFData()['f' . $i . 't'] === BuildingModel::MAIN_BUILDING) {
+				$mainBuilding = $this->getBuilding(BuildingModel::MAIN_BUILDING, $village->getFData()['f' . $i]);
+				$speed = $mainBuilding->getParameter() / 100;
+			}
+		}
+
+		return $speed;
 	}
 
 
@@ -348,7 +378,7 @@ class BuildingService
 			return 'Building is at maximum level';
 		}
 
-		$current = $this->getBuilding($village->getFData()['f' . $field. 't'], $village->getFData()['f' . $field]);
+		$current = $this->getBuilding($village->getFData()['f' . $field. 't'], $village->getFData()['f' . $field], $village);
 		if ($current) {
 			if ($current->getLevel() === $building->getLevel()) {
 				return 'Building is at same level.';
