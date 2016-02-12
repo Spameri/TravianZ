@@ -9,60 +9,9 @@
                 {$current->getName()} <span class="level">level {$current->getLevel()}</span>
             </h1>
             <p class="build_desc">{$current->getDescription()}</p>
-            <table cellpadding="1" cellspacing="1" id="build_value">
-                <tr>
-                    <th>
-                        {if $current->getBuilding() < 5}
-                        	Current production:
-                        {elseif
-                        	$current->getBuilding() === App\GameModule\Model\Building\BuildingModel::WAREHOUSE
-                        	|| $current->getBuilding() === App\GameModule\Model\Building\BuildingModel::GRANARY
-                        	|| $current->getBuilding() === App\GameModule\Model\Building\BuildingModel::CRANNY
-                        	}
-                        	Current capacity:
-						{elseif $current->getBuilding() === App\GameModule\Model\Building\BuildingModel::MAIN_BUILDING}
-							Current construction time:
-                        {/if}
-                    </th>
-                    <td>
-                    	{if $current->getBuilding() < 5}
-                        	<b>{$current->getProduction()|number}</b> per hour
-						{elseif $current->getParameter() !== 0}
-							{if $current->getBuilding() === App\GameModule\Model\Building\BuildingModel::MAIN_BUILDING}
-								<b>{$current->getParameter()}</b> %
-							{else}
-								<b>{$current->getParameter()|number}</b>
-							{/if}
-                        {/if}
-                    </td>
-                </tr>
-                <tr n:if="$next">
-                    <th>
-                        {if $next->getBuilding() < 5}
-                        	Production at level {$next->getLevel()}:
-                        {elseif
-                        	$next->getBuilding() === App\GameModule\Model\Building\BuildingModel::WAREHOUSE
-                        	|| $next->getBuilding() === App\GameModule\Model\Building\BuildingModel::GRANARY
-                        	|| $next->getBuilding() === App\GameModule\Model\Building\BuildingModel::CRANNY
-                        	}
-                        	Capacity at level {$next->getLevel()}:
-						{elseif $next->getBuilding() === App\GameModule\Model\Building\BuildingModel::MAIN_BUILDING}
-							Construction time at level {$next->getLevel()}:
-                        {/if}
-                    </th>
-                    <td>
-                    	{if $next->getBuilding() < 5}
-                        	<b>{$next->getProduction()|number}</b> per hour
-						{elseif $next->getParameter() !== 0}
-							{if $next->getBuilding() === App\GameModule\Model\Building\BuildingModel::MAIN_BUILDING}
-								<b>{$next->getParameter()}</b> %
-							{else}
-								<b>{$next->getParameter()|number}</b>
-							{/if}
-                        {/if}
-                    </td>
-                </tr>
-            </table>
+
+            {control buildingDetail}
+
             <p n:if="$next" id="contract">
                 <b>Costs</b> for upgrading to level {$next->getLevel()}:<br />
                 <img class="r1" src="{$baseUrl}/img/x.gif" alt="Lumber" title="Lumber" /><span class="little_res">{$next->getWood()|number}</span> |
@@ -80,7 +29,7 @@
             </p>
 
             <p n:if="$canBuild">
-				<a class="build" n:href=":Game:Build:build vid => $village->getId(), field => $field, building => $current->getBuilding(), level => $next->getLevel()">Upgrade to level {$next->getLevel()}</a>
+				<a class="build" n:href=":Game:Build:build id => $village->getId(), field => $field, building => $current->getBuilding(), level => $next->getLevel()">Upgrade to level {$next->getLevel()}</a>
             </p>
             <p n:if="$busyWorkers">
 				<span class="none">The workers are already at work.</span>

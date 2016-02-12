@@ -54,6 +54,7 @@ services:
 	- App\GameModule\Model\Building\BuildingAvailabilityService
 	- App\GameModule\Model\Event\ProcessCulturePoints
 	- App\GameModule\Model\Diplomacy\DiplomacyModel
+	- App\GameModule\Controls\BuildingDetail\IBuildingDetailControl
 
 #       commands
 	-

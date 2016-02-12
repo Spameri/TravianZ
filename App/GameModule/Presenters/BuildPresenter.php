@@ -7,6 +7,8 @@ use Nette;
 
 class BuildPresenter extends GamePresenter
 {
+	use App\GameModule\Controls\BuildingDetail\TBuildingDetailControl;
+
 	/** @var App\GameModule\Model\Building\BuildingService @inject */
 	public $buildingService;
 
@@ -20,12 +22,12 @@ class BuildPresenter extends GamePresenter
 	public $buildingAvailability;
 
 
-	public function actionDefault($village, $building, $field)
+	public function actionDefault($id, $building, $field)
 	{
 		if ($building == 0) {
-			$this->redirect('chooseBuilding', [$village, $field]);
+			$this->redirect('chooseBuilding', [$id, $field]);
 		}
-		$village = $this->villageService->getVillage($village);
+		$village = $this->villageService->getVillage($id);
 		$current = $this->buildingService->getBuilding($building, $village->getFData()['f' . $field], $village);
 		$this->template->current = $current;
 		$queue = $this->BDataModel->getBuildingQueue($village->getId());
@@ -54,15 +56,11 @@ class BuildPresenter extends GamePresenter
 	}
 
 
-	public function renderDefault($village, $building, $field)
+	public function actionFinishBuildingWithGold($id)
 	{
 
 	}
 
-	public function actionFinishBuildingWithGold($wid)
-	{
-
-	}
 
 	public function actionCancel($id)
 	{
@@ -76,21 +74,21 @@ class BuildPresenter extends GamePresenter
 		}
 	}
 
-	public function actionBuild($vid, $field, $building, $level)
+	public function actionBuild($id, $field, $building, $level)
 	{
-		$this->buildingService->build($vid, $field, $building, $level);
+		$this->buildingService->build($id, $field, $building, $level);
 		if ($field < 19) {
-			$this->redirect(':Game:OuterVillage:default', $vid);
+			$this->redirect(':Game:OuterVillage:default', $id);
 
 		} else {
-			$this->redirect(':Game:InnerVillage:default', $vid);
+			$this->redirect(':Game:InnerVillage:default', $id);
 		}
 	}
 
 
-	public function renderChooseBuilding($village, $field)
+	public function renderChooseBuilding($id, $field)
 	{
-		$this->template->village = $village = $this->villageService->getVillage($village);
+		$this->template->village = $village = $this->villageService->getVillage($id);
 		$available = $this->buildingAvailability->getAvailable($village, $field);
 
 		$availableData = [];

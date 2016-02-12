@@ -1,0 +1,18 @@
+<table cellpadding="1" cellspacing="1" id="build_value">
+	<tr>
+		<th>
+			Current production:
+		</th>
+		<td>
+			<b>{$current->getProduction()|number}</b> per hour
+		</td>
+	</tr>
+	<tr n:if="$next">
+		<th>
+			Production at level {$next->getLevel()}:
+		</th>
+		<td>
+			<b>{$next->getProduction()|number}</b> per hour
+		</td>
+	</tr>
+</table>

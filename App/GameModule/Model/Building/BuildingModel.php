@@ -23,10 +23,12 @@ class BuildingModel extends App\Model\BaseModel
     const GRANARY = 11;
     const MAIN_BUILDING = 15;
 	const RALLY_POINT = 16;
+	const BARRACKS = 19;
     const CRANNY = 23;
 	const CITY_WALL = 31;
 	const EARTH_WALL = 32;
 	const PALISADE = 33;
+	const TRAPPER = 36;
 	const WORLD_WONDER = 40;
 
     /**
