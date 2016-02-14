@@ -20,7 +20,7 @@ class RegisterService
 	 */
 	private $FDataModel;
 	/**
-	 * @var App\FrontModule\Model\Units\UnitsModel
+	 * @var App\GameModule\Model\Units\UnitsModel
 	 */
 	private $unitsModel;
 	/**
@@ -47,7 +47,7 @@ class RegisterService
 		UserModel $userModel,
 		App\FrontModule\Model\WData\WDataModel $WDataModel,
 		App\FrontModule\Model\FData\FDataModel $FDataModel,
-		App\FrontModule\Model\Units\UnitsModel $unitsModel,
+		App\GameModule\Model\Units\UnitsModel $unitsModel,
 		App\FrontModule\Model\TData\TDataModel $TDataModel,
 		App\FrontModule\Model\ABData\ABDataModel $ABDataModel,
 		App\FrontModule\Model\VData\VDataModel $VDataModel,

@@ -26,10 +26,10 @@
                         <img class="npc" src="{$baseUrl}/img/x.gif" alt="NPC trade" title="NPC trade" />
                     </a>
                 {/if}
-            </p>
-
-            <p n:if="$canBuild">
-				<a class="build" n:href=":Game:Build:build id => $village->getId(), field => $field, building => $current->getBuilding(), level => $next->getLevel()">Upgrade to level {$next->getLevel()}</a>
+            	{if $canBuild}
+            		<br />
+					<a class="build" n:href=":Game:Build:build id => $village->getId(), field => $field, building => $current->getBuilding(), level => $next->getLevel()">Upgrade to level {$next->getLevel()}</a>
+				{/if}
             </p>
             <p n:if="$busyWorkers">
 				<span class="none">The workers are already at work.</span>

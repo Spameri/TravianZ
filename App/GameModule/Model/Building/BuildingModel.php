@@ -24,7 +24,11 @@ class BuildingModel extends App\Model\BaseModel
     const MAIN_BUILDING = 15;
 	const RALLY_POINT = 16;
 	const BARRACKS = 19;
+	const STABLE = 20;
+	const WORKSHOP = 21;
     const CRANNY = 23;
+    const RESIDENCE = 25;
+    const PALACE = 26;
 	const CITY_WALL = 31;
 	const EARTH_WALL = 32;
 	const PALISADE = 33;

@@ -62,6 +62,12 @@ class BuildPresenter extends GamePresenter
 	}
 
 
+	public function actionRedistribute()
+	{
+
+	}
+
+
 	public function actionCancel($id)
 	{
 		$BData = $this->BDataModel->get($id);

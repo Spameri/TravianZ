@@ -1,12 +1,73 @@
-<table cellpadding="1" cellspacing="1" class="build_details">
-	<thead>
-		<tr>
-			<td>Troops</td>
-			<td>No.</td>
-			<td>Max.</td>
-		</tr>
-	</thead>
-	<tbody>
-
-	</tbody>
-</table>
+{form trainBarracks}
+	<table cellpadding="1" cellspacing="1" class="build_details">
+		<thead>
+			<tr>
+				<td>Troops</td>
+				<td>No.</td>
+				<td>Max.</td>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach $units as $unit}
+				<tr>
+					<td class="desc">
+						<div class="tit">
+							<img class="unit u{$unit->getId()}" src="{$baseUrl}/img/x.gif" alt="{$unit->getName()}" title="{$unit->getName()}" />
+							<a href="#">{$unit->getName()}</a> <span class="info">(Available: {$current['u' . $unit->getId()]})</span>
+						</div>
+						<div class="details">
+							<img class="r1" src="{$baseUrl}/img/x.gif" alt="Wood" title="Wood" />{$unit->getWood()}|{*
+							*}<img class="r2" src="{$baseUrl}/img/x.gif" alt="Clay" title="Clay" />{$unit->getClay()}|{*
+							*}<img class="r3" src="{$baseUrl}/img/x.gif" alt="Iron" title="Iron" />{$unit->getIron()}|{*
+							*}<img class="r4" src="{$baseUrl}/img/x.gif" alt="Crop" title="Crop" />{$unit->getCrop()}|{*
+							*}<img class="r5" src="{$baseUrl}/img/x.gif" alt="Crop consumption" title="Upkeep" />{$unit->getUpkeep()}|{*
+							*}<img class="clock" src="{$baseUrl}/img/x.gif" alt="Duration" title="Duration" />{$unit->getTime()|date:'G:i:s'}|{*
+							*}<a href="{plink ':Game:Build:Redistribute'}" title="NPC trade">
+								<img class="npc" src="{$baseUrl}/img/x.gif" alt="NPC trade" title="NPC trade" />
+							</a>
+						</div>
+					</td>
+					<td class="val">
+						{input $unit->getId().'number'}
+					</td>
+					<td class="max">
+						<a href="#">({$available[$unit->getId()]})</a>
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	<p>
+		<input n:name="submit" type="image" id="btn_train" class="dynamic_img" value="ok" src="{$baseUrl}/img/x.gif" alt="train"/>
+	</p>
+	 <table cellpadding="1" cellspacing="1" class="under_progress">
+		<thead>
+			<tr>
+    			<td>Troops in training</td>
+    			<td>Duration</td>
+    			<td>Finished</td>
+    		</tr>
+		</thead>
+		<tbody>
+			{foreach $queue as $single}
+				<tr>
+					<td class="desc">
+						<img class="unit u{$single->unit->getId()}" src="{$baseUrl}/img/x.gif" alt="{$single->unit->getName()}" title="{$single->unit->getName()}" />
+						{$single->amt} {$single->unit->getName()}
+					</td>
+					<td class="dur">
+						<span id="timer1">{($single->amt * $single->eachtime)|date:'G:i:s'}</span>
+					</td>
+					<td class="fin">
+						{($single->amt * $single->eachtime + $single->timestamp)|date:'G:i:s'}
+					</td>
+				</tr>
+			{/foreach}
+			<tr class="next">
+				<td colspan="3">
+					The next unit will be finished in <span id="timer2">{($queue[0]->timestamp - time() + $queue[0]->eachtime)|date:'G:i:s'}</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+{/form}

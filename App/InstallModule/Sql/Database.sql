@@ -2600,3 +2600,25 @@ INSERT INTO `building_requirement` (`building`, `require_level`, `require_buildi
   (41, 20, 20, 0),
   (42, 20, 21, 0),
   (42, 10, 15, 0);
+
+
+CREATE TABLE `unit` (
+  `id`               INT     NOT NULL,
+  `attack`           INT     NOT NULL,
+  `defence_infantry` INT     NOT NULL,
+  `defence_calvary`  INT     NOT NULL,
+  `wood`             INT     NOT NULL,
+  `clay`             INT     NOT NULL,
+  `iron`             INT     NOT NULL,
+  `crop`             INT     NOT NULL,
+  `pop`              INT     NOT NULL,
+  `speed`            INT     NOT NULL,
+  `time`             INT     NOT NULL,
+  `capacity`         INT     NOT NULL,
+  `type`             TINYINT NOT NULL,
+  `tribe`            TINYINT NOT NULL
+)
+  COMMENT = ''
+  ENGINE = 'InnoDB'
+  COLLATE 'utf8_general_ci';
+
