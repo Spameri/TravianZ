@@ -15,6 +15,12 @@ class OuterVillagePresenter extends GamePresenter
 	/** @var App\FrontModule\Model\VData\VDataModel @inject */
 	public $VDataModel;
 
+	/** @var App\GameModule\Model\Units\UnitsModel @inject */
+	public $unitsModel;
+
+	/** @var App\GameModule\Model\Units\UnitService @inject */
+	public $unitService;
+
 
 	public function startup()
 	{
@@ -37,6 +43,8 @@ class OuterVillagePresenter extends GamePresenter
 			$id = $field->wref;
 		}
 		$this->template->village = $this->villageService->getVillage($id);
+		$this->template->units = $this->unitsModel->get($id);
+		$this->template->unitNames = $this->unitService->getNames();
 	}
 
 

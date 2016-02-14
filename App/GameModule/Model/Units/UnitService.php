@@ -158,7 +158,7 @@ class UnitService
 	];
 
 	/**
-	 * @var App\GameModule\Model\Units\UnitsModel
+	 * @var App\GameModule\Model\Units\UnitModel
 	 */
 	private $unitModel;
 	/**
@@ -216,6 +216,9 @@ class UnitService
 
 				} else {
 					$amount = $trainable;
+				}
+				if ($amount == 0) {
+					continue;
 				}
 
 				$this->VDataModel->update($village->getId(), [
@@ -411,10 +414,10 @@ class UnitService
 	 */
 	public function getTrainableUnit($village, $unit)
 	{
-		$wood = round($village->getActualWood() / $unit->getWood());
-		$clay = round($village->getActualClay() / $unit->getClay());
-		$iron = round($village->getActualIron() / $unit->getIron());
-		$crop = round($village->getActualCrop() / $unit->getCrop());
+		$wood = floor($village->getActualWood() / $unit->getWood());
+		$clay = floor($village->getActualClay() / $unit->getClay());
+		$iron = floor($village->getActualIron() / $unit->getIron());
+		$crop = floor($village->getActualCrop() / $unit->getCrop());
 		return min($wood, $clay, $iron, $crop);
 	}
 
@@ -428,5 +431,14 @@ class UnitService
 		$unitData = $this->unitsModel->get($village->getId());
 
 		return $unitData;
+	}
+
+
+	/**
+	 * @return array
+	 */
+	public function getNames()
+	{
+		return $this->unitModel->getNames();
 	}
 }

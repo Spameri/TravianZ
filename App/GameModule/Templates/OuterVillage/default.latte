@@ -67,6 +67,36 @@
                     </tr>
                 </tbody>
             </table>
+            <table id="troops" cellpadding="1" cellspacing="1">
+            	<thead>
+            		<tr>
+            			<th colspan="3">Troops</th>
+            		</tr>
+				</thead>
+				<tbody>
+					{var $hasUnits = FALSE}
+            		{for $i = 1; $i < 50; $i++}
+						{if $units['u' . $i] > 0}
+							<tr>
+								<td class="ico">
+									<img class="unit u{$i}" src="{$baseUrl}/img/x.gif"
+										alt="{$unitNames[$i]}" title="{$unitNames[$i]}" />
+								</td>
+								<td class="num">
+									{$units['u' . $i]}
+								</td>
+								<td class="un">
+									{$unitNames[$i]}
+								</td>
+							</tr>
+							{var $hasUnits = TRUE}
+						{/if}
+					{/for}
+					<tr n:if=" ! $hasUnits">
+						<td>none</td>
+					</tr>
+            	</tbody>
+			</table>
         </div>
         {control building}
     </div>

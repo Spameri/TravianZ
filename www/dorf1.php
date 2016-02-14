@@ -10,8 +10,6 @@ $building->procBuild($_GET);
 
 		<?php
 		include("Templates/movement.tpl");
-		// --production--
-		include("Templates/troops.tpl");
 
 		?>
 
