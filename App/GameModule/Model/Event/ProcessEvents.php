@@ -27,6 +27,10 @@ class ProcessEvents
 	 * @var App\FrontModule\Model\VData\VDataModel
 	 */
 	private $VDataModel;
+	/**
+	 * @var ProcessTraining
+	 */
+	private $processTraining;
 
 
 	public function __construct(
@@ -35,12 +39,14 @@ class ProcessEvents
 		App\FrontModule\Model\VData\VillageService $villageService,
 		Kdyby\Clock\IDateTimeProvider $dateTimeProvider,
 		App\FrontModule\Model\VData\VDataModel $VDataModel
+		, ProcessTraining $processTraining
 	){
 		$this->buildingService = $buildingService;
 		$this->productionService = $productionService;
 		$this->villageService = $villageService;
 		$this->dateTimeProvider = $dateTimeProvider;
 		$this->VDataModel = $VDataModel;
+		$this->processTraining = $processTraining;
 	}
 
 
@@ -54,6 +60,7 @@ class ProcessEvents
 				$this->productionService->processProduction($village, $time);
 			}
 			$this->buildingService->processBuildings($time);
+			$this->processTraining->process($time);
 
 			$this->releaseLock();
 		}

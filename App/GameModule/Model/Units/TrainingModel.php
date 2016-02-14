@@ -27,4 +27,12 @@ class TrainingModel extends App\Model\BaseModel
 
 		return $query->fetchAll();
 	}
+
+
+	public function getProcessData($time)
+	{
+		return $this->database->select('*')->from($this->table)
+			->where('timestamp < %i', $time)
+			->fetchAll();
+	}
 }

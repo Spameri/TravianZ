@@ -40,7 +40,7 @@
 	<p>
 		<input n:name="submit" type="image" id="btn_train" class="dynamic_img" value="ok" src="{$baseUrl}/img/x.gif" alt="train"/>
 	</p>
-	 <table cellpadding="1" cellspacing="1" class="under_progress">
+	 <table  n:if="$queue" cellpadding="1" cellspacing="1" class="under_progress">
 		<thead>
 			<tr>
     			<td>Troops in training</td>

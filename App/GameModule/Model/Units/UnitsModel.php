@@ -21,4 +21,12 @@ class UnitsModel extends App\Model\BaseModel
 			->toArray();
 	}
 
+
+	public function update($id, $data)
+	{
+		return $this->database->update($this->table, $data)
+			->where('vref = %i', $id)
+			->execute();
+	}
+
 }
