@@ -292,14 +292,14 @@ class ProductionService
 				}
 			}
 			$crop = $VData->crop;
-			if ($VData->crop !== $VData->maxstore) {
+			if ($VData->crop !== $VData->maxcrop) {
 				$productionCrop = $this->getProductionCrop($village);
 				$producedCrop = ($time - $lastUpdate) * ($productionCrop / 3600);
 				$totalCrop = $producedCrop + $VData->crop;
-				if ($totalCrop < $VData->maxstore) {
+				if ($totalCrop < $VData->maxcrop) {
 					$crop = $totalCrop;
 				} else {
-					$crop = $VData->maxstore;
+					$crop = $VData->maxcrop;
 				}
 			}
 			$this->VDataModel->update($village->getId(), [
