@@ -35,7 +35,7 @@
 						<tr>
 							<td class="link">
 								<p n:if="$single['canBuild']">
-									<a class="build" n:href=":Game:Build:build vid => $village->getId(), field => $field, building => $single['building']->getBuilding(), level => $single['building']->getLevel()">Build level {$single['building']->getLevel()}</a>
+									<a class="build" n:href=":Game:Build:build id => $village->getId(), field => $field, building => $single['building']->getBuilding(), level => $single['building']->getLevel()">Build level {$single['building']->getLevel()}</a>
 								</p>
 								<p n:if="$single['busyWorkers']">
 									<span class="none">The workers are already at work.</span>

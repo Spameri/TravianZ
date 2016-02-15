@@ -131,9 +131,9 @@ class BuildingService
 	}
 
 
-	public function build($vid, $field, $building, $level)
+	public function build($id, $field, $building, $level)
 	{
-		$village = $this->villageService->getVillage($vid);
+		$village = $this->villageService->getVillage($id);
 		$next = $this->getBuilding($building, $level, $village);
 		if ($this->isThereEnoughResources($next, $village)) {
 			if ($village->getOwner()->tribe === 1) {
@@ -168,13 +168,13 @@ class BuildingService
 				}
 			}
 			$this->BDataModel->add([
-				'wid'       => $vid,
+				'wid'       => $id,
 				'field'     => $field,
 				'type'      => $building,
 				'timestamp' => $time,
 				'level'     => $level,
 			]);
-			$this->VDataModel->update($vid, [
+			$this->VDataModel->update($id, [
 				'wood' => ($village->getActualWood() - $next->getWood()),
 				'clay' => ($village->getActualClay() - $next->getClay()),
 				'iron' => ($village->getActualIron() - $next->getIron()),
@@ -288,6 +288,7 @@ class BuildingService
 			return TRUE;
 		}
 		$woodNeeded = $building->getWood() - $village->getActualWood();
+		\Tracy\Debugger::barDump($village);
 		if ($woodNeeded > 0) {
 			$time = round($woodNeeded / ($village->getProductionWood() / 3600));
 		} else {
