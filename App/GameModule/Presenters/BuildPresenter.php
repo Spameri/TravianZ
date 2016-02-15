@@ -33,7 +33,7 @@ class BuildPresenter extends GamePresenter
 		$queue = $this->BDataModel->getBuildingQueue($village->getId());
 		$nextLevel = $village->getFData()['f' . $field] + 1;
 		foreach ($queue as $single) {
-			if ($single->type == $current->getBuilding() && $nextLevel < $single->level && $single->field == $field) {
+			if ($single->type == $current->getBuilding() && $single->field == $field) {
 				$nextLevel = $single->level;
 				$nextLevel++;
 			}
