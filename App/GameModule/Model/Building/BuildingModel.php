@@ -21,11 +21,16 @@ class BuildingModel extends App\Model\BaseModel
     const BAKERY = 9;
     const WAREHOUSE = 10;
     const GRANARY = 11;
+	const BLACKSMITH = 12;
+	const ARMOURY = 13;
     const MAIN_BUILDING = 15;
 	const RALLY_POINT = 16;
+	const MARKET_PLACE = 17;
+	const EMBASSY = 18;
 	const BARRACKS = 19;
 	const STABLE = 20;
 	const WORKSHOP = 21;
+	const ACADEMY = 22;
     const CRANNY = 23;
     const RESIDENCE = 25;
     const PALACE = 26;
@@ -33,6 +38,7 @@ class BuildingModel extends App\Model\BaseModel
 	const EARTH_WALL = 32;
 	const PALISADE = 33;
 	const TRAPPER = 36;
+	const HERO_MANSION = 37;
 	const WORLD_WONDER = 40;
 
     /**

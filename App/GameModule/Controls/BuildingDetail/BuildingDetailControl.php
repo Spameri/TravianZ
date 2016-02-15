@@ -83,6 +83,42 @@ class BuildingDetailControl extends Nette\Application\UI\Control
 			case App\GameModule\Model\Building\BuildingModel::BARRACKS:
 				$this->renderBarracks();
 				break;
+
+			case App\GameModule\Model\Building\BuildingModel::STABLE:
+				$this->renderStable();
+				break;
+
+			case App\GameModule\Model\Building\BuildingModel::ACADEMY:
+				$this->renderAcademy();
+				break;
+
+			case App\GameModule\Model\Building\BuildingModel::ARMOURY:
+				$this->renderArmoury();
+				break;
+
+			case App\GameModule\Model\Building\BuildingModel::BLACKSMITH:
+				$this->renderBlacksmith();
+				break;
+
+			case App\GameModule\Model\Building\BuildingModel::MARKET_PLACE:
+				$this->renderMarketPlace();
+				break;
+
+			case App\GameModule\Model\Building\BuildingModel::EMBASSY:
+				$this->renderEmbassy();
+				break;
+
+			case App\GameModule\Model\Building\BuildingModel::HERO_MANSION:
+				$this->renderHeroMansion();
+				break;
+
+			case App\GameModule\Model\Building\BuildingModel::RALLY_POINT:
+				$this->renderRallyPoint();
+				break;
+
+			default:
+				$this->template->setFile(__DIR__ . '/Template/Blank.latte');
+				break;
 		}
 	}
 
@@ -147,5 +183,55 @@ class BuildingDetailControl extends Nette\Application\UI\Control
 	public function renderCapacity()
 	{
 		$this->template->setFile(__DIR__ . '/Template/Capacity.latte');
+	}
+
+	public function renderAcademy()
+	{
+		$this->template->setFile(__DIR__ . '/Template/Academy.latte');
+	}
+
+	public function renderArmoury()
+	{
+		$this->template->setFile(__DIR__ . '/Template/Armoury.latte');
+	}
+
+	public function renderBlacksmith()
+	{
+		$this->template->setFile(__DIR__ . '/Template/Blacksmith.latte');
+	}
+
+	public function renderStable()
+	{
+		$this->units = $this->unitService->getAvailableUnits($this->village, App\GameModule\Model\Building\BuildingModel::STABLE);
+		$this->template->units = $this->units;
+		$this->template->available = $this->unitService->getTrainableUnits($this->village, $this->units);
+		$this->template->current = $this->unitService->getUnits($this->village);
+		$queue = $this->trainingModel->getByBuilding($this->village, App\GameModule\Model\Building\BuildingModel::STABLE);
+		foreach ($queue as $item) {
+			$item->unit = $this->unitFactory->getUnit($item->unit);
+		}
+		$this->template->queue = $queue;
+
+		$this->template->setFile(__DIR__ . '/Template/Stable.latte');
+	}
+
+	public function renderEmbassy()
+	{
+		$this->template->setFile(__DIR__ . '/Template/Embassy.latte');
+	}
+
+	public function renderMarketPlace()
+	{
+		$this->template->setFile(__DIR__ . '/Template/MarketPlace.latte');
+	}
+
+	public function renderHeroMansion()
+	{
+		$this->template->setFile(__DIR__ . '/Template/HeroMansion.latte');
+	}
+
+	public function renderRallyPoint()
+	{
+		$this->template->setFile(__DIR__ . '/Template/RallyPoint.latte');
 	}
 }

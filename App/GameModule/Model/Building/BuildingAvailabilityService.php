@@ -27,6 +27,7 @@ class BuildingAvailabilityService
 
 	/**
 	 * @param App\GameModule\DTO\Village $village
+	 * @param int $field
 	 * @return array
 	 */
 	public function getAvailable($village, $field)
