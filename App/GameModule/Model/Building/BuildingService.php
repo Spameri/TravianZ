@@ -385,7 +385,7 @@ class BuildingService
 			}
 
 			/** @var \stdClass $maxLevel */
-			$maxLevel = $this->buildingModel->getBuildingLevel($building->getBuilding(), ($current->getLevel() + 1));
+			$maxLevel = $this->buildingModel->getBuildingMaxLevel($building->getBuilding());
 			if ($current->getLevel() === $maxLevel->level) {
 				return 'Building is at maximum level';
 			}

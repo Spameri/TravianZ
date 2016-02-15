@@ -49,6 +49,19 @@ class BuildingModel extends App\Model\BaseModel
     }
 
 
+    /**
+     * @param int $building
+     * @return \Dibi\Row|FALSE
+     */
+    public function getBuildingMaxLevel($building)
+    {
+        return $this->database->select('*')->from($this->tableLevel)
+            ->where('building = %i', $building)
+			->orderBy('level DESC')
+            ->fetch();
+    }
+
+
     public function getAll()
     {
         return $this->database->select('*')->from($this->table)
