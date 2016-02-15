@@ -31,6 +31,10 @@ class BuildingDetailControl extends Nette\Application\UI\Control
 	 * @var App\GameModule\Model\Units\TrainingModel
 	 */
 	private $trainingModel;
+	/**
+	 * @var App\GameModule\Model\Units\UnitFactory
+	 */
+	private $unitFactory;
 
 
 	public function __construct(
@@ -38,12 +42,14 @@ class BuildingDetailControl extends Nette\Application\UI\Control
 		, App\GameModule\Controls\Train\ITrainControl $trainControl
 		, App\FrontModule\Model\VData\VillageService $villageService
 		, App\GameModule\Model\Units\TrainingModel $trainingModel
+		, App\GameModule\Model\Units\UnitFactory $unitFactory
 	)
 	{
 		$this->unitService = $unitService;
 		$this->trainControl = $trainControl;
 		$this->villageService = $villageService;
 		$this->trainingModel = $trainingModel;
+		$this->unitFactory = $unitFactory;
 	}
 
 
@@ -95,7 +101,7 @@ class BuildingDetailControl extends Nette\Application\UI\Control
 		$this->template->current = $this->unitService->getUnits($this->village);
 		$queue = $this->trainingModel->getByBuilding($this->village, App\GameModule\Model\Building\BuildingModel::BARRACKS);
 		foreach ($queue as $item) {
-			$item->unit = $this->unitService->getUnit($item->unit);
+			$item->unit = $this->unitFactory->getUnit($item->unit);
 		}
 		$this->template->queue = $queue;
 

@@ -59,7 +59,7 @@ class BuildingAvailabilityService
 			if ($building < 5) {
 				continue;
 			}
-			if ($this->isBuilt($village, $building)) {
+			if ($this->buildingService->isBuilt($village, $building)) {
 				continue;
 			}
 			if (in_array($building, [BuildingModel::CITY_WALL, BuildingModel::EARTH_WALL, BuildingModel::PALISADE, BuildingModel::RALLY_POINT])) {
@@ -73,7 +73,7 @@ class BuildingAvailabilityService
 			$requirements = $this->buildingModel->getRequirements($building);
 			$passed = FALSE;
 			foreach ($requirements as $requirement) {
-				$built = $this->isBuilt($village, $requirement->require_building);
+				$built = $this->buildingService->isBuilt($village, $requirement->require_building);
 				if ($built && $requirement->exclude_building === $built->getBuilding()) {
 					$passed = FALSE;
 					break;
@@ -93,20 +93,4 @@ class BuildingAvailabilityService
 		return $available;
 	}
 
-
-	/**
-	 * @param App\GameModule\DTO\Village $village
-	 * @param int $building
-	 * @return App\GameModule\DTO\Building|bool
-	 */
-	public function isBuilt($village, $building)
-	{
-		for ($i = 19; $i <= 40; $i++) {
-			if ($village->getFData()['f' . $i . 't'] === $building) {
-				return $this->buildingService->getBuilding($building, $village->getFData()['f' . $i], $village);
-			}
-		}
-
-		return FALSE;
-	}
 }

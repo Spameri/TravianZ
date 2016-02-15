@@ -27,20 +27,26 @@ class VillageService
 	 * @var App\FrontModule\Model\User\UserModel
 	 */
 	private $userModel;
+	/**
+	 * @var App\GameModule\Model\Units\UpkeepService
+	 */
+	private $upkeepService;
 
 
 	public function __construct(
-		VDataModel $VDataModel,
-		App\FrontModule\Model\WData\WDataModel $WDataModel,
-		App\FrontModule\Model\FData\FDataModel $FDataModel,
-		App\GameModule\Model\Production\ProductionService $productionService,
-		App\FrontModule\Model\User\UserModel $userModel
+		VDataModel $VDataModel
+		, App\FrontModule\Model\WData\WDataModel $WDataModel
+		, App\FrontModule\Model\FData\FDataModel $FDataModel
+		, App\GameModule\Model\Production\ProductionService $productionService
+		, App\FrontModule\Model\User\UserModel $userModel
+		, App\GameModule\Model\Units\UpkeepService $upkeepService
 	) {
 		$this->VDataModel = $VDataModel;
 		$this->WDataModel = $WDataModel;
 		$this->FDataModel = $FDataModel;
 		$this->productionService = $productionService;
 		$this->userModel = $userModel;
+		$this->upkeepService = $upkeepService;
 	}
 
 
@@ -94,7 +100,8 @@ class VillageService
 			$village->setStorage($VData->maxstore);
 			$village->setGranary($VData->maxcrop);
 
-			$village->setUpkeep($VData->pop);
+			$upkeep = $VData->pop + $this->upkeepService->getUpkeep($id);
+			$village->setUpkeep($upkeep);
 
 			$village->setName($VData->name);
 			$village->setLoyalty($VData->loyalty);
@@ -112,7 +119,7 @@ class VillageService
 			$village->setProductionClay($this->productionService->getProductionClay($village));
 			$village->setProductionIron($this->productionService->getProductionIron($village));
 			$village->setProductionCrop($this->productionService->getProductionCrop($village));
-			$village->setMaxUpkeep($this->productionService->getProductionCrop($village));
+			$village->setMaxUpkeep($this->productionService->getBaseProductionCrop($village));
 		}
 
 		return $village;

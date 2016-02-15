@@ -162,10 +162,6 @@ class UnitService
 	 */
 	private $unitModel;
 	/**
-	 * @var int
-	 */
-	private $speed;
-	/**
 	 * @var UnitsModel
 	 */
 	private $unitsModel;
@@ -178,25 +174,29 @@ class UnitService
 	 */
 	private $VDataModel;
 	/**
-	 * @var App\GameModule\Model\Building\BuildingAvailabilityService
+	 * @var App\GameModule\Model\Building\BuildingService
 	 */
-	private $buildingAvailabilityService;
+	private $buildingService;
+	/**
+	 * @var UnitFactory
+	 */
+	private $unitFactory;
 
 
 	public function __construct(
-		$speed
-		, UnitModel $unitModel
+		UnitModel $unitModel
 		, UnitsModel $unitsModel
 		, TrainingModel $trainingModel
 		, App\FrontModule\Model\VData\VDataModel $VDataModel
-		, App\GameModule\Model\Building\BuildingAvailabilityService $buildingAvailabilityService
+		, App\GameModule\Model\Building\BuildingService $buildingService
+		, UnitFactory $unitFactory
 	){
 		$this->unitModel = $unitModel;
-		$this->speed = $speed;
 		$this->unitsModel = $unitsModel;
 		$this->trainingModel = $trainingModel;
 		$this->VDataModel = $VDataModel;
-		$this->buildingAvailabilityService = $buildingAvailabilityService;
+		$this->buildingService = $buildingService;
+		$this->unitFactory = $unitFactory;
 	}
 
 
@@ -261,42 +261,6 @@ class UnitService
 
 
 	/**
-	 * @param int $id
-	 * @param App\GameModule\DTO\Building|bool $building
-	 * @return App\GameModule\DTO\Unit
-	 */
-	public function getUnit($id, $building = FALSE)
-	{
-		/** @var \stdClass $unitData */
-		$unitData = $this->unitModel->get($id);
-
-		$unit = new App\GameModule\DTO\Unit();
-
-		$unit->setId($unitData->id);
-		$unit->setName($unitData->name);
-		$unit->setAttack($unitData->attack);
-		$unit->setDefenceInfantry($unitData->defence_infantry);
-		$unit->setDefenceCalvary($unitData->defence_calvary);
-		$unit->setWood($unitData->wood);
-		$unit->setClay($unitData->clay);
-		$unit->setIron($unitData->iron);
-		$unit->setCrop($unitData->crop);
-		$unit->setUpkeep($unitData->pop);
-		$unit->setSpeed($unitData->speed);
-		$time = $unitData->time / $this->speed;
-		if ($building) {
-			$time = $time * ($building->getParameter() / 100);
-		}
-		$unit->setTime(round($time));
-		$unit->setCapacity($unitData->capacity);
-		$unit->setType($unitData->type);
-		$unit->setTribe($unitData->tribe);
-
-		return $unit;
-	}
-
-
-	/**
 	 * @param App\GameModule\DTO\Village $village
 	 * @param int $building
 	 * @return array
@@ -307,8 +271,8 @@ class UnitService
 		if ($village->getOwner()->tribe === App\FrontModule\Model\User\UserService::TRIBE_ROMANS) {
 			switch ($building) {
 				case App\GameModule\Model\Building\BuildingModel::BARRACKS:
-					$barracks = $this->buildingAvailabilityService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::BARRACKS);
-					$units[] = $this->getUnit(self::LEGIONNAIRE, $barracks);
+					$barracks = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::BARRACKS);
+					$units[] = $this->unitFactory->getUnit(self::LEGIONNAIRE, $barracks);
 					// TODO RESEARCH
 					break;
 
@@ -321,21 +285,21 @@ class UnitService
 					break;
 
 				case App\GameModule\Model\Building\BuildingModel::RESIDENCE:
-					$residence = $this->buildingAvailabilityService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::RESIDENCE);
-					$units[] = $this->getUnit(self::SETTLER, $residence);
+					$residence = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::RESIDENCE);
+					$units[] = $this->unitFactory->getUnit(self::SETTLER, $residence);
 					break;
 
 				case App\GameModule\Model\Building\BuildingModel::PALACE:
-					$palace = $this->buildingAvailabilityService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::PALACE);
-					$units[] = $this->getUnit(self::SETTLER, $palace);
+					$palace = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::PALACE);
+					$units[] = $this->unitFactory->getUnit(self::SETTLER, $palace);
 					break;
 			}
 
 		} elseif ($village->getOwner()->tribe === App\FrontModule\Model\User\UserService::TRIBE_TEUTONS) {
 			switch ($building) {
 				case App\GameModule\Model\Building\BuildingModel::BARRACKS:
-					$barracks = $this->buildingAvailabilityService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::BARRACKS);
-					$units[] = $this->getUnit(self::MACEMAN, $barracks);
+					$barracks = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::BARRACKS);
+					$units[] = $this->unitFactory->getUnit(self::MACEMAN, $barracks);
 					// TODO RESEARCH
 					break;
 
@@ -348,21 +312,21 @@ class UnitService
 					break;
 
 				case App\GameModule\Model\Building\BuildingModel::RESIDENCE:
-					$residence = $this->buildingAvailabilityService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::RESIDENCE);
-					$units[] = $this->getUnit(self::SETTLER_TEUTON, $residence);
+					$residence = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::RESIDENCE);
+					$units[] = $this->unitFactory->getUnit(self::SETTLER_TEUTON, $residence);
 					break;
 
 				case App\GameModule\Model\Building\BuildingModel::PALACE:
-					$palace = $this->buildingAvailabilityService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::PALACE);
-					$units[] = $this->getUnit(self::SETTLER_TEUTON, $palace);
+					$palace = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::PALACE);
+					$units[] = $this->unitFactory->getUnit(self::SETTLER_TEUTON, $palace);
 					break;
 			}
 
 		} elseif ($village->getOwner()->tribe === App\FrontModule\Model\User\UserService::TRIBE_GAULS) {
 			switch ($building) {
 				case App\GameModule\Model\Building\BuildingModel::BARRACKS:
-					$barracks = $this->buildingAvailabilityService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::BARRACKS);
-					$units[] = $this->getUnit(self::PHALANX, $barracks);
+					$barracks = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::BARRACKS);
+					$units[] = $this->unitFactory->getUnit(self::PHALANX, $barracks);
 					// TODO RESEARCH
 					break;
 
@@ -375,13 +339,13 @@ class UnitService
 					break;
 
 				case App\GameModule\Model\Building\BuildingModel::RESIDENCE:
-					$residence = $this->buildingAvailabilityService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::RESIDENCE);
-					$units[] = $this->getUnit(self::SETTLER_GAUL, $residence);
+					$residence = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::RESIDENCE);
+					$units[] = $this->unitFactory->getUnit(self::SETTLER_GAUL, $residence);
 					break;
 
 				case App\GameModule\Model\Building\BuildingModel::PALACE:
-					$palace = $this->buildingAvailabilityService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::PALACE);
-					$units[] = $this->getUnit(self::SETTLER_GAUL, $palace);
+					$palace = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::PALACE);
+					$units[] = $this->unitFactory->getUnit(self::SETTLER_GAUL, $palace);
 					break;
 			}
 		}

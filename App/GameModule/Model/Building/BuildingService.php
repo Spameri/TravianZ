@@ -24,10 +24,6 @@ class BuildingService
 	 */
 	private $FDataModel;
 	/**
-	 * @var App\GameModule\Model\Production\ProductionService
-	 */
-	private $productionService;
-	/**
 	 * @var App\FrontModule\Model\VData\VillageService
 	 */
 	private $villageService;
@@ -47,7 +43,6 @@ class BuildingService
         BuildingModel $buildingModel,
 		App\GameModule\Model\BData\BDataModel $BDataModel,
 		App\FrontModule\Model\FData\FDataModel $FDataModel,
-		App\GameModule\Model\Production\ProductionService $productionService,
 		App\FrontModule\Model\VData\VillageService $villageService,
 		App\FrontModule\Model\VData\VDataModel $VDataModel,
 		Kdyby\Clock\IDateTimeProvider $dateTimeProvider
@@ -56,7 +51,6 @@ class BuildingService
         $this->speed = $speed;
 		$this->BDataModel = $BDataModel;
 		$this->FDataModel = $FDataModel;
-		$this->productionService = $productionService;
 		$this->villageService = $villageService;
 		$this->VDataModel = $VDataModel;
 		$this->dateTimeProvider = $dateTimeProvider;
@@ -121,7 +115,7 @@ class BuildingService
 				'f' . $building->field => $building->level,
 				'f' . $building->field . 't' => $building->type,
 			]);
-			$data['pop'] = $village->getUpkeep() + $buildingStats->getUpkeep();
+			$data['pop'] = $village->getPopulation() + $buildingStats->getUpkeep();
 			$data['cp'] = $village->getCulturePoints() + $buildingStats->getCulturePoints();
 			switch ($buildingStats->getBuilding()) {
 				case BuildingModel::WAREHOUSE:
@@ -401,5 +395,22 @@ class BuildingService
 		}
 
 		return TRUE;
+	}
+
+
+	/**
+	 * @param App\GameModule\DTO\Village $village
+	 * @param int $building
+	 * @return App\GameModule\DTO\Building|bool
+	 */
+	public function isBuilt($village, $building)
+	{
+		for ($i = 19; $i <= 40; $i++) {
+			if ($village->getFData()['f' . $i . 't'] === $building) {
+				return $this->getBuilding($building, $village->getFData()['f' . $i], $village);
+			}
+		}
+
+		return FALSE;
 	}
 }

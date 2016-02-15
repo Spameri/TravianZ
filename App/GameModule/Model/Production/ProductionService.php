@@ -20,18 +20,24 @@ class ProductionService
 	 * @var App\FrontModule\Model\VData\VDataModel
 	 */
 	private $VDataModel;
+	/**
+	 * @var App\GameModule\Model\Units\UpkeepService
+	 */
+	private $upkeepService;
 
 
 	function __construct(
-        $speed,
-        App\GameModule\Model\Building\BuildingModel $buildingModel,
-        App\FrontModule\Model\OData\ODataModel $ODataModel,
-		App\FrontModule\Model\VData\VDataModel $VDataModel
+        $speed
+        , App\GameModule\Model\Building\BuildingModel $buildingModel
+        , App\FrontModule\Model\OData\ODataModel $ODataModel
+		, App\FrontModule\Model\VData\VDataModel $VDataModel
+		, App\GameModule\Model\Units\UpkeepService $upkeepService
     ){
         $this->speed = $speed;
         $this->buildingModel = $buildingModel;
         $this->ODataModel = $ODataModel;
 		$this->VDataModel = $VDataModel;
+		$this->upkeepService = $upkeepService;
 	}
 
     /**
@@ -181,7 +187,7 @@ class ProductionService
      * @param App\GameModule\DTO\Village $village
      * @return int
      */
-    public function getProductionCrop($village)
+    public function getBaseProductionCrop($village)
     {
         $production = 0;
         $FData = $village->getFData();
@@ -234,11 +240,26 @@ class ProductionService
         // Step 6 apply speed
         $production = $production * $this->speed;
 
-		// Step 7 subtract upkeep
-		$production = $production - $village->getUpkeep();
-
         return round($production);
     }
+
+
+	/**
+	 * @param App\GameModule\DTO\Village $village
+	 * @return float
+	 */
+	public function getProductionCrop($village)
+	{
+		$production = $this->getBaseProductionCrop($village);
+
+		// Step 7 subtract population
+		$production = $production - $village->getPopulation();
+
+		// Step 8 subtract troops
+		$production = $production - $this->upkeepService->getUpkeep($village->getId());
+
+		return round($production);
+	}
 
 
 	/**
