@@ -1,0 +1,195 @@
+{default $hasUnits = FALSE}
+{var bodyClass = 'v35 ie ie8'}
+{block content}
+	<div id="content"  class="map">
+		<h1>
+			{if $village}
+				{$village->getName()} ({$wdata->x}|{$wdata->y})
+			{elseif $wdata->fieldtype != 0}
+				Abandoned valley ({$wdata->x}|{$wdata->y})
+			{elseif $wdata->occupied}
+				Occupied oasis ({$wdata->x}|{$wdata->y})
+			{else}
+				Unoccupied oasis ({$wdata->x}|{$wdata->y})
+			{/if}
+        </h1>
+        <div n:if="$village && $village->isCapital()" id="dmain">(capital)</div>
+        {if $village && $village->getType() === \App\FrontModule\Model\VData\VillageService::ARTIFACT_TYPE}
+			<img src="{$baseUrl}/img/x.gif" id="detailed_map" class="f99" alt="Ancient Construction Plan" />
+		{else}
+			<img src="{$baseUrl}/img/x.gif" id="detailed_map"
+			n:class="$wdata->fieldtype == 0 ? 'w' . $wdata->oasistype : 'f' . $wdata->fieldtype"
+			{if $wdata->fieldtype != 0}alt="{\App\FrontModule\Model\VData\VillageService::VALLEY_TYPE[$wdata->fieldtype]}"{/if}
+			{if $wdata->fieldtype == 0}alt="{\App\FrontModule\Model\VData\VillageService::OASIS_TYPE[$wdata->oasistype]}"{/if}>
+		{/if}
+
+		<div id="map_details">
+			<table n:if="$wdata->oasistype == 0 && $wdata->occupied == 0" cellpadding="1" cellspacing="1" id="distribution" class="tableNone">
+        		<thead>
+        			<tr>
+        				<th colspan="3">Land distribution</th>
+        			</tr>
+				</thead>
+				{var $exploded = explode('-', \App\FrontModule\Model\VData\VillageService::VALLEY_TYPE[$wdata->fieldtype])}
+        		<tbody>
+					<tr>
+        				<td class="ico"><img class="r1" src="{$baseUrl}/img/x.gif" alt="Lumber" title="Lumber" /></td>
+        				<td class="val">{$exploded[0]}</td>
+        				<td class="desc">Woodcutter</td>
+        			</tr>
+					<tr>
+        				<td class="ico"><img class="r2" src="{$baseUrl}/img/x.gif" alt="Clay" title="Clay" /></td>
+        				<td class="val">{$exploded[1]}</td>
+        				<td class="desc">Clay pit</td>
+        			</tr>
+					<tr>
+        				<td class="ico"><img class="r3" src="{$baseUrl}/img/x.gif" alt="Iron" title="Iron" /></td>
+        				<td class="val">{$exploded[2]}</td>
+        				<td class="desc">Iron mine</td>
+        			</tr>
+					<tr>
+        				<td class="ico"><img class="r4" src="{$baseUrl}/img/x.gif" alt="Crop" title="Crop" /></td>
+        				<td class="val">{$exploded[3]}</td>
+        				<td class="desc">Cropland</td>
+        			</tr>
+				</tbody>
+        	</table>
+
+			<table n:if="$wdata->occupied" cellpadding="1" cellspacing="1" id="village_info" class="tableNone">
+				<tbody>
+					<tr>
+						<th>Tribe</th>
+						<td>
+							{\App\FrontModule\Model\User\UserService::TRIBE_NAMES[$village->getOwner()->tribe]}
+						</td>
+					</tr>
+					<tr>
+						<th>Alliance</th>
+						<td n:if=" ! $village->getOwner()->alliance">-</td>
+						<td n:if="$village->getOwner()->alliance">
+							<a href=":Game:Alliance:default $village->getOwner()->alliance">$village->getOwner()->alliance</a>
+						</td>
+					</tr>
+					<tr>
+						<th>Owner</th>
+						<td>
+							<a href=":Game:Profil:default $village->getOwner()->id">{$village->getOwner()->username}</a>
+						</td>
+					</tr>
+					<tr>
+						<th>Population</th>
+						<td>{$village->getPopulation()}</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table n:if="$wdata->oasistype != 0" cellpadding="1" cellspacing="1" id="bonus" class="tableNone bonus">
+				<thead>
+					<tr>
+						<th>Bonus:</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr n:if=" ! in_array($wdata->oasistype, [10,11,12])">
+						<td class="ico">
+							<img n:class="strpos(\App\FrontModule\Model\VData\VillageService::OASIS_TYPE[$wdata->oasistype], 'Iron') ? r3,
+								strpos(\App\FrontModule\Model\VData\VillageService::OASIS_TYPE[$wdata->oasistype], 'Clay') ? r2,
+								strpos(\App\FrontModule\Model\VData\VillageService::OASIS_TYPE[$wdata->oasistype], 'Lumber') ? r1"
+							src="{$baseUrl}/img/x.gif" title="CROP"> {\App\FrontModule\Model\VData\VillageService::OASIS_TYPE[$wdata->oasistype]}
+						</td>
+					</tr>
+					<tr n:if="in_array($wdata->oasistype, [3,6,9,10,11,12])">
+						<td class="ico">
+							<img class="r4"
+							src="{$baseUrl}/img/x.gif" title="CROP">
+							{if $wdata->oasistype === 12}
+								+50% Crop
+							{else}
+								+25% Crop
+							{/if}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table n:if="$wdata->oasistype != 0 && $wdata->occupied == 0" cellpadding="1" cellspacing="1" id="troop_info" class="tableNone">
+				<thead>
+					<tr>
+						<th colspan="3">Troops:</th>
+					</tr>
+				</thead>
+				<tbody>
+					{for $i = 31; $i <= 40; $i++}
+					    <tr n:if="$units['u' . $i] > 0">
+                        	<td class="ico"><img class="unit u{$i}" src="{$baseUrl}/img/x.gif" alt="{$unitNames[$i]}" title="{$unitNames[$i]}" /></td>
+							<td class="val">{$units['u' . $i]}</td>
+                            <td class="desc">{$unitNames[$i]}</td>
+                            {var $hasUnits = TRUE}
+					  	</tr>
+					{/for}
+                    <tr n:if=" ! $hasUnits">
+                    	<td>no troops</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<table cellpadding="1" cellspacing="1" id="troop_info" class="tableNone rep">
+				<thead>
+					<tr>
+            			<th>Report:</th>
+            		</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							There is no
+							information available.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<table cellpadding="1" cellspacing="1" id="options" class="tableNone">
+			<thead>
+				<tr>
+					<th>Options:</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<a n:href=":Game:Map:default $id, $wdata->id">&raquo; Center map.</a>
+					</td>
+				</tr>
+				{if $wdata->id != $id}
+				<tr n:if="$wdata->occupied == 0 && $wdata->oasistype == 0">
+					<td class="none">
+						<a href="a2b.php?id=">&raquo; Found new village</a>
+					</td>
+				</tr>
+				<tr n:if=" ! $rallyPoint">
+					<td class="none">
+						<a n:href=":Game:Build:chooseBuilding $id, 39">
+							&raquo; Cant't send troops
+							(build a rally point)
+						</a>
+					</td>
+				</tr>
+				<tr n:if="$rallyPoint && ! ($wdata->oasistype == 0 && $wdata->occupied == 0)">
+					<td class="none">
+						<a href="a2b.php?z=">
+							&raquo;
+							{if $wdata->oasistype != 0}
+								Raid {if $wdata->occupied == 0}un{/if}occupied oasis
+							{else}
+								Send troops
+							{/if}
+						</a>
+					</td>
+				</tr>
+				{/if}
+			</tbody>
+		</table>
+	</div>
+{/block}

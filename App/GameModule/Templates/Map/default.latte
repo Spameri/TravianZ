@@ -32,7 +32,7 @@
 							alt="Unoccupied oasis"
 						{/if}
 
-						href="{link ':Game:Map:detail' $field->id}">
+						href="{link ':Game:Map:detail' $id, $field->id}">
 				{/foreach}
 				<area id="ma_n1" n:href=":Game:Map:default $id, $oneNorth" vid="$oneNorth" coords="422,67,25" shape="circle" title="North">
 				<area id="ma_n2" n:href=":Game:Map:default $id, $oneEast" vid="$oneEast" coords="427,254,25" shape="circle" title="East">

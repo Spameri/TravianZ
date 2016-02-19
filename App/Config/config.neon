@@ -62,6 +62,7 @@ services:
 	- App\GameModule\Model\Event\ProcessTraining
 	- App\GameModule\Model\Units\UpkeepService
 	- App\GameModule\Model\Units\UnitFactory(%speed%)
+	- App\GameModule\Model\NData\ReportService
 
 #       commands
 	-

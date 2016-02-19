@@ -16,6 +16,18 @@ class MapPresenter extends GamePresenter
 	/** @var App\GameModule\Model\Diplomacy\DiplomacyModel @inject */
 	public $diplomacyModel;
 
+	/** @var App\GameModule\Model\Units\UnitsModel @inject */
+	public $unitsModel;
+
+	/** @var App\GameModule\Model\Units\UnitService @inject */
+	public $unitService;
+
+	/** @var App\GameModule\Model\NData\ReportService @inject */
+	public $reportService;
+
+	/** @var App\GameModule\Model\Building\BuildingService @inject */
+	public $buildingService;
+
 	public function startup()
 	{
 		parent::startup();
@@ -161,8 +173,29 @@ class MapPresenter extends GamePresenter
 	}
 
 
-	public function actionDetail($id)
+	/**
+	 * @param int $id
+	 * @param int $wid
+	 */
+	public function actionDetail($id, $wid)
 	{
+		$this->template->id = $id;
+		$village = $this->villageService->getVillage($id);
+		/** @var \stdClass $wdata */
+		$this->template->wdata = $wdata = $this->WDataModel->get($wid);
+		$this->template->reports = $this->reportService->getLastReportsForUser($wid, $this->user->getId());
+		$this->template->rallyPoint = $this->buildingService->isBuilt($village, App\GameModule\Model\Building\BuildingModel::RALLY_POINT);
+		if ($wdata->occupied === 1) {
+			$this->template->village = $this->villageService->getVillage($wid);
+		} else {
+			$this->template->village = FALSE;
+		}
+		if ($wdata->oasistype != 0 && $wdata->occupied == 0) {
+			$this->template->units = $this->unitsModel->get($wid);
+			$this->template->unitNames = $this->unitService->getNames();
 
+		} else {
+			$this->template->units = [];
+		}
 	}
 }

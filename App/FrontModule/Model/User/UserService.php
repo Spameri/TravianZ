@@ -14,6 +14,15 @@ class UserService
 	const TRIBE_NATARS = 5;
 	const TRIBE_BARBARIAN = 6;
 
+	const TRIBE_NAMES = [
+		self::TRIBE_ROMANS => 'Romans',
+		self::TRIBE_TEUTONS => 'Teutons',
+		self::TRIBE_GAULS => 'Gauls',
+		self::TRIBE_NATURE => 'Nature',
+		self::TRIBE_NATARS => 'Natars',
+		self::TRIBE_BARBARIAN => 'Barbarian',
+	];
+
 	/**
 	 * @var UserModel
 	 */
