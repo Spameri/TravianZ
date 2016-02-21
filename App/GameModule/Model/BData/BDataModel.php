@@ -31,7 +31,7 @@ class BDataModel extends App\Model\BaseModel
 	{
 		return $this->database->select('timestamp')->from($this->table)
 			->where('wid = %i', $wid)
-			->where('type > 18')
+			->where('type > 4')
 			->orderBy('timestamp DESC')
 			->limit(1)
 			->fetchSingle();
@@ -42,7 +42,7 @@ class BDataModel extends App\Model\BaseModel
 	{
 		return $this->database->select('timestamp')->from($this->table)
 			->where('wid = %i', $wid)
-			->where('type < 19')
+			->where('type < 5')
 			->orderBy('timestamp DESC')
 			->limit(1)
 			->fetchSingle();
@@ -83,6 +83,7 @@ class BDataModel extends App\Model\BaseModel
 	{
 		return $this->database->select('*')->from($this->table)
 			->where('timestamp < %i', $time)
+			->orderBy(['timestamp' => 'ASC'])
 			->fetchAll();
 	}
 }
