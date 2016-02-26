@@ -165,7 +165,7 @@
 				{if $wdata->id != $id}
 				<tr n:if="$wdata->occupied == 0 && $wdata->oasistype == 0">
 					<td class="none">
-						<a href="a2b.php?id=">&raquo; Found new village</a>
+						<a n:href=":Game:Send:default $id, $wdata->id">&raquo; Found new village</a>
 					</td>
 				</tr>
 				<tr n:if=" ! $rallyPoint">
@@ -178,7 +178,7 @@
 				</tr>
 				<tr n:if="$rallyPoint && ! ($wdata->oasistype == 0 && $wdata->occupied == 0)">
 					<td class="none">
-						<a href="a2b.php?z=">
+						<a n:href=":Game:Send:default $id, $wdata->id">
 							&raquo;
 							{if $wdata->oasistype != 0}
 								Raid {if $wdata->occupied == 0}un{/if}occupied oasis

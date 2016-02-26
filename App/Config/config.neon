@@ -63,6 +63,7 @@ services:
 	- App\GameModule\Model\Units\UpkeepService
 	- App\GameModule\Model\Units\UnitFactory(%speed%)
 	- App\GameModule\Model\NData\ReportService
+	- App\GameModule\Controls\SendUnits\ISendUnitsControl
 
 #       commands
 	-

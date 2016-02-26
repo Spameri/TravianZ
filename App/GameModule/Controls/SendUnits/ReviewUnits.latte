@@ -1,0 +1,90 @@
+<h1>
+	{if $data->type === 1}
+		{var type = Reinforcement}
+	{elseif $data->type === 2}
+		{var type = Attack}
+	{elseif $data->type === 4}
+		{var type = Scout}
+	{else}
+		{var type = Raid}
+	{/if}
+	{$type}
+	to
+	{if $destination}
+		{$destination->getName()}
+	{else}
+		Oasis
+	{/if}
+</h1>
+<table id="short_info" cellpadding="1" cellspacing="1">
+	<tbody>
+		<tr>
+			<th>Destination:</th>
+			<td>
+				<a href="{plink ':Game:Map:detail' $village->getId(), $wdata->id}">
+					{if $destination}
+						{$destination->getName()}
+					{else}
+						Oasis
+					{/if}
+					({$wdata->x}|{$wdata->y})
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<th>Owner:</th>
+			<td>
+				<a n:if="$destination" href=":Game:User:default">
+					{$destination->getOwner()->username}
+				</a>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="troop_details" cellpadding="1" cellspacing="1">
+	<thead>
+		<tr>
+			<td>{$village->getName()}</td>
+			<td colspan="11">
+				{$type} to
+				{if $destination}
+					{$destination->getName()}
+				{else}
+					Oasis
+				{/if}
+			</td>
+		</tr>
+	</thead>
+	<tbody class="units">
+		<tr>
+			<td></td>
+			{foreach $unitData as $unit}
+				<td>
+					<img src="{$baseUrl}/img/x.gif" class="unit u{$unit->getId()}" title="{$unit->getName()}" alt="{$unit->getName()}" />
+				</td>
+			{/foreach}
+			<td>
+		  		<img src="{$baseUrl}/img/x.gif" class="unit uhero" title="Hero" alt="Hero" />
+			</td>
+		</tr>
+		<tr>
+			<th>Troops</th>
+			{foreach $unitData as $unit}
+				<td n:class=" ! $units['u' . $unit->getId()] ? none : FALSE">{$units['u' . $unit->getId()]}</td>
+			{/foreach}
+			<td n:class=" ! $units['hero'] ? none : FALSE">{$units['hero']}</td>
+		</tr>
+	</tbody>
+	<tbody class="infos">
+        <tr>
+       		<th>Arrived:</th>
+       		<td colspan="11">
+				<div class="in">in $time</div>
+				<div class="at">at <span id="tp2"> date('U')+$time</span><span> hours</span></div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+{dump $data}
+
+

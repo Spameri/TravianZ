@@ -18,6 +18,19 @@ class UnitService
 	const SENATOR = 9;
 	const SETTLER = 10;
 
+	const ROMANS = [
+		self::LEGIONNAIRE,
+		self::PRAETORIAN,
+		self::IMPERIAN,
+		self::EQUITES_LEGATI,
+		self::EQUITES_IMPERATORIS,
+		self::EQUITES_CEASARIS,
+		self::BATTERING_RAM,
+		self::FIRE_CATAPULT,
+		self::SENATOR,
+		self::SETTLER,
+	];
+
 	const MACEMAN = 11;
 	const SPEARMAN = 12;
 	const AXEMAN = 13;
@@ -28,6 +41,19 @@ class UnitService
 	const CATAPULT_TEUTON = 18;
 	const CHIEF_TEUTON = 19;
 	const SETTLER_TEUTON = 20;
+
+	const TEUTONS = [
+		self::MACEMAN,
+		self::SPEARMAN,
+		self::AXEMAN,
+		self::SCOUT,
+		self::PALADIN,
+		self::TEUTONIC_KNIGHT,
+		self::RAM_TEUTON,
+		self::CATAPULT_TEUTON,
+		self::CHIEF_TEUTON,
+		self::SETTLER_TEUTON,
+	];
 
 	const PHALANX = 21;
 	const SWORDSMAN = 22;
@@ -40,6 +66,19 @@ class UnitService
 	const CHIEFTAIN = 29;
 	const SETTLER_GAUL = 30;
 
+	const GAULS = [
+		self::PHALANX,
+		self::SWORDSMAN,
+		self::PATHFINDER,
+		self::THEUTATES_THUNDER,
+		self::DRUIDRIDER,
+		self::HAEDUAN,
+		self::RAM_GAUL,
+		self::TREBUCHET,
+		self::CHIEFTAIN,
+		self::SETTLER_GAUL,
+	];
+
 	const RAT = 31;
 	const SPIDER = 32;
 	const SERPENT = 33;
@@ -50,6 +89,19 @@ class UnitService
 	const CROCODILE = 38;
 	const TIGER = 39;
 	const ELEPHANT = 40;
+
+	const NATURE = [
+		self::RAT,
+		self::SPIDER,
+		self::SERPENT,
+		self::BAT,
+		self::WILD_BOAR,
+		self::WOLF,
+		self::BEAR,
+		self::CROCODILE,
+		self::TIGER,
+		self::ELEPHANT,
+	];
 
 	const PIKEMAN = 41;
 	const THORNED_WARRIOR = 42;
@@ -62,6 +114,19 @@ class UnitService
 	const NATARIAN_EMPEROR = 49;
 	const SETTLER_NATAR = 50;
 
+	const NATARS = [
+		self::PIKEMAN,
+		self::THORNED_WARRIOR,
+		self::GUARDSMAN,
+		self::BIRDS_OF_PREY,
+		self::AXERIDER,
+		self::NATARIAN_KNIGHT,
+		self::WAR_ELEPHANT,
+		self::BALLISTA,
+		self::NATARIAN_EMPEROR,
+		self::SETTLER_NATAR,
+	];
+
 	const PEON = 51;
 	const HUNTER = 52;
 	const WARRIOR = 53;
@@ -72,6 +137,19 @@ class UnitService
 	const CATAPULT_BARBARIAN = 58;
 	const CHIEF_BARBARIAN = 59;
 	const SETTLER_BARBARIAN = 60;
+
+	const BARBARIANS = [
+		self::PEON,
+		self::HUNTER,
+		self::WARRIOR,
+		self::HYDRA,
+		self::STEED,
+		self::WAR_STEED,
+		self::RAM_BARBARIAN,
+		self::CATAPULT_BARBARIAN,
+		self::CHIEF_BARBARIAN,
+		self::SETTLER_BARBARIAN,
+	];
 
 	const INFANTRY = [
 		self::LEGIONNAIRE,

@@ -62,25 +62,6 @@ $process['c'] = 1;
     $id = $database->addA2b($ckey,time(),$process['0'],$t1,$t2,$t3,$t4,$t5,$t6,$t7,$t8,$t9,$t10,$t11,$process['c']);
 
 
-
-if ($process['c']==1){
-
-$actionType = "Scout";
-
-}else if ($process['c']==2){
-
-$actionType = "Reinforcement";
-
-}elseif ($process['c']==3){
-
-$actionType = "Normal attack";
-
-}else{
-
-$actionType = "Raid";
-
-}
-
 $uid = $session->uid;
 
 $tribe = $session->tribe;
@@ -88,93 +69,9 @@ $start = ($tribe-1)*10+1;
 $end = ($tribe*10);
 ?>
 
-<h1><?php echo $actionType." to ".$process[1]; ?></h1>            
 <form method="post" action="a2b.php">
-
-            <table id="short_info" cellpadding="1" cellspacing="1">
-
-                <tbody>
-
-                    <tr>
-
-                        <th>Destination:</th>
-
-                        <td><a href="karte.php?d=<?php echo $process[0]; ?>&c=<?php echo $generator->getMapCheck($process[0]); ?>"><?php echo $process[1]; ?> (<?php echo $coor['x']; ?>|<?php echo $coor['y']; ?>)</a></td>
-
-                    </tr>
-
-                    <tr>
-
-                        <th>Owner:</th>
-
-                        <td><a href="spieler.php?uid=<?php echo $process['2']; ?>"><?php echo $database->getUserField($process['2'],'username',0); ?></a></td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-
-
             <table class="troop_details" cellpadding="1" cellspacing="1">
 
-                <thead>
-
-                    <tr>
-
-                        <td><?php echo $process[1]; ?></td>
-
-                        <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>"><?php echo $actionType." to ".$process['1']; ?></td>
-
-                    </tr>
-
-                </thead>
-
-                <tbody class="units">
-
-                    <tr>
-
-                        <td></td>
-                 <?php 
-                for($i=$start;$i<=($end);$i++) {
-                      echo "<td><img src=\"img/x.gif\" class=\"unit u$i\" title=\"".$technology->getUnitName($i)."\" alt=\"".$technology->getUnitName($i)."\" /></td>";    
-                  } if ($process['t11'] != ''){
-                  echo "<td><img src=\"img/x.gif\" class=\"unit uhero\" title=\"Hero\" alt=\"Hero\" /></td>";    
-                  
-                  }?>
-                        
-                    </tr>
-
-                    <tr>
-
-                        <th>Troops</th>
-
-                        <td <?php if (!isset($process['t1']) || $process['t1'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t1'];} ?></td>
-
-                        <td <?php if (!isset($process['t2']) || $process['t2'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t2'];} ?></td>
-
-                        <td <?php if (!isset($process['t3']) || $process['t3'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t3'];} ?></td>
-
-                        <td <?php if (!isset($process['t4']) || $process['t4'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t4'];} ?></td>
-
-                        <td <?php if (!isset($process['t5']) || $process['t5'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t5'];} ?></td>
-
-                        <td <?php if (!isset($process['t6']) || $process['t6'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t6'];} ?></td>
-
-                        <td <?php if (!isset($process['t7']) || $process['t7'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t7'];} ?></td>
-
-                        <td <?php if (!isset($process['t8']) || $process['t8'] == ''){ echo "class=\"none\">0"; }else{ $kata='1'; echo ">".$process['t8'];} ?></td>
-
-                        <td <?php if (!isset($process['t9']) || $process['t9'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t9'];} ?></td>
-
-                        <td <?php if (!isset($process['t10']) || $process['t10'] == ''){ echo "class=\"none\">0"; }else{ echo ">".$process['t10'];} ?></td>
-
-                        <?php if (!isset($process['t11']) || $process['t11'] == ''){ echo ""; }else{ echo "<td>".$process['t11']."</td>";} ?>
-
-                     </tr>
-
-                </tbody>
                                          <?php                if ($process['c']==1){
 
 ?>
@@ -186,8 +83,6 @@ $end = ($tribe*10);
         </tr>
     </tbody>
     <?php } ?>
-                
-
         <?php if(isset($kata) AND $process['c']!='2'){?><tr>
 
             <?php if($process['c']=='3'){ ?><tbody class="cata">
@@ -328,16 +223,6 @@ $end = ($tribe*10);
             ?>
 
         <?php } ?>
-
-
-
-             <tbody class="infos">
-    <tr>
-
-   <th>Arrived:</th>
-
-            
-
             <?php
             $speeds = array();
 
@@ -418,17 +303,6 @@ $end = ($tribe*10);
 
             
 
-            <td colspan="<?php if($process['t11'] != ''){ echo"11"; }else{ echo"10"; } ?>">
-
-            <div class="in">in <?php echo $generator->getTimeFormat($time); ?></div>
-
-            <div class="at">at <span id="tp2"> <?php echo $generator->procMtime(date('U')+$time,9)?></span><span> hours</span></div>
-
-            </td>
-
-        </tr>
-
-    </tbody>
 
 </table>
 

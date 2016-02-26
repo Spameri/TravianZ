@@ -1,0 +1,126 @@
+<h1>Send Troops</h1>
+
+{form sendUnitsForm}
+	<table id="troops" cellpadding="1" cellspacing="1">
+    	<tbody>
+			<tr>
+				<td class="line-first column-first large">
+					<img class="unit u{$unitData[0]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[0]->getName()}" alt="{$unitData[0]->getName()}">
+					<input n:name="1" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[0]->getId()]" href="#">({$units['u' . $unitData[0]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[0]->getId()]" class="none">(0)</span>
+				</td>
+				<td class="line-first large">
+					<img class="unit u{$unitData[3]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[3]->getName()}" alt="{$unitData[3]->getName()}">
+					<input n:name="4" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[3]->getId()]" href="#">({$units['u' . $unitData[3]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[3]->getId()]" class="none">(0)</span>
+				</td>
+				<td class="line-first regular">
+					<img class="unit u{$unitData[6]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[6]->getName()}" alt="{$unitData[6]->getName()}">
+					<input n:name="7" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[6]->getId()]" href="#">({$units['u' . $unitData[6]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[6]->getId()]" class="none">(0)</span>
+				</td>
+				<td class="line-first small">
+					<img class="unit u{$unitData[8]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[8]->getName()}" alt="{$unitData[8]->getName()}">
+					<input n:name="9" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[8]->getId()]" href="#">({$units['u' . $unitData[8]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[8]->getId()]" class="none">(0)</span>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="column-first large">
+					<img class="unit u{$unitData[1]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[1]->getName()}" alt="{$unitData[1]->getName()}">
+					<input n:name="2" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[1]->getId()]" href="#">({$units['u' . $unitData[1]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[1]->getId()]" class="none">(0)</span>
+				</td>
+				<td class="line-first large">
+					<img class="unit u{$unitData[4]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[4]->getName()}" alt="{$unitData[4]->getName()}">
+					<input n:name="5" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[4]->getId()]" href="#">({$units['u' . $unitData[4]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[4]->getId()]" class="none">(0)</span>
+				</td>
+				<td class="line-first regular">
+					<img class="unit u{$unitData[7]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[7]->getName()}" alt="{$unitData[7]->getName()}">
+					<input n:name="8" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[7]->getId()]" href="#">({$units['u' . $unitData[7]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[7]->getId()]" class="none">(0)</span>
+				</td>
+				<td class="line-first small">
+					<img class="unit u{$unitData[9]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[9]->getName()}" alt="{$unitData[9]->getName()}">
+					<input n:name="10" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[9]->getId()]" href="#">({$units['u' . $unitData[9]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[9]->getId()]" class="none">(0)</span>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="column-first large">
+					<img class="unit u{$unitData[2]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[2]->getName()}" alt="{$unitData[2]->getName()}">
+					<input n:name="3" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[2]->getId()]" href="#">({$units['u' . $unitData[2]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[2]->getId()]" class="none">(0)</span>
+				</td>
+				<td class="line-first large">
+					<img class="unit u{$unitData[5]->getId()}" src="{$baseUrl}/img/x.gif" title="{$unitData[5]->getName()}" alt="{$unitData[5]->getName()}">
+					<input n:name="6" class="text" maxlength="6" type="text">
+					<a n:if="$units['u' . $unitData[5]->getId()]" href="#">({$units['u' . $unitData[5]->getId()]})</a>
+					<span n:if=" ! $units['u' . $unitData[5]->getId()]" class="none">(0)</span>
+				</td>
+				<td>
+				</td>
+				<td class="regular">
+					<img class="unit uhero" src="{$baseUrl}/img/x.gif" title="Hero" alt="Hero">
+					<input class="text" name="t11" maxlength="6" type="text">
+					<span class="none">(0)</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table id="coords" cellpadding="1" cellspacing="1">
+        <tbody>
+        	<tr>
+            	<td class="sel">
+                	<label>
+                    	<input class="radio" n:name="type:1">
+                    	Reinforcement
+                	</label>
+				</td>
+				<td class="vil">
+					<span>Village:</span>
+					<input class="text" n:name="village" maxlength="20">
+				</td>
+
+			</tr>
+			<tr>
+				<td class="sel">
+					<label>
+						<input class="radio" n:name="type:2">
+						Normal attack
+					</label>
+				</td>
+				<td class="or">or</td>
+			</tr>
+			<tr>
+				<td class="sel">
+					<label>
+						<input class="radio" n:name="type:3">
+						Raid
+					</label>
+				</td>
+				<td class="target">
+					<span>x:</span>
+					<input class="text" n:name="x" maxlength="4" type="text">
+					<span>y:</span>
+					<input class="text" n:name="y" maxlength="4" type="text">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<input value="ok" n:name="ok" id="btn_ok" class="dynamic_img " src="{$baseUrl}/img/x.gif" alt="OK" type="image">
+{/form}
+
