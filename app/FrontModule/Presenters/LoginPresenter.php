@@ -2,14 +2,15 @@
 
 namespace App\FrontModule\Presenters;
 
-use App;
-use Nette;
 
-class LoginPresenter extends Nette\Application\UI\Presenter
+class LoginPresenter extends \Nette\Application\UI\Presenter
 {
 
-	/** @var App\FrontModule\Model\User\LoginService @inject */
+	/**
+	 * @var \App\FrontModule\Model\User\LoginService @inject
+	 */
 	public $loginService;
+
 
 	public function actionDefault()
 	{
@@ -23,9 +24,9 @@ class LoginPresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	protected function createComponentLoginForm()
+	protected function createComponentLoginForm() : \Nette\Application\UI\Form
 	{
-		$form = new Nette\Application\UI\Form();
+		$form = new \Nette\Application\UI\Form();
 
 		$form->addText('nickname', 'Nickname')
 			->setRequired();
@@ -41,7 +42,7 @@ class LoginPresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	public function processLogin(Nette\Application\UI\Form $form)
+	public function processLogin(\Nette\Application\UI\Form $form)
 	{
 		$values = $form->getValues();
 
@@ -54,7 +55,7 @@ class LoginPresenter extends Nette\Application\UI\Presenter
 
 			$this->redirect(':Game:InnerVillage:default');
 
-		} catch (Nette\Security\AuthenticationException $e) {
+		} catch (\Nette\Security\AuthenticationException $e) {
 			$this->flashMessage($e->getMessage(), 'red');
 		}
 	}

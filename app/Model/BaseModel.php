@@ -6,10 +6,14 @@ use Dibi;
 
 abstract class BaseModel
 {
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	protected $table;
 
-	/** @var Dibi\Connection */
+	/**
+	 * @var Dibi\Connection
+	 */
 	protected $database;
 
 

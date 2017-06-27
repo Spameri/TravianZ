@@ -21,7 +21,7 @@ session:
 
 
 services:
-	router: App\RouterFactory::createRouter
+	router: App\Router\RouterFactory::createRouter
 
 	latte.latteFactory:
 		setup:

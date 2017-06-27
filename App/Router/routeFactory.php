@@ -1,20 +1,20 @@
 <?php
-namespace App;
 
-use Nette;
-use Nette\Application\Routers\RouteList;
-use Nette\Application\Routers\Route;
+namespace App\Router;
+
 
 class RouterFactory
 {
-	/**
-	 * @return Nette\Application\IRouter
-	 */
-	public static function createRouter()
-	{
-		$router = new RouteList;
 
-		$router[] = new Route('<module>/<presenter>[/<action>][/<id>]', 'Front:Homepage:default');
+	public static function createRouter() : \Nette\Application\IRouter
+	{
+		$router = new \Nette\Application\Routers\RouteList();
+
+		$router[] = new \Nette\Application\Routers\Route('<module>/<presenter>[/<action>][/<id>]', [
+			'model' => 'Front',
+			'presenter' => 'Homepage',
+			'action' => 'default',
+		]);
 
 		return $router;
 	}

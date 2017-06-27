@@ -2,15 +2,17 @@
 
 namespace App\FrontModule\Presenters;
 
-use App;
-use Nette;
 
-class RegisterPresenter extends Nette\Application\UI\Presenter
+class RegisterPresenter extends \Nette\Application\UI\Presenter
 {
-	/** @var App\FrontModule\Model\User\UserModel @inject */
+	/**
+	 * @var \App\FrontModule\Model\User\UserModel @inject
+	 */
 	public $userModel;
 
-	/** @var App\FrontModule\Model\User\RegisterService @inject */
+	/**
+	 * @var \App\FrontModule\Model\User\RegisterService @inject
+	 */
 	public $registerService;
 
 	public function actionDefault()
@@ -24,9 +26,10 @@ class RegisterPresenter extends Nette\Application\UI\Presenter
 
 	}
 
+
 	protected function createComponentRegisterForm()
 	{
-		$form = new Nette\Application\UI\Form();
+		$form = new \Nette\Application\UI\Form();
 
 		$form->addText('nickname', 'Nickname')
 			->setRequired();
@@ -65,7 +68,7 @@ class RegisterPresenter extends Nette\Application\UI\Presenter
 	}
 
 
-	public function processRegistration(Nette\Application\UI\Form $form)
+	public function processRegistration(\Nette\Application\UI\Form $form)
 	{
 		$values = $form->getValues();
 
